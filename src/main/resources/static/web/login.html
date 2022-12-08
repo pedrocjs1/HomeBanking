@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/login.css">
+    <link rel="shortcut icon" href="./images/iconBank.png" type="image/x-icon">
+
+    <title>Login Mind Bank</title>
+</head>
+<body>
+    <div id="login" >
+        <main>
+            <div class="login-container">
+                
+                <div action="" class="form-login">
+                    <div>
+                        <img  style="width: 15rem; margin-left: .5rem;" class=" d-flex " src="./images/mindbankblanco-removebg-preview.png" alt="">  
+                    </div>
+                    <ul class="login-nav">
+                        <li class="login-nav__item active">
+                            <a href="#">Sign In</a>
+                        </li>
+                        <li class="login-nav__item">
+                            <a href="#">Sign Up</a>
+                        </li>
+                    </ul>
+                    <label for="login-input-user" class="login__label">
+                        Username
+                    </label>
+                    <input id="login-input-user" class="login__input" type="text" />
+                    <label for="login-input-password" class="login__label">
+                        Password
+                    </label>
+                    <input id="login-input-password" class="login__input" type="password" />
+                    <label for="login-sign-up" class="login__label--checkbox">
+                        <input id="login-sign-up" type="checkbox" class="login__input--checkbox" />
+                        Keep me Signed in
+                    </label>
+                    <a href="./accounts.html"> 
+                        <button class="login__submit" >Sign in</button>
+                    </a>
+                </div>
+                <a href="" class="login__forgot">Forgot Password?</a>
+            </div>
+    </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"
+         ></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./javascript/login.js"></script>
+</body>
+</html>

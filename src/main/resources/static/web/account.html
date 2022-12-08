@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./styles/account.css" />
+    <link rel="shortcut icon" href="./images/iconBank.png" type="image/x-icon">
+    <title>Mind Bank</title>
+  </head>
+  <body >
+    <div id="account" v-cloak>
+      <div :class="header">
+       
+          <header :class="currentBackGround  + ' page-header contenedor'">
+            <nav :class="currentBackGround">
+              <a href="#0" aria-label="forecastr logo" class="logo">
+                <img v-if="currentBackGround === 'bg-dark'" style="width: 5rem;" :class="'borderRadius d-flex d-md-none ' + backgroundLogo" src="./images/mindbankblanco-removebg-preview.png" alt="">
+                <img v-if="currentBackGround === 'backGroundGrey'" style="width: 5rem;" :class="'borderRadius d-flex d-md-none ' + backgroundLogo" src="./images/mindbankNegro-removebg.png" alt="">
+              </a>
+              <button
+                class="toggle-mob-menu"
+                aria-expanded="false"
+                aria-label="open menu"
+                @click="collapseHeaderMovile"
+                
+              >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+              </svg>
+              </button>
+              
+              
+              <div class="" >
+                <img v-if="currentBackGround === 'backGroundGrey'" style="width: 10rem;" :class="'ms-4 mt-4 borderRadius d-none d-md-flex ' + backgroundLogo" src="./images/mindbankNegro-removebg.png" alt="">
+                <img v-if="currentBackGround === 'bg-dark'" style="width: 10rem;" :class="'ms-4 mt-4 borderRadius d-none d-md-flex ' + backgroundLogo" src="./images/mindbankblanco-removebg-preview.png" alt=""><ul :class="currentBackGround + ' admin-menu'">
+                  <li class="menu-heading">
+                    <h3 :class="currentText">Admin</h3>
+                  </li>
+                  <li>
+                    <a href="./accounts.html">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-person-vcard-fill ' + currentText" viewBox="0 0 16 16">
+                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5ZM9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8Zm1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5Zm-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96c.026-.163.04-.33.04-.5ZM7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/>
+                      </svg>
+                      <span :class="currentText">Accounts</span></span>
+                    </a>
+                  </li>
+                  <li>
+                    <a id="active" href="">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-journal-text ' + currentText" viewBox="0 0 16 16">
+                        <path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                        <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+                        <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+                      </svg>
+                      <span :class="currentText">Account: <span style="color: rgb(167, 16, 16) ;">{{accountName}}</span></span>
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <a  href="#0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-currency-dollar ' + currentText" viewBox="0 0 16 16">
+                        <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
+                      </svg>
+                      <span :class="currentText">Loans</span>
+                    </a>
+                  </li>
+                
+                  <li>
+                    <a href="#0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-chat-left-dots ' + currentText" viewBox="0 0 16 16">
+                        <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                        <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                      </svg>
+                      <span :class="currentText">Chats</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-currency-bitcoin ' + currentText" viewBox="0 0 16 16">
+                        <path d="M5.5 13v1.25c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25V13h.5v1.25c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25V13h.084c1.992 0 3.416-1.033 3.416-2.82 0-1.502-1.007-2.323-2.186-2.44v-.088c.97-.242 1.683-.974 1.683-2.19C11.997 3.93 10.847 3 9.092 3H9V1.75a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25V3h-.573V1.75a.25.25 0 0 0-.25-.25H5.75a.25.25 0 0 0-.25.25V3l-1.998.011a.25.25 0 0 0-.25.25v.989c0 .137.11.25.248.25l.755-.005a.75.75 0 0 1 .745.75v5.505a.75.75 0 0 1-.75.75l-.748.011a.25.25 0 0 0-.25.25v1c0 .138.112.25.25.25L5.5 13zm1.427-8.513h1.719c.906 0 1.438.498 1.438 1.312 0 .871-.575 1.362-1.877 1.362h-1.28V4.487zm0 4.051h1.84c1.137 0 1.756.58 1.756 1.524 0 .953-.626 1.45-2.158 1.45H6.927V8.539z"/>
+                      </svg>
+                      <span :class="currentText">Crypto Currency</span>
+                    </a>
+                  </li>
+                  
+                  <li class="menu-heading">
+                    <h3 :class="currentText">Settings</h3>
+                  </li>
+                  <li>
+                    <a href="#0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-gear ' + currentText" viewBox="0 0 16 16">
+                        <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                        <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                      </svg>
+                      <span :class="currentText">Settings</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-person-circle ' + currentText" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                      </svg>
+                      <span :class="currentText">Profile</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-box-arrow-left ' + currentText" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
+                        <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+                      </svg>
+                      <span :class="currentText">Logout</span>
+                    </a>
+                  </li>
+                  
+                  <li>
+                    
+                    <div class="switch">
+                      <input   type="checkbox" id="mode"  v-model="checkedAccount" />
+                      
+                      <label for="mode">
+                        <span></span>
+                        <span :class="currentText">{{mode}}</span>
+                      </label>
+                    </div>
+                    
+                    
+                  </li>
+                </ul>
+              </div>
+            </nav>
+            {{darkMode}}
+          </header>
+          <section :class="'page-content d-flex flex-column justify-content-between ' + backgroundBody">
+            <section class="search-and-user">
+              <form>
+                <input class="searchAccount" type="search" placeholder="Search Pages..." />
+                <!-- <button type="submit" aria-label="submit form">
+                  <svg aria-hidden="true">
+                    <use xlink:href="#search"></use>
+                  </svg>
+                </button> -->
+              </form>
+              <div class="admin-profile">
+                <span :class="'greeting ' + currentText">Hello {{username}}</span>
+                <div class="notifications">
+                  <span class="badge">1</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-person-circle ' + currentText" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                  </svg>
+                </div>
+              </div>
+            </section>
+            <section class="grid d-flex flex-sm-column flex-md-column account-media table-responsive">
+              <h2 :class="currentText">Account: {{accountName}}</h2>
+              <h2 :class="currentText">Balance: ${{accountBalance}}</h2>
+              <table class="table table-responsive">
+                <thead>
+                  <tr :class="currentText">
+                    <th scope="col">Id</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Type</th>
+                  </tr>
+                </thead>
+                <tbody :class="currentText">
+                  <tr v-for="transaction in accountTransaction">
+                    <h2 v-if="accountTransaction.length === 0" class="text-black display-7 fw-bolder">There are no transactions made with this account</h2>
+                    <th scope="row">{{transaction.id}}</th>
+                    <th >
+                      {{formatedDate(transaction.date)}}
+                      {{formatedHour(transaction.date)}}
+                    </th>
+                    <td>{{transaction.description}}</td>
+                    <td>${{transaction.amount}}</td>
+                    <td v-if="transaction.type == 'DEBIT'" style="background-color: rgba(138, 13, 13, 0.767) ;">{{transaction.type}}</td>
+                    <td v-else-if="transaction.type == 'CREDIT'" style="background-color: rgba(33, 121, 33, 0.781) ;">{{transaction.type}}</td>
+                  </tr>
+                  
+                  
+                </tbody>
+              </table>
+              
+            </section>
+            <footer :class="'footer-page d-flex align-items-center justify-content-center gap-3 ' + currentBackGround ">
+              <img v-if="currentBackGround === 'backGroundGrey'" style="width: 10rem;" :class="'ms-4 borderRadius  d-flex ' + backgroundLogo" src="./images/mindbankNegro-removebg.png" alt="">
+              <img v-if="currentBackGround === 'bg-dark'" style="width: 10rem;" :class="'ms-4  borderRadius  d-flex ' + backgroundLogo" src="./images/mindbankblanco-removebg-preview.png" alt="">
+                <div class="logo-footer" href="https://github.com">
+                <h3 :class="'text-footer ' + currentText">| Copyrigth © 2022 Mind Bank <br> | Todos los derechos reservados</h3>
+              </div>
+              
+            </footer>
+          </section>
+        
+      </div>
+    </div>
+  </body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./javascript/account.js"></script>
+</html>
