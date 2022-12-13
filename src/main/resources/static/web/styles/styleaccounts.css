@@ -45,7 +45,38 @@ a {
 button {
   background: none;
   cursor: pointer;
+  
 }
+
+.scale-up-center {
+	-webkit-animation: scale-up-center 0.4s ease-in-out both;
+	        animation: scale-up-center 0.4s ease-in-out both;
+}
+
+
+
+ @-webkit-keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+
 
 /* input {
   -webkit-appearance: none;
@@ -243,9 +274,69 @@ html {
   outline: none;
 }
 
+.image-ad1 img {
+  width: 100%;
+  height: 30rem;
+  background-image: url("../images/adsBank/add1.jpeg");
+  /* aspect-ratio: 3/2;
+  object-fit:cover; */
+  /* mix-blend-mode: color-burn; */
+  /* height: 30rem; */
+  background-size: contain; 
+  background-repeat: no-repeat; 
+  background-position: center center;
+}
+
+
+.image-ad2 img {
+  /* width: 50rem; */
+  height: 30rem;
+  background-image: url("../images/adsBank/add2.jpeg");
+  /* aspect-ratio: 3/2;
+  object-fit:cover; */
+  /* mix-blend-mode: color-burn; */
+  /* height: 30rem; */
+  background-size: contain; 
+  background-repeat: no-repeat; 
+  /* background-position-y: -10rem; */
+  background-position: center center;
+  
+}
+
+.image-ad3 img {
+  width: 100%;
+  /* min-height: 30rem; */
+  height: 30rem; 
+  background-image: url("../images/adsBank/ads3.jpeg");
+  /* aspect-ratio: 3/2; */
+  /* object-fit:cover; */
+  /* mix-blend-mode: color-burn; */
+  /* height: 30rem; */
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: center center;
+
+  
+}
+
+/* .button-ads {
+  color: #ffff;
+  height: 3.4rem;
+  
+  top: -1.1rem;
+  right: 15.5rem;
+  background-color: #0b60ca !important;
+} */
+
+
+.button-ads:hover {
+  color: #ffff;
+  background-color: #05418b !important;
+}
+
 #active {
   background: #0b303a8a;
-  color: var(--blue);
+  color: #ffffff;
 }
 
 .shadowWhite {
@@ -266,8 +357,8 @@ html {
   color: #00b9eb;
 }
 
-.card-traslate:hover {
-  transform: translateY(-.3rem);
+.scale-up-center:hover {
+  transform: translateY(-.3rem) !important;
 }
 
 .backgroundTitletarget {

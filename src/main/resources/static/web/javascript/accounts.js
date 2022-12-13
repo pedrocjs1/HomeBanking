@@ -5,6 +5,9 @@ const account = createApp({
         return {
             accountClient:[],
             clientsAccount: {},
+            loans: [],
+            clientLoans: {},
+            balanceTotalLoan: "",
             
             username: "",
             
@@ -46,10 +49,18 @@ const account = createApp({
                 this.clientsAccount = this.accountClient.sort((a,b) => a.id - b.id)
                 this.balanceTotal = this.clientsAccount.map(account => account.balance).reduce((iter, acc) => iter + acc)
                 console.log(this.clientsAccount)
-
+   
                 
+            })
+            .catch((error) => console.log(error))
 
-                
+            axios
+            .get("/rest/clients/1/loans")
+            .then((data) =>{
+                this.loans = data.data._embedded.clientLoans
+                this.clientLoans = this.loans.sort((a,b) => a.payment - b.payment)
+                this.balanceTotalLoan = this.clientLoans.map(account => account.amount).reduce((iter, acc) => iter + acc)
+                console.log(this.clientLoans)
                 
             })
             .catch((error) => console.log(error))
@@ -63,6 +74,14 @@ const account = createApp({
         },
         formatedDate(dateInput) {
             const date = new Date(dateInput)
+            // console.log(date)
+            return date.toDateString().slice(3)
+        },
+        formatedNextDate(dateInput) {
+            const date = new Date(dateInput)
+            const month = date.setMonth(1)
+            
+            console.log(month)
             return date.toDateString().slice(3)
         },
         formatedHour(dateInput) {

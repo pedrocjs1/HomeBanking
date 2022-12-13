@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 public class ClientDTO {
 
     private Set<AccountDTO> accountDTO = new HashSet<>();
+
+    private List<ClientLoanDTO> loans;
     long id;
 
     String firstName, lastName, email;
@@ -23,6 +25,7 @@ public class ClientDTO {
         this.lastName = client.getLastName();
         this.email = client.getEmail();
         this.accountDTO = client.getAccounts().stream().map(account -> new AccountDTO(account)).collect(Collectors.toSet());
+        this.loans = client.getLoans();
     }
 
     public long getId() {

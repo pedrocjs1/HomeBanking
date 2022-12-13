@@ -13,7 +13,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="./styles/styleaccounts.css" />
     <link rel="shortcut icon" href="./images/iconBank.png" type="image/x-icon">
-    <title>Mind Bank</title>
+    <title>MINDHUB BANK</title>
   </head>
   <body >
     <div id="account" v-cloak>
@@ -23,8 +23,8 @@
           <header :class="currentBackGround  + ' page-header contenedor d-flex'">
             <nav :class="currentBackGround">
               <a href="#0" aria-label="forecastr logo" class="logo">
-                <img v-if="currentBackGround === 'bg-dark'" style="width: 5rem;" :class="'borderRadius d-flex d-md-none ' + backgroundLogo" src="./images/mindbankblanco-removebg-preview.png" alt="">
-                <img v-if="currentBackGround === 'backGroundGrey'" style="width: 5rem;" :class="'borderRadius d-flex d-md-none ' + backgroundLogo" src="./images/mindbankNegro-removebg.png" alt="">
+                <img v-if="currentBackGround === 'bg-dark'" style="width: 5rem;" :class="'borderRadius d-flex d-md-none ' + backgroundLogo" src="./images/logoBlack.png" alt="Logo MindHub Bank">
+                <img v-if="currentBackGround === 'backGroundGrey'" style="width: 5rem;" :class="'borderRadius d-flex d-md-none ' + backgroundLogo" src="./images/logoWhite.png" alt="Logo MindHub Bank">
               </a>
               <button
                 class="toggle-mob-menu"
@@ -40,14 +40,14 @@
               
               
               <div class="" >
-                <img v-if="currentBackGround === 'backGroundGrey'" style="width: 10rem;" :class="'ms-4 mt-4 borderRadius d-none d-md-flex ' + backgroundLogo" src="./images/mindbankNegro-removebg.png" alt="">
-                <img v-if="currentBackGround === 'bg-dark'" style="width: 10rem;" :class="'ms-4 mt-4 borderRadius d-none d-md-flex ' + backgroundLogo" src="./images/mindbankblanco-removebg-preview.png" alt="">
+                <img v-if="currentBackGround === 'backGroundGrey'" style="width: 10rem;" :class="'ms-4 mt-4 borderRadius d-none d-md-flex ' + backgroundLogo" src="./images/logoWhite.png" alt="Logo MindHub Bank">
+                <img v-if="currentBackGround === 'bg-dark'" style="width: 10rem;" :class="'ms-4 mt-4 borderRadius d-none d-md-flex ' + backgroundLogo" src="./images/logoBlack.png" alt="Logo MindHub Bank">
                 <ul :class="currentBackGround + ' admin-menu'">
                   <li class="menu-heading">
                     <h3 :class="currentText">Admin</h3>
                   </li>
                   <li>
-                    <a id="active" href="./account.html">
+                    <a id="active" href="./accounts.html">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-person-vcard-fill ' + currentText" viewBox="0 0 16 16">
                         <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5ZM9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8Zm1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5Zm-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96c.026-.163.04-.33.04-.5ZM7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/>
                       </svg>
@@ -158,7 +158,7 @@
               <h2 :class="currentText">Total Balance: ${{balanceTotal}}</h2>
               <div class="d-flex flex-column gap-3 align-items-md-center flex-lg-row">
                 <template v-for="client in clientsAccount" >
-                    <div :class="'d-flex flex-column card-traslate ' + shadowCard" style="width: 18rem; ">
+                    <div :class="'d-flex flex-column scale-up-center ' + shadowCard" style="width: 18rem; ">
                       <div :class="bgGrey  +' card-body'">
                         <a class="a-container-card" :href="'./account.html?id='+ client.id">
                           <strong>{{client.number}}</strong>
@@ -180,13 +180,81 @@
                     </div>
                 </template>
               </div>
-          
+
+              <h2 :class="currentText">Loans</h2>
+              <h2 :class="currentText">Total Loans: ${{balanceTotalLoan}}</h2>
+              <div class="d-flex flex-column gap-3 align-items-md-center flex-lg-row">
+                <template v-for="loans in clientLoans" >
+                    <div :class="'d-flex flex-column scale-up-center ' + shadowCard" style="width: 18rem; ">
+                      <div :class="bgGrey  +' card-body'">
+                        <!-- <a class="a-container-card" :href="'./account.html?id='+ client.id"> -->
+                          <h5 class="card-title size-h5">Loan Amount:</h5>
+                          <strong>${{loans.amount}}</strong>
+                          <h5 class="card-title size-h5">Quotas:</h5>
+                          <strong class="card-text">
+                            {{loans.payment}}
+                          </strong>
+                          <h5 class="card-title size-h5">Date:</h5>
+                          <strong class="card-text">
+                            {{formatedDate(loans.date)}}
+                          </strong>
+                          <a  :class="backgroundTitle +' btn mt-2'" v-model="checkedHeader">
+                            <span :class="currentText + ' d-flex '">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                              <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                            </svg>Take Another Loan</span> </a>
+                        <!-- </a> -->
+                      </div>
+                    </div>
+                </template>
+              </div>
+
+              <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                  <div class="carousel-item active image-ad1">
+                    <img src="" class="d-block w-100" alt="">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5></h5>
+                      <p></p>
+                    </div>
+                  </div>
+                  <div class="carousel-item image-ad2">
+                    <img src="" class="d-block w-100" alt="">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5></h5>
+                      <p></p>
+                    </div>
+                  </div>
+                  <div class="carousel-item image-ad3">
+                    <img src="" class="d-block w-100" alt="">
+                    <div class="carousel-caption d-none d-md-block">
+                      <a href="https://github.com/pedrocjs1" target="_blank">
+                        <button type="button" class="btn btn-light col-5 rounded-pill button-ads">See If You Pre-Qualify</button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon"  aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+
             </section>
             <footer :class="'footer-page d-flex align-items-center justify-content-center gap-3 mt-4 ' + currentBackGround ">
-              <img v-if="currentBackGround === 'backGroundGrey'" style="width: 10rem;" :class="'ms-4 borderRadius  d-flex ' + backgroundLogo" src="./images/mindbankNegro-removebg.png" alt="">
-              <img v-if="currentBackGround === 'bg-dark'" style="width: 10rem;" :class="'ms-4  borderRadius  d-flex ' + backgroundLogo" src="./images/mindbankblanco-removebg-preview.png" alt="">
+              <img v-if="currentBackGround === 'backGroundGrey'" style="width: 10rem;" :class="'ms-4 borderRadius  d-flex ' + backgroundLogo" src="./images/logoWhite.png" alt="Logo MindHub">
+              <img v-if="currentBackGround === 'bg-dark'" style="width: 10rem;" :class="'ms-4  borderRadius  d-flex ' + backgroundLogo" src="./images/logoBlack.png" alt="Logo MindHub">
                 <div class="logo-footer" href="https://github.com">
-                <h3 :class="'text-footer ' + currentText">| Copyrigth © 2022 Mind Bank <br> | Todos los derechos reservados</h3>
+                <h3 :class="'text-footer ' + currentText">| Copyrigth © 2022 MindHub Bank <br> | Todos los derechos reservados</h3>
               </div>
               
             </footer>

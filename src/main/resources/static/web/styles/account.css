@@ -231,7 +231,7 @@ html {
 
 #active {
   background: #0b303a8a;
-  color: var(--blue);
+  color: #ffff;
 }
 
 .page-header .admin-menu a:hover ,
