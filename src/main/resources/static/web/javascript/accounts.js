@@ -9,6 +9,7 @@ const account = createApp({
             clientLoans: {},
             balanceTotalLoan: "",
             
+            
             username: "",
             
 
@@ -47,9 +48,9 @@ const account = createApp({
                 this.accountClient = data.data.accountDTO
                 this.username = data.data.firstName
                 this.clientsAccount = this.accountClient.sort((a,b) => a.id - b.id)
-                this.balanceTotal = this.clientsAccount.map(account => account.balance).reduce((iter, acc) => iter + acc)
+                this.balanceTotal = this.clientsAccount.map(account => account.balance).reduce((iter, acc) => iter + acc).toFixed(2)
                 console.log(this.clientsAccount)
-   
+                
                 
             })
             .catch((error) => console.log(error))
@@ -59,7 +60,7 @@ const account = createApp({
             .then((data) =>{
                 this.loans = data.data._embedded.clientLoans
                 this.clientLoans = this.loans.sort((a,b) => a.payment - b.payment)
-                this.balanceTotalLoan = this.clientLoans.map(account => account.amount).reduce((iter, acc) => iter + acc)
+                this.balanceTotalLoan = this.clientLoans.map(account => account.amount).reduce((iter, acc) => iter + acc).toFixed(2)
                 console.log(this.clientLoans)
                 
             })

@@ -164,7 +164,7 @@
                           <strong>{{client.number}}</strong>
                           <h5 class="card-title size-h5">Balance:</h5>
                           <strong class="card-text">
-                            ${{client.balance}}
+                            ${{client.balance.toFixed(2)}}
                           </strong>
                           <h5 class="card-title size-h5">Date:</h5>
                           <strong class="card-text">
@@ -189,7 +189,7 @@
                       <div :class="bgGrey  +' card-body'">
                         <!-- <a class="a-container-card" :href="'./account.html?id='+ client.id"> -->
                           <h5 class="card-title size-h5">Loan Amount:</h5>
-                          <strong>${{loans.amount}}</strong>
+                          <strong>${{loans.amount.toFixed(2)}}</strong>
                           <h5 class="card-title size-h5">Quotas:</h5>
                           <strong class="card-text">
                             {{loans.payment}}
