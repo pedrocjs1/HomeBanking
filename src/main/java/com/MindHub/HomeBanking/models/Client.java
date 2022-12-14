@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
+
 
 @Entity // Crea una tabla en la DB (en este caso de cliente)
 public class Client {
@@ -51,6 +51,9 @@ public class Client {
         return email;
     }
 
+    public Set<Account> getAccounts() {
+        return accounts;
+    }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -68,16 +71,11 @@ public class Client {
         this.loans = loans;
     }
 
-    public Set<Account> getAccounts() {
-        return accounts;
-    }
-
 
     public void addAccount(Account account) {
         account.setOwner(this);
         accounts.add(account);
     }
-
 
 
     public List<ClientLoanDTO> getLoans() {

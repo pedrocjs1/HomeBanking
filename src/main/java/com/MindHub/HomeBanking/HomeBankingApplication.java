@@ -29,7 +29,7 @@ public class HomeBankingApplication {
 			clientRepository.save(melba);
 			clientRepository.save(Pedro);
 
-			Account account001 = new Account("VIN001", LocalDateTime.now(), 5000.00);
+			Account account001 = new Account("VIN001", LocalDateTime.now(), 5000.50);
 			Account account002 = new Account("VIN002", LocalDateTime.now().plusDays(1), 7500.00);
 
 			melba.addAccount(account001);
