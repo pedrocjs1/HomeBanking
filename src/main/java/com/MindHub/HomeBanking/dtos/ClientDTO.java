@@ -40,6 +40,10 @@ public class ClientDTO {
         return lastName;
     }
 
+    public List<ClientLoanDTO> getLoans() {
+        return loans;
+    }
+
     public String getEmail() {
         return email;
     }
