@@ -274,47 +274,47 @@ html {
   outline: none;
 }
 
-.image-ad1 img {
-  width: 100%;
+ .image-ad1 img {
+  /* width: 100%; */
   height: 30rem;
-  background-image: url("../images/adsBank/add1.jpeg");
-  /* aspect-ratio: 3/2;
-  object-fit:cover; */
+  /* background-image: url("../images/adsBank/add1.jpeg"); */
+  /* aspect-ratio: 3/2; */
+  /* object-fit:cover; */
   /* mix-blend-mode: color-burn; */
   /* height: 30rem; */
-  background-size: contain; 
-  background-repeat: no-repeat; 
-  background-position: center center;
+  /* background-size: contain;  */
+  /* background-repeat: no-repeat;  */
+  /* background-position: center center; */
 }
 
 
 .image-ad2 img {
   /* width: 50rem; */
   height: 30rem;
-  background-image: url("../images/adsBank/add2.jpeg");
-  /* aspect-ratio: 3/2;
-  object-fit:cover; */
-  /* mix-blend-mode: color-burn; */
-  /* height: 30rem; */
-  background-size: contain; 
-  background-repeat: no-repeat; 
-  /* background-position-y: -10rem; */
-  background-position: center center;
-  
-}
-
-.image-ad3 img {
-  width: 100%;
-  /* min-height: 30rem; */
-  height: 30rem; 
-  background-image: url("../images/adsBank/ads3.jpeg");
+  /* background-image: url("../images/adsBank/add2.jpeg"); */
   /* aspect-ratio: 3/2; */
   /* object-fit:cover; */
   /* mix-blend-mode: color-burn; */
   /* height: 30rem; */
-  background-size: cover; 
+  /* background-size: contain;  */
+  /* background-repeat: no-repeat;  */
+  /* background-position-y: -10rem; */
+  /* background-position: center center; */
+  
+}
+
+.image-ad3 img {
+  /* width: 100%; */
+  /* min-height: 30rem; */
+  height: 30rem; 
+  /* background-image: url("../images/adsBank/ads3.jpeg");  */
+  /* aspect-ratio: 3/2;
+  object-fit:cover;
+  mix-blend-mode: color-burn;
+   height: 30rem; */
+  /* background-size: cover; 
   background-repeat: no-repeat; 
-  background-position: center center;
+  background-position: center center; */
 
   
 }
