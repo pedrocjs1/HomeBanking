@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -20,7 +21,12 @@ public class HomeBankingApplication {
 	}
 
 	@Bean
-	public CommandLineRunner initData(ClientRepository clientRepository, AccountRepository accountRepository, TransactionRepository transactionRepository, LoanRepository loanRepository, ClientLoanRepository clientLoanRepository) {
+	public CommandLineRunner initData(ClientRepository clientRepository,
+									  AccountRepository accountRepository,
+									  TransactionRepository transactionRepository,
+									  LoanRepository loanRepository,
+									  ClientLoanRepository clientLoanRepository,
+									  CardRepository cardRepository) {
 		return (args) -> {
 			// save a couple of customers
 			Client melba = new Client("Melba", "Morel", "melba@mindhub.com");
@@ -91,8 +97,13 @@ public class HomeBankingApplication {
 			clientLoanRepository.save(clientloan3);
 			clientLoanRepository.save(clientloan4);
 
+			Card card1 = new Card(melba.getFullname(), CardType.DEBIT, ColorCard.GOLD, "1234567890123456", 123, LocalDate.now(), LocalDate.now().plusYears(5), melba);
+			Card card2 = new Card(melba.getFullname(), CardType.CREDIT, ColorCard.TITANIUM, "4567893215987563", 852, LocalDate.now(), LocalDate.now().plusYears(5), melba);
+			Card card3 = new Card(Pedro.getFullname(), CardType.CREDIT, ColorCard.SILVER, "4523697184253867", 963, LocalDate.now(), LocalDate.now().plusYears(5), Pedro);
 
-
+			cardRepository.save(card1);
+			cardRepository.save(card2);
+			cardRepository.save(card3);
 
 		};
 	}

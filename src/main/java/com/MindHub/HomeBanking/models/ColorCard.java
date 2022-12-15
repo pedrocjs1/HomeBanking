@@ -1,2 +1,7 @@
-package com.MindHub.HomeBanking.models;public class ColorCard {
+package com.MindHub.HomeBanking.models;
+
+public enum ColorCard {
+    GOLD,
+    SILVER,
+    TITANIUM
 }

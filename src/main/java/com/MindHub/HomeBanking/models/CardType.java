@@ -1,2 +1,6 @@
-package com.MindHub.HomeBanking.models;public class CardType {
+package com.MindHub.HomeBanking.models;
+
+public enum CardType {
+    CREDIT,
+    DEBIT
 }
