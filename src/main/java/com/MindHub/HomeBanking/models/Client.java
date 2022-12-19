@@ -11,16 +11,16 @@ import java.util.stream.Collectors;
 
 
 
-@Entity // Crea una tabla en la DB (en este caso de cliente)
+@Entity
 public class Client {
 
-    @Id // indica que la propiedad de abajo es la clave primaria (primari key). cada objejeto debe de tener una primary key UNICA
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native") // esa primary key es generada por la db y se y se lo indicamos con esta notacion
-    @GenericGenerator(name = "native", strategy = "native") // genericGeneractor hace refencia a la estrategia nativa, hibernate usa la estrategia soportada de forma nativa por el dialecto configurado
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
     private Long id;
 
-    @OneToMany(mappedBy="owner", fetch=FetchType.EAGER) // especificamos la relacion entre objetos (en este caso uno a muchos) el mapped by sirve para aclarar con que atributo de la otra clase tenemos asociada esta clase.
-    private Set<Account> accounts = new HashSet<>(); // inicializar en memoria un set vacio
+    @OneToMany(mappedBy="owner", fetch=FetchType.EAGER)
+    private Set<Account> accounts = new HashSet<>();
 
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Set<ClientLoan> loans = new HashSet<>();

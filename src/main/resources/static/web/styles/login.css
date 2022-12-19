@@ -12,15 +12,49 @@ body {
 	transition: .25s all ease;
 }
 
+
+
+.image-ad1 img {
+	height: 30rem !important;
+	width: 30rem !important;
+	border-radius: 2rem !important;
+}
+.image-ad2 img {
+	height: 30rem !important;
+	width: 30rem !important;
+	border-radius: 1.5rem !important;
+
+}
+
+.carousel-item {
+	transition: transform 1s ease, opacity .1s ease-out
+}
+  
+.image-ad3 img {
+	height: 30rem !important; 
+	width: 30rem !important;
+	border-radius: 2rem !important;
+
+}
+
+
+.main-container {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+
 .login-container {
-	display: block;
+	display: flex;
+	flex-direction: column;
 	position: relative;
 	z-index: 0;
-	margin: 4rem auto 0;
+	/* margin: 4rem auto 0; */
     padding: 5rem 4rem 0 4rem;
 	width: 100%;
-	max-width: 525px;
-	min-height: 780px;
+	max-width: 400px;
+	min-height: 400px;
 	background-image: url(../images/bankLogin.jpg);
 	box-shadow: 0 50px 70px -20px rgba(0, 0, 0, 0.85);
 }
@@ -41,14 +75,14 @@ body {
 .form-login {
 	position: relative;
 	z-index: 1;
-  padding-bottom: 4.5rem;
+  padding-bottom: 2rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .login-nav {
 	position: relative;
 	padding: 0;
-	margin: 0 0 6em 1rem;
+	margin: 0 0 1.5rem 1rem;
 }
 
 .login-nav__item {
@@ -159,7 +193,7 @@ body {
 	font-family: 'Montserrat', sans-serif;
 	text-transform: uppercase;
 	letter-spacing: 1px;
-	margin-top: 1rem;
+	margin-top: .5rem;
 	padding: .75rem;
 	border-radius: 2rem;
 	display: block;
@@ -175,7 +209,8 @@ body {
 
 .login__forgot {
 	display: block;
-	margin-top: 3rem;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
 	text-align: center;
 	color: rgba(255, 255, 255, 0.75);
 	font-size: .75rem;

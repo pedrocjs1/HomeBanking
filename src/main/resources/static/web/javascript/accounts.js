@@ -46,25 +46,19 @@ const account = createApp({
             .get("http://localhost:8080/api/clients/1")
             .then((data) =>{
                 this.accountClient = data.data.accountDTO
-                this.username = data.data.firstName
+                this.username = data.data.firstName + ' ' + data.data.lastName
                 this.clientsAccount = this.accountClient.sort((a,b) => a.id - b.id)
                 this.balanceTotal = this.clientsAccount.map(account => account.balance).reduce((iter, acc) => iter + acc).toFixed(2)
-                console.log(this.clientsAccount)
-                
-                
-            })
-            .catch((error) => console.log(error))
-
-            axios
-            .get("/rest/clients/1/loans")
-            .then((data) =>{
-                this.loans = data.data._embedded.clientLoans
+                console.log(this.username)
+                this.loans = data.data.loans
                 this.clientLoans = this.loans.sort((a,b) => a.payment - b.payment)
                 this.balanceTotalLoan = this.clientLoans.map(account => account.amount).reduce((iter, acc) => iter + acc).toFixed(2)
                 console.log(this.clientLoans)
                 
             })
             .catch((error) => console.log(error))
+
+        
         },
         collapseHeaderMovile(){
             if (this.header == "mob-menu-opened"){
@@ -80,9 +74,8 @@ const account = createApp({
         },
         formatedNextDate(dateInput) {
             const date = new Date(dateInput)
-            const month = date.setMonth(1)
-            
-            console.log(month)
+            date.setMonth(date.getMonth() + 1)
+        
             return date.toDateString().slice(3)
         },
         formatedHour(dateInput) {
@@ -90,6 +83,9 @@ const account = createApp({
             let minutes = date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getMinutes()
             return date.getHours() + ":" + minutes
         },
+        addCommas(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
         
        
         

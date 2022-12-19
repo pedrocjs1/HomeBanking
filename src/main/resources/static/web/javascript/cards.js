@@ -46,10 +46,10 @@ const card = createApp({
             .get("http://localhost:8080/api/clients/1")
             .then((data) =>{
                 this.cards = data.data.cards.sort((a,b) => a.id - b.id)
-                // this.username = data.data.firstName
+                this.username = data.data.firstName + ' ' + data.data.lastName
                 // this.clientsAccount = this.accountClient.sort((a,b) => a.id - b.id)
                 // this.balanceTotal = this.clientsAccount.map(account => account.balance).reduce((iter, acc) => iter + acc).toFixed(2)
-                console.log(this.cards)
+                console.log(this.username)
                 
                 
             })

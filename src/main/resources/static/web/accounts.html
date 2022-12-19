@@ -162,9 +162,9 @@
                 </div>
               </div>
             </section>
-            <section  class="grid d-flex flex-sm-column flex-md-column  account-media">
-              <h2 :class="currentText">Accounts</h2>
-              <h2 :class="currentText">Total Balance: ${{balanceTotal}}</h2>
+            <section  class="grid d-flex flex-sm-column flex-md-column align-items-center  account-media">
+              <h2 :class="currentText">ACCOUNTS</h2>
+              <h2 :class="currentText">Total Balance: ${{addCommas(balanceTotal)}}</h2>
               <div class="d-flex flex-column gap-3 align-items-md-center flex-lg-row">
                 <template v-for="client in clientsAccount" >
                     <div :class="'d-flex flex-column scale-up-center ' + shadowCard" style="width: 18rem; ">
@@ -173,7 +173,7 @@
                           <strong>{{client.number}}</strong>
                           <h5 class="card-title size-h5">Balance:</h5>
                           <strong class="card-text">
-                            ${{client.balance.toFixed(2)}}
+                            ${{addCommas(client.balance.toFixed(2))}}
                           </strong>
                           <h5 class="card-title size-h5">Date:</h5>
                           <strong class="card-text">
@@ -189,73 +189,69 @@
                     </div>
                 </template>
               </div>
-
-              <h2 :class="currentText">Loans</h2>
-              <h2 :class="currentText">Total Loans: ${{balanceTotalLoan}}</h2>
-              <div class="d-flex flex-column gap-3 align-items-md-center flex-lg-row">
-                <template v-for="loans in clientLoans" >
-                    <div :class="'d-flex flex-column scale-up-center ' + shadowCard" style="width: 18rem; ">
-                      <div :class="bgGrey  +' card-body'">
-                        <!-- <a class="a-container-card" :href="'./account.html?id='+ client.id"> -->
-                          <h5 class="card-title size-h5">Loan Amount:</h5>
-                          <strong>${{loans.amount.toFixed(2)}}</strong>
-                          <h5 class="card-title size-h5">Quotas:</h5>
-                          <strong class="card-text">
-                            {{loans.payment}}
-                          </strong>
-                          <h5 class="card-title size-h5">Date:</h5>
-                          <strong class="card-text">
-                            {{formatedDate(loans.date)}}
-                          </strong>
-                          <a  :class="backgroundTitle +' btn mt-2'" v-model="checkedHeader">
-                            <span :class="currentText + ' d-flex '">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
-                              <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
-                            </svg>Take Another Loan</span> </a>
-                        <!-- </a> -->
+              <div class="d-flex flex-column justify-content-center align-items-center w-100 gap-3  ">
+                <h2 :class="currentText">LOANS</h2>
+                <h2 :class="currentText">Total Loans: ${{addCommas(balanceTotalLoan)}}</h2>
+                <div class="d-flex flex-column gap-3 align-items-md-center flex-lg-row">
+                  <template v-for="loans in clientLoans" >
+                      <div :class="'d-flex flex-column scale-up-center ' + shadowCard" style="width: 18rem; ">
+                        <div :class="bgGrey  +' card-body'">
+                          <!-- <a class="a-container-card" :href="'./account.html?id='+ client.id"> -->
+                            <div class="d-flex justify-content-between">
+                              <div class="d-flex flex-column">
+                                <h5 class="card-title size-h5">Loan Amount:</h5>
+                                <strong>${{addCommas(loans.amount.toFixed(2))}}</strong>
+                              </div>
+                              <div class="d-flex flex-column">
+                                <h5 class="card-title size-h5">Loan Type:</h5>
+                                <strong>{{loans.name}}</strong>
+                              </div>
+                            </div>
+                            <h5 class="card-title size-h5">Quotas:</h5>
+                            <strong class="card-text">
+                              {{loans.payments}}
+                            </strong>
+                            <div class="d-flex justify-content-between">
+                              <div>
+                                <h5 class="card-title size-h5">Date:</h5>
+                                <strong class="card-text">
+                                  {{formatedDate(loans.date)}}
+                                </strong>
+                              </div>
+                              <div>
+                                <h5 class="card-title size-h5">Next Payment:</h5>
+                                <strong class="card-text">
+                                  {{formatedNextDate(loans.date)}}
+                                </strong>
+                              </div>
+                            </div>
+                            <a  :class="backgroundTitle +' btn mt-2'" v-model="checkedHeader">
+                              <span :class="currentText + ' d-flex '">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                              </svg>Take Another Loan</span> </a>
+                          <!-- </a> -->
+                        </div>
+                      </div>
+                  </template>
+                </div>
+              </div>
+              
+              
+              <div class="d-flex justify-content-center w-50">
+                  <div id="carouselExampleSlidesOnly" class="carousel slide border-radius" data-bs-ride="carousel">
+                      <div class="carousel-inner">
+                        <div class="carousel-item active image-ad1">
+                          <img src="./images/adsBank/add1.jpeg" class="d-block w-100 " alt="...">
+                        </div>
+                        <div class="carousel-item image-ad2">
+                          <img src="./images/adsBank/add2.jpeg" class="d-block w-100 " alt="...">
+                        </div>
+                        <div class="carousel-item image-ad3">
+                          <img src="./images/adsBank/ads3Bank.jpeg" class="d-block w-100 " alt="...">
+                        </div>
                       </div>
                     </div>
-                </template>
-              </div>
-
-              <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                  <div class="carousel-item active image-ad1">
-                    <img src="./images/adsBank/add1.jpeg" class="d-block w-100" alt="">
-                    <div class="carousel-caption d-none d-md-block">
-                      <h5></h5>
-                      <p></p>
-                    </div>
-                  </div>
-                  <div class="carousel-item image-ad2">
-                    <img src="./images/adsBank/add2.jpeg" class="d-block w-100" alt="">
-                    <div class="carousel-caption d-none d-md-block">
-                      <h5></h5>
-                      <p></p>
-                    </div>
-                  </div>
-                  <div class="carousel-item image-ad3">
-                    <img src="./images/adsBank/ads3.jpeg" class="d-block w-100" alt="">
-                    <div class="carousel-caption d-none d-md-block">
-                      <a href="https://github.com/pedrocjs1" target="_blank">
-                        <button type="button" class="btn btn-light col-5 rounded-pill button-ads">See If You Pre-Qualify</button>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon"  aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
               </div>
 
             </section>
@@ -272,6 +268,7 @@
       </div>
     </div>
   </body>
+    <script src="https:/app.embed.im/snow.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script

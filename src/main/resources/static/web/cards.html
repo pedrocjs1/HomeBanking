@@ -152,7 +152,7 @@
                 </button> -->
               </form>
               <div class="admin-profile">
-                <span :class="'greeting ' + currentText">Hello </span>
+                <span :class="'greeting ' + currentText">Hello {{username}} </span>
                 <div class="notifications">
                   <span class="badge">1</span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-person-circle ' + currentText" viewBox="0 0 16 16">
@@ -162,8 +162,8 @@
                 </div>
               </div>
             </section>
-            <section  class="grid d-flex flex-sm-column flex-md-row justify-content-center align-items-center account-media">
-              
+            <section  class="grid d-flex flex-sm-column flex-md-column justify-content-center align-items-center account-media">
+                <h2 :class="currentText">Cards</h2>
               
                 <template  v-for="card in cards">
 
@@ -176,7 +176,7 @@
                           <svg class="logo-card" width="40" height="40" viewbox="0 0 17.5 16.2">
                             <path d="M3.2 0l5.4 5.6L14.3 0l3.2 3v9L13 16.2V7.8l-4.4 4.1L4.5 8v8.2L0 12V3l3.2-3z" fill="white"></path>
                           </svg>
-                          <div class="investor">{{card.type}}</div>
+                          <div class="investor">{{card.type}} TITANIUM</div>
                           <div class="chip">
                             <div class="chip-line"></div>
                             <div class="chip-line"></div>
@@ -228,7 +228,7 @@
                           <svg class="logo-card" width="40" height="40" viewbox="0 0 17.5 16.2">
                             <path d="M3.2 0l5.4 5.6L14.3 0l3.2 3v9L13 16.2V7.8l-4.4 4.1L4.5 8v8.2L0 12V3l3.2-3z" fill="white"></path>
                           </svg>
-                          <div class="investor">{{card.type}}</div>
+                          <div class="investor">{{card.type}} GOLD</div>
                           <div class="chip">
                             <div class="chip-line"></div>
                             <div class="chip-line"></div>
@@ -281,7 +281,7 @@
                           <svg class="logo-card" width="40" height="40" viewbox="0 0 17.5 16.2">
                             <path d="M3.2 0l5.4 5.6L14.3 0l3.2 3v9L13 16.2V7.8l-4.4 4.1L4.5 8v8.2L0 12V3l3.2-3z" fill="white"></path>
                           </svg>
-                          <div class="investor">{{card.type}}</div>
+                          <div class="investor">{{card.type}} SILVER</div>
                           <div class="chip">
                             <div class="chip-line"></div>
                             <div class="chip-line"></div>
