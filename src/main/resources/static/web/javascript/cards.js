@@ -28,9 +28,13 @@ const card = createApp({
             header: "",
             headerDesktop: "",
 
-            balanceTotal: ""
+            balanceTotal: "",
 
+            view: true,
 
+            viewPassword: "d-none",
+            noViewPassword: ""
+            
             
             
             
@@ -72,6 +76,15 @@ const card = createApp({
 
             let year = date.getFullYear().toString().slice(-2);
             return month + "/" + year
+        },
+        viewPasswordFunction(){
+            if (this.noViewPassword == "") {
+                this.viewPassword = ""
+                this.noViewPassword = "d-none"              
+            } else if (this.noViewPassword == "d-none") {
+                this.noViewPassword = ""
+                this.viewPassword = "d-none"
+            }
         }
         
     

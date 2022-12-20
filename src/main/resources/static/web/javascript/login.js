@@ -6,25 +6,9 @@ const login = createApp({
             accountClient:[],
             clientsAccount: {},
             
-            username: "",
             
-
-            checkedAccount: undefined,
-            currentText: "",
-            currentBackGround: "",
-            mode: "",
-            boxShadow: "",
-            backgroundBody: "",
-            backgroundTitle: "",
-            shadowCard: "",
-            bgGrey: "",
-            backgroundLogo: "",
-
-            checkedHeader: true,
-            header: "",
-            headerDesktop: "",
-
-            balanceTotal: ""
+            
+           
 
 
             
@@ -62,31 +46,7 @@ const login = createApp({
             
     },
     computed: {
-      darkMode(){
-        if (this.checkedAccount === "true" || this.checkedAccount === true) {
-          this.currentText = "text-white"
-          this.currentBackGround = "bg-dark"
-          this.mode = "Dark Mode"
-          this.backgroundBody = "backgroundBody"
-          this.backgroundTitle = "bg-dark"
-          this.shadowCard = "shadowWhite" 
-          this.bgGrey = "bg-light borderRadius"
-          this.backgroundLogo = ""
-          localStorage.setItem("mode", true)
-
-        } else if (this.checkedAccount === "false" || this.checkedAccount === false) {
-          this.currentText = "text-black"
-          this.currentBackGround = "backGroundGrey"
-          this.mode = "Ligth Mode"
-          this.boxShadow = "m-3 shadow bg-body rounded"
-          this.backgroundBody = "backgroundWhite "
-          this.backgroundTitle = "backgroundTitletarget"
-          this.shadowCard = "shadow  bg-body rounded" 
-          this.bgGrey = "backgroundBodyCard borderRadius"
-          this.backgroundLogo = ""
-          localStorage.setItem("mode", false)
-        }
-    }
+      
 
     
     

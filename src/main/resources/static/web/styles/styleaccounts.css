@@ -329,6 +329,7 @@ html {
 
 .a-container-card:hover{
   color: #00b9eb;
+  cursor: pointer;
 }
 
 .scale-up-center:hover {

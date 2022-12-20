@@ -179,7 +179,7 @@
                           <strong class="card-text">
                             {{formatedDate(client.creationDate)}}
                           </strong>
-                          <a :href="'./account.html?id='+ client.id" :class="backgroundTitle +' btn mt-2'" v-model="checkedHeader">
+                          <a :href="'./account.html?id='+ client.id" :class="backgroundTitle +' btn mt-2 d-flex justify-content-center'" v-model="checkedHeader">
                             <span :class="currentText + ' d-flex '">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
                               <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
@@ -196,7 +196,7 @@
                   <template v-for="loans in clientLoans" >
                       <div :class="'d-flex flex-column scale-up-center ' + shadowCard" style="width: 18rem; ">
                         <div :class="bgGrey  +' card-body'">
-                          <!-- <a class="a-container-card" :href="'./account.html?id='+ client.id"> -->
+                          <a class="a-container-card">
                             <div class="d-flex justify-content-between">
                               <div class="d-flex flex-column">
                                 <h5 class="card-title size-h5">Loan Amount:</h5>
@@ -225,12 +225,12 @@
                                 </strong>
                               </div>
                             </div>
-                            <a  :class="backgroundTitle +' btn mt-2'" v-model="checkedHeader">
+                            <a  :class="backgroundTitle +' btn mt-2 d-flex justify-content-center'" v-model="checkedHeader">
                               <span :class="currentText + ' d-flex '">
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
                               </svg>Take Another Loan</span> </a>
-                          <!-- </a> -->
+                          </a>
                         </div>
                       </div>
                   </template>
