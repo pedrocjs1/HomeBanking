@@ -29,14 +29,15 @@ public class Client {
     private Set<Card> cards = new HashSet<>();
 
 
-    private String firstName, lastName, email;
+    private String firstName, lastName, email, password;
 
     public Client(){}
 
-    public Client(String firstName, String lastName, String email){
+    public Client(String firstName, String lastName, String email, String password){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
     }
 
     public Long getId() {
@@ -54,6 +55,14 @@ public class Client {
 
     public String getEmail(){
         return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFullname(){

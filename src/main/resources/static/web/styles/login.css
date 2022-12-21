@@ -16,12 +16,12 @@ body {
 
 .image-ad1 img {
 	height: 30rem !important;
-	width: 30rem !important;
+	width: 100% !important;
 	border-radius: 2rem !important;
 }
 .image-ad2 img {
 	height: 30rem !important;
-	width: 30rem !important;
+	width: 100% !important;
 	border-radius: 1.5rem !important;
 
 }
@@ -32,7 +32,7 @@ body {
   
 .image-ad3 img {
 	height: 30rem !important; 
-	width: 30rem !important;
+	width: 100% !important;
 	border-radius: 2rem !important;
 
 }
@@ -221,4 +221,38 @@ body {
 
 .login__forgot:hover {
 	color: rgb(17, 97, 237);
+}
+
+
+@media screen and (max-width:510px) {
+	.login-container {
+		padding: 2rem !important;
+		
+	}
+	.logo-login-query {
+		width: 7rem !important;
+	}
+	.login-nav__item__query {
+		margin: 0rem !important;
+	}
+	.login-nav {
+		display: flex; 
+		gap: 1rem;
+	}
+	.carousel-query {
+		display: none;
+	}
+}
+
+
+@media screen and (max-width:767px) {
+	
+	.login-nav__item__query {
+		margin: 0rem !important;
+	}
+	.login-nav {
+		display: flex; 
+		flex-direction: row !important;
+		gap: 1rem;
+	}
 }

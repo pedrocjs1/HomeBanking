@@ -29,8 +29,8 @@ public class HomeBankingApplication {
 									  CardRepository cardRepository) {
 		return (args) -> {
 			// save a couple of customers
-			Client melba = new Client("Melba", "Morel", "melba@mindhub.com");
-			Client Pedro = new Client("Pedro", "Vega", "pedro@mindhub.com");
+			Client melba = new Client("Melba", "Morel", "melba@mindhub.com", "123456");
+			Client Pedro = new Client("Pedro", "Vega", "pedro@mindhub.com", "123456");
 
 			clientRepository.save(melba);
 			clientRepository.save(Pedro);

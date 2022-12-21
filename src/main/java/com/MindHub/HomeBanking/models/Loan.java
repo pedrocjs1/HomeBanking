@@ -69,7 +69,10 @@ public class Loan {
         this.payments = payments;
     }
 
-
+    @JsonIgnore
+    public Set<ClientLoan> getClientLoan() {
+        return clientLoans;
+    }
 
 
     @JsonIgnore
