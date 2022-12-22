@@ -47,7 +47,7 @@ const card = createApp({
     methods: {
         loadData(){
             axios
-            .get("http://localhost:8080/api/clients/1")
+            .get("http://localhost:8080/api/clients/current")
             .then((data) =>{
                 this.cards = data.data.cards.sort((a,b) => a.id - b.id)
                 this.username = data.data.firstName + ' ' + data.data.lastName
@@ -85,7 +85,13 @@ const card = createApp({
                 this.noViewPassword = ""
                 this.viewPassword = "d-none"
             }
-        }
+        },
+        logout() {
+            axios.post('/api/logout').then(response => {
+                
+                window.location.href = './index.html'
+            })
+        },
         
     
         

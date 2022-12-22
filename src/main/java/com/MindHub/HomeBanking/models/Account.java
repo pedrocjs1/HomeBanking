@@ -31,10 +31,11 @@ public class Account {
 
     public Account() { }
 
-    public Account(String number, LocalDateTime creationDate, double balance) {
+    public Account(String number, LocalDateTime creationDate, double balance, Client client) {
         this.number = number;
         this.creationDate = creationDate;
         this.balance = balance;
+        this.owner = client;
     }
 
     public Long getId() {
@@ -68,6 +69,8 @@ public class Account {
     public Client getOwner() {
         return owner;
     }
+
+
 
     public void setOwner(Client owner) {
         this.owner = owner;

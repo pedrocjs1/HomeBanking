@@ -82,6 +82,12 @@ const account = createApp({
             let minutes = date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getMinutes()
             return date.getHours() + ":" + minutes
         },
+        logout() {
+            axios.post('/api/logout').then(response => {
+                
+                window.location.href = './index.html'
+            })
+        },
         
        
         

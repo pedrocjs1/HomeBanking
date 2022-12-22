@@ -39,27 +39,28 @@
                     </div>
                     <ul class="login-nav d-flex flex-row">
                         <li class="login-nav__item active">
-                            <a href="./login.html">Sign In</a>
+                            <a href="./index.html">Sign In</a>
                         </li>
                         <li class="login-nav__item login-nav__item__query">
-                            <a href="./relogin.html">Sign Up</a>
+                            <a href="./register.html">Sign Up</a>
                         </li>
                     </ul>
+                    <h6 v-if="errorLogin !=''" class="text-white" v-cloak>{{errorLogin}}</h3>
                     <label for="login-input-user" class="login__label">
                         Username
                     </label>
-                    <input id="login-input-user" class="login__input" type="text" />
+                    <input id="login-input-user" v-model="email" placeholder="Email" class="login__input" type="text" required autofocus/>
                     <label for="login-input-password" class="login__label">
                         Password
                     </label>
-                    <input id="login-input-password" class="login__input" type="password" />
+                    <input id="login-input-password" v-model="password" class="login__input"  placeholder="Password" type="password" required/>
                     <label for="login-sign-up" class="login__label--checkbox">
                         <input id="login-sign-up" type="checkbox" class="login__input--checkbox" />
                         Keep me Signed in
                     </label>
-                    <a href="./accounts.html"> 
-                        <button class="login__submit" >Sign in</button>
-                    </a>
+                    
+                    <button @click="login" class="login__submit" >Sign in</button>
+                    
                 </div>
                 <a href="" class="login__forgot">Forgot Password?</a>
             </div>

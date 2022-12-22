@@ -39,35 +39,36 @@
                     </div>
                     <ul class="login-nav d-flex flex-row">
                         <li class="login-nav__item ">
-                            <a href="./login.html">Sign In</a>
+                            <a href="./index.html">Sign In</a>
                         </li>
                         <li class="login-nav__item active login-nav__item__query">
-                            <a href="./relogin.html">Sign Up</a>
+                            <a href="./register.html">Sign Up</a>
                         </li>
                     </ul>
-                    <label for="login-input-user" class="login__label">
+                    <h6 v-if="errorRegister !=''" class="text-white" v-cloak>{{errorRegister}}</h3>
+                    <label for="login-input-FirstName" class="login__label">
                         FirstName
                     </label>
-                    <input id="login-input-user" class="login__input" type="text" />
-                    <label for="login-input-user" class="login__label">
+                    <input id="login-input-FirstName" v-model="firstNameSign" class="login__input" type="text" required />
+                    <label for="login-input-LastName" class="login__label">
                         LastName
                     </label>
-                    <input id="login-input-user" class="login__input" type="email" />
-                    <label for="login-input-user" class="login__label">
+                    <input id="login-input-LastName" v-model="lastNameSign" class="login__input" type="email" required/>
+                    <label for="login-input-Email" class="login__label">
                         Email
                     </label>
-                    <input id="login-input-user" class="login__input" type="text" />
+                    <input id="login-input-Email" v-model="emailSign" class="login__input" type="text" required/>
                     <label for="login-input-password" class="login__label">
                         Password
                     </label>
-                    <input id="login-input-password" class="login__input" type="password" />
+                    <input id="login-input-password" v-model="passwordSign" class="login__input" type="password" required/>
                     <label for="login-sign-up" class="login__label--checkbox">
                         <input id="login-sign-up" type="checkbox" class="login__input--checkbox" />
                         I accept terms and conditions
                     </label>
-                    <a href="./accounts.html"> 
-                        <button class="login__submit" >Sign Up</button>
-                    </a>
+                    
+                        <button @click.prevent="signup" class="login__submit" >Sign Up</button>
+                    
                 </div>
                 <a href="./login.html" class="login__forgot">¿Already have an account?</a>
             </div>

@@ -2,11 +2,13 @@ package com.MindHub.HomeBanking;
 
 import com.MindHub.HomeBanking.models.*;
 import com.MindHub.HomeBanking.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,6 +18,8 @@ import java.util.List;
 @SpringBootApplication
 public class HomeBankingApplication {
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	public static void main(String[] args) {
 		SpringApplication.run(HomeBankingApplication.class, args);
 	}
@@ -29,14 +33,15 @@ public class HomeBankingApplication {
 									  CardRepository cardRepository) {
 		return (args) -> {
 			// save a couple of customers
-			Client melba = new Client("Melba", "Morel", "melba@mindhub.com", "123456");
-			Client Pedro = new Client("Pedro", "Vega", "pedro@mindhub.com", "123456");
-
+			Client melba = new Client("Melba", "Morel", "melba@mindhub.com", passwordEncoder.encode("123456"));
+			Client Pedro = new Client("Pedro", "Vega", "pedro@mindhub.com", passwordEncoder.encode("123456"));
+			Client Guillermo = new Client("Guillermo", "Cornetti", "guillermoCornetti@admin.com", passwordEncoder.encode("guille123"));
 			clientRepository.save(melba);
 			clientRepository.save(Pedro);
+			clientRepository.save(Guillermo);
 
-			Account account001 = new Account("VIN001", LocalDateTime.now(), 5000.50);
-			Account account002 = new Account("VIN002", LocalDateTime.now().plusDays(1), 7500.00);
+			Account account001 = new Account("VIN001", LocalDateTime.now(), 5000.50, melba);
+			Account account002 = new Account("VIN002", LocalDateTime.now().plusDays(1), 7500.00, melba);
 
 			melba.addAccount(account001);
 			melba.addAccount(account002);
@@ -45,8 +50,8 @@ public class HomeBankingApplication {
 			accountRepository.save(account002);
 
 
-			Account account003 = new Account("VIN001", LocalDateTime.now(), 65000);
-			Account account004 = new Account("VIN002", LocalDateTime.now().plusDays(1), 75400);
+			Account account003 = new Account("VIN001", LocalDateTime.now(), 65000, Pedro);
+			Account account004 = new Account("VIN002", LocalDateTime.now().plusDays(1), 75400, Pedro);
 
 			Pedro.addAccount(account003);
 			Pedro.addAccount(account004);

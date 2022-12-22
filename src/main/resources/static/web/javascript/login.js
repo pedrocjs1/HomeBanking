@@ -5,8 +5,14 @@ const login = createApp({
         return {
             accountClient:[],
             clientsAccount: {},
-            
-            
+            email: "",
+            password: "",
+            errorLogin : "",
+            firstNameSign: "",
+            lastNameSign: "",
+            emailSign: "",
+            passwordSign: "",
+            errorRegister: "",
             
            
 
@@ -17,28 +23,43 @@ const login = createApp({
         }
     },
     created(){
-        this.loadData()
+        
         this.checkedAccount = localStorage.getItem("mode") 
     },
     methods: {
-        loadData(){
-            axios
-            .get("http://localhost:8080/api/clients/1")
-            .then((data) =>{
-                this.accountClient = data.data.accountDTO
-                this.username = data.data.firstName
-                this.clientsAccount = this.accountClient.sort((a,b) => a.id - b.id)
-                this.balanceTotal = this.clientsAccount.map(account => account.balance).reduce((iter, acc) => iter + acc)
-                console.log(this.clientsAccount)
-
-                
-
-                
-                
-            })
-            .catch((error) => console.log(error))
+        login(){
+            axios.post('/api/login', `email=${this.email}&password=${this.password}`)
+                .then(response => {
+                   window.location.href = '/web/accounts.html'
+                    
+                })
+                .catch(error => {
+                    this.errorLogin = "Email or password incorrect."
+                });
         },
-        
+        logout() {
+            axios.post('/api/logout').then(response => {
+                
+                window.location.href = './index.html'
+            })
+        },
+        signup() {
+            axios.post('/api/clients', `firstName=${this.firstNameSign}&lastName=${this.lastNameSign}&email=${this.emailSign}&password=${this.passwordSign}`)
+                .then(response => {
+
+                    this.email = this.emailSign
+                    this.password = this.passwordSign
+                    this.login()
+                })
+                .catch(error => {
+                    if (error.response.data == 'Missing data') {
+                        this.errorRegister = "Missing Data";
+                    }
+                    if (error.response.data == 'Email already in use') {
+                        this.errorRegister = "Email already in use";
+                    }
+                })
+        },
         
        
         
