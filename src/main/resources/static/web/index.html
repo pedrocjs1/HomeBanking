@@ -45,7 +45,7 @@
                             <a href="./register.html">Sign Up</a>
                         </li>
                     </ul>
-                    <h6 v-if="errorLogin !=''" class="text-white" v-cloak>{{errorLogin}}</h3>
+                    <h6 v-if="errorLogin !=''" style="color: rgba(221, 9, 9, 0.849) ;" v-cloak>{{errorLogin}}</h3>
                     <label for="login-input-user" class="login__label">
                         Username
                     </label>
@@ -59,7 +59,7 @@
                         Keep me Signed in
                     </label>
                     
-                    <button @click="login" class="login__submit" >Sign in</button>
+                    <button @click.prevent="login" class="login__submit" >Sign in</button>
                     
                 </div>
                 <a href="" class="login__forgot">Forgot Password?</a>

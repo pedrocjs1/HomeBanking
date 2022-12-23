@@ -2,6 +2,7 @@ package com.MindHub.HomeBanking.configurations;
 
 
 
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,14 +10,16 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 @EnableWebSecurity
 @Configuration
+
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
 
 
     @Override
@@ -26,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/web/index.html","/web/register.html", "/web/javascript/**","/web/styles/**","/web/images/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
                 .antMatchers("/rest/**", "/h2-console/**", "/manager.html").hasAuthority("ADMIN")
-                .antMatchers("/web/accounts.html", "/web/account.html", "/web/cards.html").hasAuthority("CLIENT");
+                .antMatchers("/web/accounts.html", "/web/account.html", "/web/cards.html", "/404.html").hasAuthority("CLIENT");
 
 
         http.formLogin()
@@ -36,6 +39,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.logout().logoutUrl("/api/logout");
 
+
+//        http
+//                .sessionManagement()
+//                .maximumSessions(1)
+//                .maxSessionsPreventsLogin(true);
+
+
         // turn off checking for CSRF tokens
         http.csrf().disable();
 
@@ -44,6 +54,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // if user is not authenticated, just send an authentication failure response
         http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
+        http.exceptionHandling().authenticationEntryPoint((request, response, auth) -> response.sendRedirect("/web/index.html"));
+
+        http.exceptionHandling()
+                .accessDeniedHandler(new AccessDeniedHandler());
 
         // if login is successful, just clear the flags asking for authentication
         http.formLogin().successHandler((req, res, auth) -> clearAuthenticationAttributes(req));

@@ -55,7 +55,7 @@ public class ClientController {
 
         Client client = new Client(firstName, lastName, email, passwordEncoder.encode(password));
         clientRepository.save(client);
-        Account account = new Account("VIN" + randomNumber(0, 99999999), LocalDateTime.now(), 100, client);
+        Account account = new Account("VIN" + randomNumber(0, 99999999), LocalDateTime.now(), 10, client);
         accountRepository.save(account);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
