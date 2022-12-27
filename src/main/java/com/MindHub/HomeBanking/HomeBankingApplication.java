@@ -1,5 +1,8 @@
 package com.MindHub.HomeBanking;
 
+import com.MindHub.HomeBanking.enums.CardType;
+import com.MindHub.HomeBanking.enums.ColorCard;
+import com.MindHub.HomeBanking.enums.TransactionType;
 import com.MindHub.HomeBanking.models.*;
 import com.MindHub.HomeBanking.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -17,13 +17,13 @@
                 <div id="carouselExampleSlidesOnly" class="carousel slide border-radius w-100" data-bs-ride="carousel">
                     <div class="carousel-inner">
                       <div class="carousel-item active image-ad1 ">
-                        <img src="./images/adsBank/add1.jpeg" class="  " alt="...">
+                        <img src="./images/adsBank/add1.jpeg" class="  " alt="this is an ads">
                       </div>
                       <div class="carousel-item image-ad2 ">
-                        <img src="./images/adsBank/add2.jpeg" class=" " alt="...">
+                        <img src="./images/adsBank/add2.jpeg" class=" " alt="this is an ads">
                       </div>
                       <div class="carousel-item image-ad3 ">
-                        <img src="./images/adsBank/ads3Bank.jpeg" class="  " alt="...">
+                        <img src="./images/adsBank/ads3Bank.jpeg" class="  " alt="this is an ads">
                       </div>
                     </div>
                   </div>
@@ -53,7 +53,7 @@
                     <label for="login-input-password" class="login__label">
                         Password
                     </label>
-                    <input id="login-input-password" v-model="password" class="login__input"  placeholder="Password" type="password" required/>
+                    <input @keyup.enter="login" id="login-input-password" v-model="password" class="login__input"  placeholder="Password" type="password" required/>
                     <label for="login-sign-up" class="login__label--checkbox">
                         <input id="login-sign-up" type="checkbox" class="login__input--checkbox" />
                         Keep me Signed in

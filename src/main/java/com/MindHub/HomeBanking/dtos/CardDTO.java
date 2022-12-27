@@ -1,9 +1,8 @@
 package com.MindHub.HomeBanking.dtos;
 
 import com.MindHub.HomeBanking.models.Card;
-import com.MindHub.HomeBanking.models.CardType;
-import com.MindHub.HomeBanking.models.Client;
-import com.MindHub.HomeBanking.models.ColorCard;
+import com.MindHub.HomeBanking.enums.CardType;
+import com.MindHub.HomeBanking.enums.ColorCard;
 
 import java.time.LocalDate;
 

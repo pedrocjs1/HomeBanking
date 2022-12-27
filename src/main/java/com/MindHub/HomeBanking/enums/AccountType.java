@@ -1,2 +1,6 @@
-package com.MindHub.HomeBanking.enums;public class AccountType {
+package com.MindHub.HomeBanking.enums;
+
+public enum AccountType {
+    SAVINGS,
+    CHECKING
 }

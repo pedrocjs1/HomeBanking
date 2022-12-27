@@ -29,7 +29,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/web/index.html","/web/register.html", "/web/javascript/**","/web/styles/**","/web/images/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
                 .antMatchers("/rest/**", "/h2-console/**", "/manager.html").hasAuthority("ADMIN")
-                .antMatchers("/web/accounts.html", "/web/account.html", "/web/cards.html", "/404.html").hasAuthority("CLIENT");
+                .antMatchers("/web/accounts.html", "/web/account.html", "/web/cards.html", "/404.html","/web/create-cards.html").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST,"/api/clients/current/accounts").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/api/clients/current/cards").hasAuthority("CLIENT");
 
 
         http.formLogin()
@@ -44,6 +46,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .sessionManagement()
 //                .maximumSessions(1)
 //                .maxSessionsPreventsLogin(true);
+
+
+
 
 
         // turn off checking for CSRF tokens

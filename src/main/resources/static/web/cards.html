@@ -160,6 +160,17 @@
             <section  class="grid d-flex flex-sm-column flex-md-column justify-content-center align-items-center account-media">
                 <h2 :class="currentText">Cards</h2>
                 <h3 v-if="cards.length === 0" :class="'text-black display-7 fw-bolder  ' + currentText">Has not requested cards</h3>
+                <div v-if="cards.length < 6"  >
+                  <a class="d-flex gap-2" href="./create-cards.html">
+                    <h4 :class="currentText">Order Card</h4>
+                    <button >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-plus-circle ' + currentText" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                      </svg>
+                    </button>
+                  </a>
+                </div>
                 <input id="viewCheck" type="checkbox" class="d-none" value="true" @click="viewPasswordFunction">
                 
                   <label v-if="cards.length !== 0" for="viewCheck">

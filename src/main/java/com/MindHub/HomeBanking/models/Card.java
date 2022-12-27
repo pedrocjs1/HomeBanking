@@ -1,5 +1,7 @@
 package com.MindHub.HomeBanking.models;
 
+import com.MindHub.HomeBanking.enums.CardType;
+import com.MindHub.HomeBanking.enums.ColorCard;
 import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
