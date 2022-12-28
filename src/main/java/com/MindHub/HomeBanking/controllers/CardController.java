@@ -44,8 +44,8 @@ public class CardController {
         Set<Card> cardsDebit = cardsClient.stream().filter(card -> card.getType() == CardType.DEBIT).collect(Collectors.toSet());
         Set<Card> cardsCredit = cardsClient.stream().filter(card -> card.getType() == CardType.CREDIT).collect(Collectors.toSet());
 
-        if (cardsDebit.size() < 3 && cardType == CardType.DEBIT) {
-            if (cardsDebit.stream().filter(card -> card.getColor() == colorCard).count() == 1) {
+        if (cardsDebit.size() < 3 && cardType.equals(CardType.DEBIT)) {
+            if (cardsDebit.stream().filter(card -> card.getColor().equals(colorCard)).count() == 1) {
                 return new ResponseEntity<>("You exceeded the color of cards", HttpStatus.FORBIDDEN);
             } else {
                 Card card = new Card(clientCurrent.getFullname(),
@@ -59,8 +59,8 @@ public class CardController {
                 cardRepository.save(card);
                 return new ResponseEntity<>("Created succes", HttpStatus.CREATED);
             }
-        } else if (cardsCredit.size() < 3 && cardType == CardType.CREDIT) {
-            if (cardsCredit.stream().filter(card -> card.getColor() == colorCard).count() == 1) {
+        } else if (cardsCredit.size() < 3 && cardType.equals(CardType.CREDIT)) {
+            if (cardsCredit.stream().filter(card -> card.getColor().equals(colorCard)).count() == 1) {
                 return new ResponseEntity<>("You exceeded the color of cards", HttpStatus.FORBIDDEN);
             } else {
                 Card card = new Card(clientCurrent.getFullname(),
