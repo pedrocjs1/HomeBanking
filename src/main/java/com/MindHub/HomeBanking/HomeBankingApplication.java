@@ -18,6 +18,8 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
+import static com.MindHub.HomeBanking.Utils.utils.randomNumber;
+
 @SpringBootApplication
 public class HomeBankingApplication {
 
@@ -43,8 +45,8 @@ public class HomeBankingApplication {
 			clientRepository.save(Pedro);
 			clientRepository.save(Guillermo);
 
-			Account account001 = new Account("VIN001", LocalDateTime.now(), 5000.50, melba);
-			Account account002 = new Account("VIN002", LocalDateTime.now().plusDays(1), 7500.00, melba);
+			Account account001 = new Account("VIN" + randomNumber(10000000, 99999999), LocalDateTime.now(), 5000.50, melba);
+			Account account002 = new Account("VIN" + randomNumber(10000000, 99999999), LocalDateTime.now().plusDays(1), 7500.00, melba);
 
 			melba.addAccount(account001);
 			melba.addAccount(account002);
@@ -53,8 +55,8 @@ public class HomeBankingApplication {
 			accountRepository.save(account002);
 
 
-			Account account003 = new Account("VIN001", LocalDateTime.now(), 65000, Pedro);
-			Account account004 = new Account("VIN002", LocalDateTime.now().plusDays(1), 75400, Pedro);
+			Account account003 = new Account("VIN" + randomNumber(10000000, 99999999), LocalDateTime.now(), 65000, Pedro);
+			Account account004 = new Account("VIN" + randomNumber(10000000, 99999999), LocalDateTime.now().plusDays(1), 75400, Pedro);
 
 			Pedro.addAccount(account003);
 			Pedro.addAccount(account004);

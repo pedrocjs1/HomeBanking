@@ -32,7 +32,8 @@ public class WebSecurityConfig  {
                 .antMatchers("/rest/**", "/h2-console/**", "/manager.html").hasAuthority("ADMIN")
                 .antMatchers("/web/accounts.html", "/web/account.html", "/web/cards.html", "/404.html","/web/create-cards.html").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.POST,"/api/clients/current/accounts").hasAuthority("CLIENT")
-                .antMatchers(HttpMethod.POST, "/api/clients/current/cards").hasAuthority("CLIENT");
+                .antMatchers(HttpMethod.POST, "/api/clients/current/cards").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/api/transactions").hasAuthority("CLIENT");
 
 
         http.formLogin()

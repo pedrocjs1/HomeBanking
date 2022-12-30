@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="./styles/create-cards.css" />
+    <link rel="stylesheet" href="./styles/transfers.css" />
     <link rel="shortcut icon" href="./images/iconBank.png" type="image/x-icon">
     <title>MINDHUB BANK</title>
   </head>
   <body >
-    <div id="card" v-cloak>
+    <div id="transfers" v-cloak>
       <div :class="header">
        
 
@@ -68,24 +68,24 @@
                   </a>
                 </li>
                 <li>
-                    <a id="active" href="./create-cards.html">
+                    <a id="active" href="./transaction.html">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-journal-text ' + currentText" viewBox="0 0 16 16">
                         <path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
                         <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
                         <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
                       </svg>
-                      <span :class="currentText">Order Cards</span>
+                      <span :class="currentText">Transaction</span>
                     </a>
                   </li>
-                  <li>
-                    <a href="./transfers.html">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-chat-left-dots ' + currentText" viewBox="0 0 16 16">
-                        <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                        <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-                      </svg>
-                      <span :class="currentText">Transfers </span>
-                    </a>
-                  </li>
+                <li>
+                  <a href="#0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-chat-left-dots ' + currentText" viewBox="0 0 16 16">
+                      <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                      <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                    </svg>
+                    <span :class="currentText">Chats</span>
+                  </a>
+                </li>
                 <li>
                   <a href="#0">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-currency-bitcoin ' + currentText" viewBox="0 0 16 16">
@@ -167,25 +167,101 @@
               </div>
             </section>
             <section  class="grid d-flex flex-sm-column flex-md-column justify-content-center align-items-center account-media">
-                <h2 :class="currentText">Order Card</h2>
+                <h2 :class="currentText">Transfers</h2>
                 
                 <form  class="d-flex flex-column gap-2" action="">
-                    <h5 :class="currentText">Select the type of card you want</h5>
+                    <h5 :class="currentText">Transfer to your own or a third party's account</h5>
                     <select required  v-model="selectType" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option value="DEBIT">DEBIT</option>
-                        <option  value="CREDIT">CREDIT</option>
+                        <option value="ownAccount">Own account</option>
+                        <option value="thirdAccount">Third-party account</option>
                     </select>
-                    <h5 :class="currentText">Select color type </h5>
-                    <select required  v-model="selectColor" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option value="SILVER">SILVER</option>
-                        <option value="GOLD">GOLD</option>
-                        <option value="TITANIUM">TITANIUM</option>
-                    </select>
-                    <a @click="createCard" :class="backgroundTitle +' btn mt-2 d-flex justify-content-center'">
+                    <div v-if="selectType === 'ownAccount'">
+                      <h5 :class="currentText">Select your origin account</h5>
+                      <select required  v-model="accountOrigin" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option v-if="account !== accountTarget" v-for="account in accountOwn" :value="account.number" :disabled="account.number === accountTarget">
+                          {{account.number}}
+                       </option>
+                      </select>
+                      <div v-if="accountOwn.length > 1" class="mt-2 mb-2 w-100 d-flex justify-content-center">
+                        <button @click.prevent="swapValues">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-arrow-down-up ' + currentText" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
+                          </svg>
+                        </button>
+                      </div>
+                      <h5 :class="currentText">Select your target account</h5>
+                      <select required  v-model="accountTarget" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option v-if="account !== accountOrigin"  v-for="account in accountOwn" :value="account.number" :disabled="account.number === accountOrigin">
+                          {{account.number}}
+                        </option>
+                      </select>
+                      <div class="d-flex gap-2 mt-2 mb-2">
+                        <label for="customRange2" :class="'form-label ' + currentText">Select amount:</label>
+                        <input
+                          type="text"
+                          id="customRange2"
+                          v-model="amount"
+                          :max="maxAmount"
+                          @input="updateAmount"
+                          
+                          
+                        /> 
+                      </div>
+                      <input 
+                      type="range"
+                      class="form-range"
+                      min="0"
+                      :max="maxAmount"
+                      id="customRange2"
+                      v-model="amount"
+                      step="0.1"
+                      >
+                      <div class="form-floating">
+                        <input v-model="description" type="text" class="form-control" id="floatingPassword" placeholder="Password">
+                        <label  for="floatingPassword">Description</label>
+                      </div>
+                    </div>
+                    <div v-if="selectType === 'thirdAccount'">
+                      <h5 :class="currentText">Select your origin account</h5>
+                      <select required  v-model="accountOrigin" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option  v-for="account in accountOwn" :value="account.number" >
+                          {{account.number}}
+                       </option>
+                      </select>
+                      
+                      <h5 :class="currentText">Target account</h5>
+                      <input placeholder="Target account" type="text" v-model="accountTargetOther">
+                      <div class="d-flex gap-2 mt-2 mb-2">
+                        <label for="customRange2" :class="'form-label ' + currentText">Select amount:</label>
+                        <input
+                          type="text"
+                          id="customRange2"
+                          v-model="amount"
+                          :max="maxAmount"
+                          @input="updateAmount"
+                          
+                          
+                        /> 
+                      </div>
+                      <input 
+                      type="range"
+                      class="form-range"
+                      min="0"
+                      :max="maxAmount"
+                      id="customRange2"
+                      v-model="amount"
+                      step="0.1"
+                      >
+                      <div class="form-floating">
+                        <input v-model="description" type="text" class="form-control" id="floatingPassword" placeholder="Password">
+                        <label  for="floatingPassword">Description</label>
+                      </div>
+                    </div>
+                    <a @click="transaction" :class="backgroundTitle +' btn mt-2 d-flex justify-content-center'">
                         <span :class="currentText + ' d-flex '">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
                           <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
-                        </svg>Order Card</span> 
+                        </svg>Transfer</span> 
                     </a>
                 </form>
 
@@ -209,5 +285,5 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="./javascript/create-cards.js"></script>
+    <script src="./javascript/transfers.js"></script>
 </html>
