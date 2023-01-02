@@ -61,10 +61,6 @@ public class Client {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getFullname(){
         return firstName + " " + lastName;
     }
@@ -87,6 +83,10 @@ public class Client {
         this.email = email;
     }
 
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     public void setLoans(Set<ClientLoan> loans) {
         this.loans = loans;
     }
