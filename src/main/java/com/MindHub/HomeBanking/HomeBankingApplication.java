@@ -84,26 +84,26 @@ public class HomeBankingApplication {
 
 
 			List<Integer> mortgagePayments = List.of(12,24,36,48,60);
-			Loan Mortgage = new Loan("Mortgage", 500000, mortgagePayments);
+			Loan Mortgage = new Loan("Mortgage", 500000, mortgagePayments,25);
 
 			List<Integer> personalPayments = List.of(6,12,24);
-			Loan Personal = new Loan("Personal", 100000, personalPayments);
+			Loan Personal = new Loan("Personal", 100000, personalPayments, 12);
 
 			List<Integer> carLoanPayments = List.of(6,12,24,36);
-			Loan CarLoan = new Loan("CarLoan", 300000, carLoanPayments);
+			Loan CarLoan = new Loan("CarLoan", 300000, carLoanPayments, 35);
 
 			loanRepository.save(Mortgage);
 			loanRepository.save(Personal);
 			loanRepository.save(CarLoan);
 
 
-			ClientLoan clientloan1 = new ClientLoan(400000, 60, new Date() , melba, Mortgage);
-			ClientLoan clientloan2 = new ClientLoan(200000, 12, new Date(), melba, Personal);
+			ClientLoan clientloan1 = new ClientLoan(400000, 60, melba, Mortgage);
+			ClientLoan clientloan2 = new ClientLoan(200000, 12, melba, Personal);
 			clientLoanRepository.save(clientloan1);
 			clientLoanRepository.save(clientloan2);
 
-			ClientLoan clientloan3 = new ClientLoan(100000, 24, new Date() , Pedro, Personal);
-			ClientLoan clientloan4 = new ClientLoan(200000, 36, new Date(), Pedro, CarLoan);
+			ClientLoan clientloan3 = new ClientLoan(100000, 24 , Pedro, Personal);
+			ClientLoan clientloan4 = new ClientLoan(200000, 36, Pedro, CarLoan);
 			clientLoanRepository.save(clientloan3);
 			clientLoanRepository.save(clientloan4);
 

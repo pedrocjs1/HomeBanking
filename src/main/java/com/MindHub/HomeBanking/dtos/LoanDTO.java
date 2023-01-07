@@ -12,6 +12,7 @@ public class LoanDTO {
 
     private int maxAmount;
 
+    private int percentIncrease;
     private List<Integer> payments = new ArrayList<>();
 
     public LoanDTO() {
@@ -22,6 +23,7 @@ public class LoanDTO {
         this.name = loan.getName();
         this.maxAmount = loan.getMaxAmount();
         this.payments = loan.getPayments();
+        this.percentIncrease = loan.getPercentIncrease();
     }
 
     public long getId() {
@@ -30,6 +32,10 @@ public class LoanDTO {
 
     public String getName() {
         return name;
+    }
+
+    public int getPercentIncrease() {
+        return percentIncrease;
     }
 
     public int getMaxAmount() {

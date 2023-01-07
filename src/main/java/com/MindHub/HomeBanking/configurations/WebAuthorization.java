@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 
 @EnableWebSecurity
 @Configuration
-public class WebSecurityConfig  {
+public class WebAuthorization {
 
 
 
@@ -27,13 +27,14 @@ public class WebSecurityConfig  {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
+                .antMatchers("/rest/**").denyAll()
                 .antMatchers("/web/index.html","/web/register.html", "/web/javascript/**","/web/styles/**","/web/images/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
                 .antMatchers("/rest/**", "/h2-console/**", "/manager.html").hasAuthority("ADMIN")
                 .antMatchers("/web/accounts.html", "/web/account.html", "/web/cards.html", "/404.html","/web/create-cards.html").hasAuthority("CLIENT")
-                .antMatchers(HttpMethod.POST,"/api/clients/current/accounts").hasAuthority("CLIENT")
-                .antMatchers(HttpMethod.POST, "/api/clients/current/cards").hasAuthority("CLIENT")
-                .antMatchers(HttpMethod.POST, "/api/transactions").hasAuthority("CLIENT");
+                .antMatchers(HttpMethod.POST,"/api/clients/current/**").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/api/transactions").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/api/loans").hasAuthority("CLIENT");
 
 
         http.formLogin()

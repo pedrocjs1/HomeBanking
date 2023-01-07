@@ -18,6 +18,7 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;
+    private String firstName, lastName, email, password;
 
     @OneToMany(mappedBy="owner", fetch=FetchType.EAGER)
     private Set<Account> accounts = new HashSet<>();
@@ -28,9 +29,6 @@ public class Client {
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Set<Card> cards = new HashSet<>();
 
-
-    private String firstName, lastName, email, password;
-
     public Client(){}
 
     public Client(String firstName, String lastName, String email, String password){
@@ -40,10 +38,22 @@ public class Client {
         this.password = password;
     }
 
+    public void addAccount(Account account) {
+        account.setOwner(this);
+        accounts.add(account);
+    }
+
+    public List<ClientLoanDTO> getLoans() {
+        return loans.stream().map(clientLoan -> new ClientLoanDTO(clientLoan)).collect(Collectors.toList());
+    }
+
+    public String getFullname(){
+        return firstName + " " + lastName;
+    }
+
     public Long getId() {
         return id;
     }
-
 
     public String getFirstName(){
         return firstName;
@@ -61,9 +71,6 @@ public class Client {
         return password;
     }
 
-    public String getFullname(){
-        return firstName + " " + lastName;
-    }
 
     public Set<Account> getAccounts() {
         return accounts;
@@ -83,7 +90,6 @@ public class Client {
         this.email = email;
     }
 
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -92,15 +98,7 @@ public class Client {
     }
 
 
-    public void addAccount(Account account) {
-        account.setOwner(this);
-        accounts.add(account);
-    }
 
-
-    public List<ClientLoanDTO> getLoans() {
-        return loans.stream().map(clientLoan -> new ClientLoanDTO(clientLoan)).collect(Collectors.toList());
-    }
 
 
 }
