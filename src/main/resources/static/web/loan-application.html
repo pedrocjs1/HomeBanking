@@ -178,73 +178,105 @@
                 </div>
               </div>
             </section>
-            <section  class="grid d-flex flex-sm-column flex-md-column justify-content-center align-items-center account-media">
+            <section  class="grid d-flex flex-sm-column flex-md-column  justify-content-center align-items-center account-media">
                 <h2 :class="currentText">Loans</h2>
-                
-                <form  class="d-flex flex-column gap-2" action="">
-                    <div>
-                        
-                      <h5 :class="currentText">Select a loan</h5>
-                      <select required  v-model="selectLoan" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option  v-for="loan of loans" :value="loan.name" >
-                          {{loan.name}}
-                       </option>
-                      </select>
-                      <span :class="currentText">Interest rate of
-                        {{loanQuota.percentIncrease}}%.
-                    </span>
-                      <h5 :class="currentText">Select your target account</h5>
-                      <select required  v-model="quotaSelect" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option  v-for="loan in loanQuota.payments" :value="loan" >
-                          {{loan}}
-                      
+                <div class="w-100 d-flex flex-lg-row justify-content-around">
 
-                        </option>
-                      {{loanQuotaMethod}}
-
-                      </select>
-                      <div class="d-flex gap-2 mt-2 mb-2">
-                        <label for="customRange2" :class="'form-label ' + currentText">Select amount:</label>
-                        <input
-                          type="text"
-                          id="customRange2"
-                          v-model="amount"
-                          :max="maxAmount"
-                          @input="updateAmount"
-                          
-                          
-                        /> 
-                      </div>
-                      <input 
-                      type="range"
-                      class="form-range mb-2"
-                      min="0"
-                      :max="maxAmount"
-                      id="customRange2"
-                      v-model="amount"
-                      step="0.01"
-                      >
-                      <h5 :class="currentText">Select your target account</h5>
-                      <select required  v-model="accountTarget" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option  v-for="account in accountOwn" :value="account.number" >
-                            {{account.number}}
-                    
-                        </option>
+                  <form  class="d-flex flex-column gap-2 p-3 borderCard" action="">
+                      <div>
+                        <!-- <div class="card__pricing">
+                          <div v-cloak class="card__pricing-number">
+                              <span v-cloak
+                                  class="card__pricing-symbol">%</span>{{loanQuota.percentIncrease}}
+                          </div>
+                          <span class="card__pricing-month">/increase </span>
+                      </div> -->
+                        <h5 :class="currentText">Select a loan</h5>
+                        <select required  v-model="selectLoan" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                          <option  v-for="loan of loans" :value="loan.name" >
+                            {{loan.name}}
+                         </option>
                         </select>
+                        <span :class="currentText">Interest rate of
+                          {{loanQuota.percentIncrease}}%.
+                      </span>
+                        <h5 :class="currentText">Select the quotas</h5>
+                        <select required  v-model="quotaSelect" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                          <option  v-for="loan in loanQuota.payments" :value="loan" >
+                            {{loan}}
+                        
+  
+                          </option>
+                        {{loanQuotaMethod}}
+  
+                        </select>
+                        <div class="d-flex gap-2 mt-2 mb-2">
+                          <label for="customRange2" :class="'form-label ' + currentText">Select amount:</label>
+                          <input
+                            type="text"
+                            id="customRange2"
+                            v-model="amount"
+                            :max="maxAmount"
+                            @input="updateAmount"
+                            
+                            
+                          /> 
+                        </div>
+                        <input 
+                        type="range"
+                        class="form-range mb-2"
+                        min="0"
+                        :max="maxAmount"
+                        id="customRange2"
+                        v-model="amount"
+                        step="0.01"
+                        >
+                        <h5 :class="currentText">Select your target account</h5>
+                        <select required  v-model="accountTarget" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                          <option  v-for="account in accountOwn" :value="account.number" >
+                              {{account.number}}
+                      
+                          </option>
+                          </select>
+                      </div>
+                      <label :class="currentText"
+                          v-show="amount!='' && quotaSelect!=0">Monthly rate:
+                          <span >${{addCommas((amount*(loanQuota.percentIncrease*0.01+1) / quotaSelect).toFixed(2))}}</span>
+                      </label>
+                      
+                      <a @click="loanApply" :class="backgroundTitle +' btn mt-2 d-flex justify-content-center'">
+                          <span :class="currentText + ' d-flex '">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                          </svg>Transfer</span> 
+                      </a>
+                  </form>
+                  <div class="row row-cols-1 row-cols-md-3 g-4 borderCard">
+                    <div class="col">
+                      <div class="card h-100">
+                        <img :src="imageUrl" class="card-img-top" style="width: 12.5rem; height: 9rem;" alt="Image personal loan">
+                        <div class="card-body">
+                          <h5 :class="'card-title ' + currentText">{{loanQuota.name}}</h5>
+                          <p :class="'card-title ' + currentText"><span>Payments:</span>
+                            <template v-for="(payment, index) in loanQuota.payments">
+                              <template v-if="index > 0">,</template>
+                              {{ payment }}
+                            </template>
+                          </p>
+                          <p :class="'card-title ' + currentText"><span>Max Amount:</span> ${{maxAmount}}</p>
+                          <p :class="'card-title ' + currentText"><span>The Loan has a interest rate of {{loanQuota.percentIncrease}}%</span></p>
+                          
+                        </div>
+                        <div class="card-footer"   >
+                          <small v-if="hasLoan(loanQuota.name)" class="text-muted ">Loan already taken</small>
+                          <small v-if="!hasLoan(loanQuota.name)" :class="currentText">You haven't taken this loan</small>
+                        
+                        </div>
+                      </div>
                     </div>
-                    <label :class="currentText"
-                        v-show="amount!='' && quotaSelect!=0">Monthly rate:
-                        <span >${{addCommas((amount*(loanQuota.percentIncrease*0.01+1) / quotaSelect).toFixed(2))}}</span>
-                    </label>
                     
-                    <a @click="loanApply" :class="backgroundTitle +' btn mt-2 d-flex justify-content-center'">
-                        <span :class="currentText + ' d-flex '">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
-                          <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
-                        </svg>Transfer</span> 
-                    </a>
-                </form>
-
+                  </div>
+                </div>
               
 
             </section>

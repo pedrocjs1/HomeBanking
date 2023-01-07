@@ -70,7 +70,7 @@ public class LoanController {
         if (!allLoans.contains(loan)) {
             return new ResponseEntity<>("Loan not found", HttpStatus.FORBIDDEN);
         }
-        
+
         if (loansTaked.contains(loan)) {
             return new ResponseEntity<>("Loan already taked", HttpStatus.FORBIDDEN);
         }

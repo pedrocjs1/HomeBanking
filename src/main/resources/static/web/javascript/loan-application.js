@@ -3,6 +3,7 @@ const {createApp} = Vue
 const loan = createApp({
     data(){
         return {
+            clientLoansTaken: [],
             cards:[],
             clientsAccount: {},
             loans: [],
@@ -69,12 +70,12 @@ const loan = createApp({
                 this.username = data.data.firstName + ' ' + data.data.lastName
                 // this.clientsAccount = this.accountClient.sort((a,b) => a.id - b.id)
                 // this.balanceTotal = this.clientsAccount.map(account => account.balance).reduce((iter, acc) => iter + acc).toFixed(2)
-                
+                this.clientLoansTaken = data.data.loans
                 this.accountOwn = data.data.accountDTO.sort((a,b) => a.id - b.id)
                 console.log(this.accountOwn)
                 this.accountOrigin = [... data.data.accountDTO.map(number => number.number)][0]
                 this.accountTarget = data.data.accountDTO.length > 1 ? data.data.accountDTO[0].number : "No other account"
-                console.log(this.accountOrigin)
+                console.log(this.client)
                 
             })
             .catch((error) => console.log(error))
@@ -125,11 +126,6 @@ const loan = createApp({
         },
         updateAmount(event) {
             this.amount = event.target.value;
-        },
-        swapValues() {
-            const temp = this.accountOrigin;
-            this.accountOrigin = this.accountTarget;
-            this.accountTarget = temp;
         }, 
         loanApply() {
 
@@ -182,7 +178,17 @@ const loan = createApp({
                 }
             })
     
-        }
+        },
+        hasLoan(type) {
+
+              // Verificar si el cliente tiene un préstamo del tipo especificado
+              const loansTaked = this.clientLoansTaken.find(loan => loan.name === type)
+              if (loansTaked) {
+                return true
+              } else {
+                return false
+              }
+        },
        
         
         
@@ -235,7 +241,10 @@ const loan = createApp({
 
           }
         
-    }
+    },
+    imageUrl() {
+        return `./images/${this.loanQuota.name}.jpeg`
+      },
 
     
     
