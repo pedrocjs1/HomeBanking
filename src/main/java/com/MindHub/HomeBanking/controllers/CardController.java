@@ -8,6 +8,8 @@ import com.MindHub.HomeBanking.models.Client;
 import com.MindHub.HomeBanking.repositories.AccountRepository;
 import com.MindHub.HomeBanking.repositories.CardRepository;
 import com.MindHub.HomeBanking.repositories.ClientRepository;
+import com.MindHub.HomeBanking.services.CardService;
+import com.MindHub.HomeBanking.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,19 +30,16 @@ import static com.MindHub.HomeBanking.Utils.utils.randomNumber;
 public class CardController {
 
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
 
     @Autowired
-    private AccountRepository accountRepository;
-
-    @Autowired
-    private CardRepository cardRepository;
+    private CardService cardService;
 
 
     @PostMapping("/clients/current/cards")
     public ResponseEntity<Object> createCard(Authentication authentication, @RequestParam ColorCard colorCard, @RequestParam CardType cardType) {
-        Client clientCurrent = clientRepository.findByEmail(authentication.getName());
-        Set<Card> cardsClient = cardRepository.findAll().stream().filter(card -> card.getClient() == clientCurrent).collect(Collectors.toSet());
+        Client clientCurrent = clientService.getClientCurrent(authentication);
+        Set<Card> cardsClient = cardService.getAllCardsAuthenticated(authentication);
         Set<Card> cardsDebit = cardsClient.stream().filter(card -> card.getType() == CardType.DEBIT).collect(Collectors.toSet());
         Set<Card> cardsCredit = cardsClient.stream().filter(card -> card.getType() == CardType.CREDIT).collect(Collectors.toSet());
 
@@ -56,7 +55,7 @@ public class CardController {
                         LocalDate.now(),
                         LocalDate.now().plusYears(5),
                         clientCurrent);
-                cardRepository.save(card);
+                cardService.saveCard(card);
                 return new ResponseEntity<>("Created succes", HttpStatus.CREATED);
             }
         } else if (cardsCredit.size() < 3 && cardType.equals(CardType.CREDIT)) {
@@ -71,7 +70,7 @@ public class CardController {
                         LocalDate.now(),
                         LocalDate.now().plusYears(5),
                         clientCurrent);
-                cardRepository.save(card);
+                cardService.saveCard(card);
                 return new ResponseEntity<>("Created succes", HttpStatus.CREATED);
             }
         } else {

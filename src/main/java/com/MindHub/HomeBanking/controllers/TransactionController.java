@@ -1,14 +1,12 @@
 package com.MindHub.HomeBanking.controllers;
 
-
 import com.MindHub.HomeBanking.enums.TransactionType;
 import com.MindHub.HomeBanking.models.Account;
 import com.MindHub.HomeBanking.models.Client;
 import com.MindHub.HomeBanking.models.Transaction;
-import com.MindHub.HomeBanking.repositories.AccountRepository;
-import com.MindHub.HomeBanking.repositories.CardRepository;
-import com.MindHub.HomeBanking.repositories.ClientRepository;
-import com.MindHub.HomeBanking.repositories.TransactionRepository;
+import com.MindHub.HomeBanking.services.AccountService;
+import com.MindHub.HomeBanking.services.ClientService;
+import com.MindHub.HomeBanking.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,16 +21,13 @@ import java.time.LocalDateTime;
 public class TransactionController {
 
     @Autowired
-    private AccountRepository accountRepository;
+    private AccountService accountService;
 
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
 
     @Autowired
-    private CardRepository cardRepository;
-
-    @Autowired
-    private TransactionRepository transactionRepository;
+    private TransactionService transactionService;
 
     @Transactional
     @PostMapping("/transactions")
@@ -42,9 +37,9 @@ public class TransactionController {
                                                     @RequestParam String originAccountNumber,
                                                     @RequestParam String targetAccountNumber) {
 
-        Client client = clientRepository.findByEmail(authentication.getName());
-        Account originAccount = accountRepository.findByNumber(originAccountNumber);
-        Account targetAccount = accountRepository.findByNumber(targetAccountNumber);
+        Client client = clientService.getClientCurrent(authentication);
+        Account originAccount = accountService.getAccountByNumber(originAccountNumber);
+        Account targetAccount = accountService.getAccountByNumber(targetAccountNumber);
 
         if (description.isEmpty() || amount == null || amount.isNaN() || originAccountNumber.isEmpty() || targetAccountNumber.isEmpty()) {
             return new ResponseEntity<>("Invalid amount", HttpStatus.FORBIDDEN);
@@ -91,11 +86,11 @@ public class TransactionController {
                 LocalDateTime.now(),
                 targetAccount);
 
-        transactionRepository.save(transactionDebit);
-        transactionRepository.save(transactionCredit);
+        transactionService.saveTransaction(transactionDebit);
+        transactionService.saveTransaction(transactionCredit);
 
-        accountRepository.save(originAccount);
-        accountRepository.save(targetAccount);
+        accountService.saveAccount(originAccount);
+        accountService.saveAccount(targetAccount);
 
         return new ResponseEntity<>("Transaction success", HttpStatus.CREATED);
 
