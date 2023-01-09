@@ -17,7 +17,7 @@
 
         <header :class="currentBackGround  + ' page-header contenedor d-flex'">
           <nav :class="currentBackGround">
-            <a href="#0" aria-label="forecastr logo" class="logo">
+            <a href="./accounts.html" aria-label="forecastr logo" class="logo">
               <img v-if="currentBackGround === 'bg-dark'" style="width: 5rem;" :class="'borderRadius d-flex d-md-none ' + backgroundLogo" src="./images/logoBlack.png" alt="Logo MindHub Bank">
               <img v-if="currentBackGround === 'backGroundGrey'" style="width: 5rem;" :class="'borderRadius d-flex d-md-none ' + backgroundLogo" src="./images/logoWhite.png" alt="Logo MindHub Bank">
             </a>
@@ -35,8 +35,10 @@
             
             
             <div class="" >
-              <img v-if="currentBackGround === 'backGroundGrey'" style="width: 10rem;" :class="'ms-4 mt-4 borderRadius d-none d-md-flex ' + backgroundLogo" src="./images/logoWhite.png" alt="Logo MindHub Bank">
-              <img v-if="currentBackGround === 'bg-dark'" style="width: 10rem;" :class="'ms-4 mt-4 borderRadius d-none d-md-flex ' + backgroundLogo" src="./images/logoBlack.png" alt="Logo MindHub Bank">
+              <a href="./accounts.html">
+                <img v-if="currentBackGround === 'backGroundGrey'" style="width: 10rem;" :class="'ms-4 mt-4 borderRadius d-none d-md-flex ' + backgroundLogo" src="./images/logoWhite.png" alt="Logo MindHub Bank">
+                <img v-if="currentBackGround === 'bg-dark'" style="width: 10rem;" :class="'ms-4 mt-4 borderRadius d-none d-md-flex ' + backgroundLogo" src="./images/logoBlack.png" alt="Logo MindHub Bank">
+              </a>
               <ul :class="currentBackGround + ' admin-menu'">
                 <li class="menu-heading">
                   <h3 :class="currentText">Admin</h3>
@@ -170,101 +172,109 @@
             <section  class="grid d-flex flex-sm-column flex-md-column justify-content-center align-items-center account-media">
                 <h2 :class="currentText">Transfers</h2>
                 
-                <form  class="d-flex flex-column gap-2" action="">
-                    <h5 :class="currentText">Transfer to your own or a third party's account</h5>
-                    <select required  v-model="selectType" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option value="ownAccount">Own account</option>
-                        <option value="thirdAccount">Third-party account</option>
-                    </select>
-                    <div v-if="selectType === 'ownAccount'">
-                      <h5 :class="currentText">Select your origin account</h5>
-                      <select required  v-model="accountOrigin" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option  v-for="account in accountOwn" :value="account.number" :disabled="account.number === accountTarget">
-                          {{account.number}}
-                       </option>
+                <div class="w-100 d-flex flex-lg-row justify-content-around mediaQuerySection">
+
+                  <form  :class="'d-flex flex-column gap-2 p-3 ' + shadowCardLoan" action="">
+                      <h5 :class="currentText">Transfer to your own or a third party's account</h5>
+                      <select required  v-model="selectType" :class="'form-select form-select-sm ' + currentText" aria-label=".form-select-sm example">
+                          <option :class="optionBackground" value="ownAccount">Own account</option>
+                          <option :class="optionBackground" value="thirdAccount">Third-party account</option>
                       </select>
-                      <div v-if="accountOwn.length > 1" class="mt-2 mb-2 w-100 d-flex justify-content-center">
-                        <button @click.prevent="swapValues">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-arrow-down-up ' + currentText" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
-                          </svg>
-                        </button>
+                      <div v-if="selectType === 'ownAccount'">
+                        <h5 :class="currentText">Select your origin account</h5>
+                        <select required  v-model="accountOrigin" :class="'form-select form-select-sm ' + currentText" aria-label=".form-select-sm example">
+                          <option :class="optionBackground"  v-for="account in accountOwn" :value="account.number" :disabled="account.number === accountTarget">
+                            {{account.number}}
+                         </option>
+                        </select>
+                        <div v-if="accountOwn.length > 1" class="mt-2 mb-2 w-100 d-flex justify-content-center">
+                          <button @click.prevent="swapValues">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-arrow-down-up ' + currentText" viewBox="0 0 16 16">
+                              <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
+                            </svg>
+                          </button>
+                        </div>
+                        <h5 :class="currentText">Select your target account</h5>
+                        <select required  v-model="accountTarget" :class="'form-select form-select-sm ' + currentText" aria-label=".form-select-sm example">
+                          <option :class="optionBackground"  v-for="account in accountOwn" :value="account.number" :disabled="account.number === accountOrigin">
+                            {{account.number}}
+                          </option>
+                        </select>
+                        <div class="d-flex gap-2 mt-2 mb-2">
+                          <label for="customRange2" :class="'form-label ' + currentText">Select amount:</label>
+                          <input
+                            type="text"
+                            id="customRange2"
+                            v-model="amount"
+                            :max="maxAmount"
+                            @input="updateAmount"
+                            
+                            
+                          /> 
+                        </div>
+                        <input 
+                        type="range"
+                        class="form-range mb-2"
+                        min="0"
+                        :max="maxAmount"
+                        id="customRange2"
+                        v-model="amount"
+                        step="0.01"
+                        >
+                        <div class="form-floating">
+                          <input v-model="description" type="text" class="form-control" id="floatingPassword" placeholder="Password">
+                          <label  for="floatingPassword">Description</label>
+                        </div>
                       </div>
-                      <h5 :class="currentText">Select your target account</h5>
-                      <select required  v-model="accountTarget" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option  v-for="account in accountOwn" :value="account.number" :disabled="account.number === accountOrigin">
-                          {{account.number}}
-                        </option>
-                      </select>
-                      <div class="d-flex gap-2 mt-2 mb-2">
-                        <label for="customRange2" :class="'form-label ' + currentText">Select amount:</label>
-                        <input
-                          type="text"
-                          id="customRange2"
-                          v-model="amount"
-                          :max="maxAmount"
-                          @input="updateAmount"
-                          
-                          
-                        /> 
+                      <div v-if="selectType === 'thirdAccount'">
+                        <h5 :class="currentText">Select your origin account</h5>
+                        <select required  v-model="accountOrigin" :class="'form-select form-select-sm ' + currentText" aria-label=".form-select-sm example">
+                          <option  :class="optionBackground" v-for="account in accountOwn" :value="account.number" >
+                            {{account.number}}
+                         </option>
+                        </select>
+                        
+                        <h5 :class="currentText">Target account</h5>
+                        <input placeholder="Target account" type="text" v-model="accountTargetOther">
+                        <div class="d-flex gap-2 mt-2 mb-2">
+                          <label for="customRange2" :class="'form-label ' + currentText">Select amount:</label>
+                          <input
+                            type="text"
+                            id="customRange2"
+                            v-model="amount"
+                            :max="maxAmount"
+                            @input="updateAmount"
+                            
+                            
+                          /> 
+                        </div>
+                        <input 
+                        type="range"
+                        class="form-range mb-2"
+                        min="0"
+                        :max="maxAmount"
+                        id="customRange2"
+                        v-model="amount"
+                        step="0.1"
+                        >
+                        <div class="form-floating">
+                          <input v-model="description" type="text" class="form-control" id="floatingPassword" placeholder="Password">
+                          <label  for="floatingPassword">Description</label>
+                        </div>
                       </div>
-                      <input 
-                      type="range"
-                      class="form-range mb-2"
-                      min="0"
-                      :max="maxAmount"
-                      id="customRange2"
-                      v-model="amount"
-                      step="0.01"
-                      >
-                      <div class="form-floating">
-                        <input v-model="description" type="text" class="form-control" id="floatingPassword" placeholder="Password">
-                        <label  for="floatingPassword">Description</label>
-                      </div>
-                    </div>
-                    <div v-if="selectType === 'thirdAccount'">
-                      <h5 :class="currentText">Select your origin account</h5>
-                      <select required  v-model="accountOrigin" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option  v-for="account in accountOwn" :value="account.number" >
-                          {{account.number}}
-                       </option>
-                      </select>
-                      
-                      <h5 :class="currentText">Target account</h5>
-                      <input placeholder="Target account" type="text" v-model="accountTargetOther">
-                      <div class="d-flex gap-2 mt-2 mb-2">
-                        <label for="customRange2" :class="'form-label ' + currentText">Select amount:</label>
-                        <input
-                          type="text"
-                          id="customRange2"
-                          v-model="amount"
-                          :max="maxAmount"
-                          @input="updateAmount"
-                          
-                          
-                        /> 
-                      </div>
-                      <input 
-                      type="range"
-                      class="form-range mb-2"
-                      min="0"
-                      :max="maxAmount"
-                      id="customRange2"
-                      v-model="amount"
-                      step="0.1"
-                      >
-                      <div class="form-floating">
-                        <input v-model="description" type="text" class="form-control" id="floatingPassword" placeholder="Password">
-                        <label  for="floatingPassword">Description</label>
-                      </div>
-                    </div>
-                    <a @click="transaction" :class="backgroundTitle +' btn mt-2 d-flex justify-content-center'">
-                        <span :class="currentText + ' d-flex '">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
-                          <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
-                        </svg>Transfer</span> 
-                    </a>
-                </form>
+                      <a @click="transaction" :class="backgroundTitle +' btn mt-2 d-flex justify-content-center'">
+                          <span :class="currentText + ' d-flex '">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                          </svg>Transfer</span> 
+                      </a>
+                  </form>
+
+                  <div class="d-flex align-items-center">
+                    <img src="./images/transferImage.png" style="width: 20.5rem; height: 20rem;" alt="ilustration image">
+                  </div>
+
+                </div>
 
               
 

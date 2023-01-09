@@ -35,7 +35,9 @@ const loan = createApp({
             shadowCard: "",
             bgGrey: "",
             backgroundLogo: "",
-
+            shadowCardLoan: "",
+            optionBackground: "",
+            buttonDisableColor: "",
             checkedHeader: true,
             header: "",
             headerDesktop: "",
@@ -205,6 +207,9 @@ const loan = createApp({
           this.shadowCard = "shadowWhite" 
           this.bgGrey = "bg-light borderRadius"
           this.backgroundLogo = ""
+          this.shadowCardLoan = "borderCard-white"
+          this.buttonDisableColor = "buttonDisableColor"
+          this.optionBackground = "optionBackground-white"
           localStorage.setItem("mode", true)
 
         } else if (this.checkedAccount === "false" || this.checkedAccount === false) {
@@ -217,6 +222,9 @@ const loan = createApp({
           this.shadowCard = "shadow  bg-body rounded" 
           this.bgGrey = "backgroundBodyCard borderRadius"
           this.backgroundLogo = ""
+          this.shadowCardLoan = "borderCard-black"
+          this.buttonDisableColor = ""
+          this.optionBackground = "optionBackground-black"
           localStorage.setItem("mode", false)
         }
     },
@@ -244,7 +252,8 @@ const loan = createApp({
     },
     imageUrl() {
         return `./images/${this.loanQuota.name}.jpeg`
-      },
+    },
+    
 
     
     

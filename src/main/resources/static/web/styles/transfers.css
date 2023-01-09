@@ -1287,3 +1287,77 @@ input:valid ~ label{
     transform: rotateY(180deg);
   }
 }
+
+select {
+  background: url('https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-arrow-down-32.png') no-repeat right !important;
+  outline: none !important;
+  /* -moz-appearance: none !important;
+  -webkit-appearance: none !important; */
+}
+
+ select{
+
+  /* background: none !important; */
+  border: none !important;
+    border-bottom-color: currentcolor !important;
+    border-bottom-style: none !important;
+    border-bottom-width: medium !important;
+  border-bottom: solid 2px #00b9eb !important;
+  
+  font-size: 1.000em !important;
+  font-weight: 400 !important;
+  letter-spacing: 1px !important;
+  margin: 0em 0 1.875em 0 !important;
+  padding: 0 0 0.875em 0 !important;
+  text-transform: uppercase !important;
+  width: 100% !important;
+  -webkit-box-sizing: border-box !important;
+  -moz-box-sizing: border-box !important;
+  -ms-box-sizing: border-box !important;
+  -o-box-sizing: border-box !important;
+  box-sizing: border-box !important;
+  -webkit-transition: all 0.3s !important;
+  -moz-transition: all 0.3s !important;
+  -ms-transition: all 0.3s !important;
+  -o-transition: all 0.3s !important;
+  transition: all 0.3s !important;
+}
+
+ 
+input {
+  border-bottom: solid 2px #00b9eb !important;
+
+}
+
+.optionBackground-black {
+  background-color:#212529 !important;
+}
+.optionBackground-white {
+  background-color:#c7cace !important;
+}
+
+
+.borderCard-black{
+  border: 1px solid #fff !important;
+  border-radius: 1rem !important;
+  padding-bottom: 1rem;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  /* box-shadow: rgba(179, 176, 176, 0.2) 0px 7px 29px 0px; */
+}
+
+.borderCard-white{
+  border: 1px solid #21252970 !important;
+  border-radius: 1rem !important;
+  padding-bottom: 1rem;
+  /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+  box-shadow: rgba(179, 176, 176, 0.2) 0px 7px 29px 0px;
+}
+
+
+@media screen and (max-width: 844px) {
+  .mediaQuerySection {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 4rem;
+  }
+}

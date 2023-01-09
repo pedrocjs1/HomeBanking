@@ -33,6 +33,8 @@ const transaction = createApp({
             shadowCard: "",
             bgGrey: "",
             backgroundLogo: "",
+            optionBackground: "",
+            shadowCardLoan: "",
 
             checkedHeader: true,
             header: "",
@@ -90,20 +92,6 @@ const transaction = createApp({
                 
                 window.location.href = './index.html'
             })
-        },
-        createCard() {
-            axios
-                    .post(
-                        "/api/clients/current/cards",
-                        `colorCard=${this.selectColor}&cardType=${this.selectType}`
-                    )
-                    .then((response) => window.location.href=("./cards.html"))
-
-                    .catch((error) => Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: `${error.response.data}`,
-                    }));
         },
         updateAmount(event) {
             this.amount = event.target.value;
@@ -187,6 +175,8 @@ const transaction = createApp({
           this.shadowCard = "shadowWhite" 
           this.bgGrey = "bg-light borderRadius"
           this.backgroundLogo = ""
+          this.optionBackground = "optionBackground-black"
+          this.shadowCardLoan = "borderCard-white"
           localStorage.setItem("mode", true)
 
         } else if (this.checkedAccount === "false" || this.checkedAccount === false) {
@@ -199,6 +189,8 @@ const transaction = createApp({
           this.shadowCard = "shadow  bg-body rounded" 
           this.bgGrey = "backgroundBodyCard borderRadius"
           this.backgroundLogo = ""
+          this.optionBackground = "optionBackground-white"
+          this.shadowCardLoan = "borderCard-black"
           localStorage.setItem("mode", false)
         }
     },

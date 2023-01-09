@@ -9,8 +9,8 @@ const createCard = createApp({
             clientLoans: {},
             balanceTotalLoan: "",
             
-            selectType: "DEBIT",
-            selectColor:"SILVER",
+            selectType: "Debit",
+            selectColor:"Silver",
 
 
             username: "",
@@ -26,10 +26,11 @@ const createCard = createApp({
             shadowCard: "",
             bgGrey: "",
             backgroundLogo: "",
-
+            optionBackground:"",
             checkedHeader: true,
             header: "",
             headerDesktop: "",
+            shadowCardLoan: "",
 
             balanceTotal: "",
 
@@ -78,20 +79,36 @@ const createCard = createApp({
             })
         },
         createCard() {
-            axios
-                    .post(
-                        "/api/clients/current/cards",
-                        `colorCard=${this.selectColor}&cardType=${this.selectType}`
-                    )
-                    .then((response) => window.location.href=("./cards.html"))
-
-                    .catch((error) => Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: `${error.response.data}`,
-                    }));
-        }
+            Swal.fire({
+                title: 'Would you like to order this card?',
+                showDenyButton: true,
+                text: `Card ${this.selectType} and color ${this.selectColor}`,
+                confirmButtonText: 'Accept',
+                denyButtonText: `Cancel`,
+            }).then((result) => {
+                
+                if (result.isConfirmed) {
+                    axios.post(
+                                "/api/clients/current/cards",
+                                `colorCard=${this.selectColor}&cardType=${this.selectType}`
+                            )
+                            .then((response) => window.location.href=("./cards.html"))
         
+                            .catch((error) => Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: `${error.response.data}`,
+                            }));
+                }else {
+                    Swal.fire('Order card canceled')
+                                .then(result => {
+                                    window.location.reload()
+                                })
+                }
+        
+                
+            })
+        }
     
         
        
@@ -110,6 +127,8 @@ const createCard = createApp({
           this.shadowCard = "shadowWhite" 
           this.bgGrey = "bg-light borderRadius"
           this.backgroundLogo = ""
+          this.optionBackground = "optionBackground-black"
+          this.shadowCardLoan = "borderCard-white"
           localStorage.setItem("mode", true)
 
         } else if (this.checkedAccount === "false" || this.checkedAccount === false) {
@@ -122,9 +141,20 @@ const createCard = createApp({
           this.shadowCard = "shadow  bg-body rounded" 
           this.bgGrey = "backgroundBodyCard borderRadius"
           this.backgroundLogo = ""
+          this.optionBackground = "optionBackground-white"
+          this.shadowCardLoan = "borderCard-black"
           localStorage.setItem("mode", false)
         }
-    }
+    },
+    imageUrl() {
+        return `./images/cardImage/${this.selectType}${this.selectColor}.png`
+    },
+    imageDiscount() {
+        return `./images/cardImage/${this.selectType}.png`
+    },
+    imageDiscountCredit() {
+        return `./images/cardImage/${this.selectType}${this.selectColor}1.png`
+    },
 
     
     
