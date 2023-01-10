@@ -209,7 +209,7 @@ const loan = createApp({
           this.backgroundLogo = ""
           this.shadowCardLoan = "borderCard-white"
           this.buttonDisableColor = "buttonDisableColor"
-          this.optionBackground = "optionBackground-white"
+          this.optionBackground = "optionBackground-black"
           localStorage.setItem("mode", true)
 
         } else if (this.checkedAccount === "false" || this.checkedAccount === false) {
@@ -224,7 +224,7 @@ const loan = createApp({
           this.backgroundLogo = ""
           this.shadowCardLoan = "borderCard-black"
           this.buttonDisableColor = ""
-          this.optionBackground = "optionBackground-black"
+          this.optionBackground = "optionBackground-white"
           localStorage.setItem("mode", false)
         }
     },

@@ -170,16 +170,16 @@
                 </div>
               </div>
             </section>
-            <section  class="grid d-flex flex-sm-column flex-md-column  justify-content-center align-items-center account-media">
+            <section  class="grid d-flex flex-sm-column flex-md-column flex-wrap gap-3  align-items-center account-media pruebaasd">
                 <h2 :class="currentText">Loans</h2>
                 <div class="w-100 d-flex flex-lg-row justify-content-around mediaQuerySection">
 
-                  <form  :class="'d-flex flex-column gap-3 p-3 ' + shadowCardLoan" action="">
+                  <form style="width: 20rem;"  :class="'d-flex flex-column gap-3 p-3 ' + shadowCardLoan" action="">
                       <div>
                         
                         <h5 :class="currentText">Select a loan</h5>
                         <select required  v-model="selectLoan" :class="'form-select form-select-sm mb-2 ' + currentText" aria-label=".form-select-sm example">
-                          <option  v-for="loan of loans" :value="loan.name" >
+                          <option :class="optionBackground"  v-for="loan of loans" :value="loan.name" >
                             {{loan.name}}
                          </option>
                         </select>
@@ -237,9 +237,9 @@
                           </svg>Transfer</span> 
                       </a>
                   </form>
-                  <div :class="'row row-cols-1 row-cols-md-3 g-4 ' + shadowCardLoan">
-                    <div class="col">
-                      <div class="card h-100">
+                  <div style="width: 20rem;" :class="'row row-cols-1 row-cols-md-3 g-4 align-items-between ' + shadowCardLoan">
+                    
+                      <div class="card w-100 d-flex align-items-center ">
                         <!-- <div class="card__pricing">
                             <div v-cloak class="card__pricing-number">
                                 <span v-cloak
@@ -247,8 +247,8 @@
                             </div>
                             <span class="card__pricing-month">/increase </span>
                         </div> -->
-                        <img :src="imageUrl" class="card-img-top" style="width: 12.5rem; height: 9rem;" alt="Image personal loan">
-                        <div class="card-body">
+                        <img :src="imageUrl" class="card-img-top w-100" style="width: 18.5rem; height: 11rem;" alt="Image personal loan">
+                        <div class="card-body d-flex flex-column w-100 mb-4 ps-0">
                           <h5 :class="'card-title ' + currentText">{{loanQuota.name}}</h5>
                           <p :class="'card-title ' + currentText"><span>Payments:</span>
                             <template v-for="(payment, index) in loanQuota.payments">
@@ -259,13 +259,14 @@
                           <p :class="'card-title ' + currentText"><span>Max Amount:</span> ${{maxAmount}}</p>
                           <p :class="'card-title ' + currentText"><span>The Loan has a interest rate of {{loanQuota.percentIncrease}}%</span></p>
                           
+                        </div>                                              
+                        <div :class="'card-footer w-100 text-center mt-5 ' + buttonDisableColor">
+                            <small v-if="hasLoan(loanQuota.name)" class="text-muted ">Loan already taken</small>
+                            <small v-if="!hasLoan(loanQuota.name)" :class="currentText">You haven't taken this loan</small>
+                          
                         </div>
-                        <div :class="'card-footer ' + buttonDisableColor">
-                          <small v-if="hasLoan(loanQuota.name)" class="text-muted ">Loan already taken</small>
-                          <small v-if="!hasLoan(loanQuota.name)" :class="currentText">You haven't taken this loan</small>
-                        
-                        </div>
-                      </div>
+                       
+                      
                     </div>
                     
                   </div>

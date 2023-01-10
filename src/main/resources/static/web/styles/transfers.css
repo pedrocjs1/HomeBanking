@@ -1308,7 +1308,7 @@ select {
   font-weight: 400 !important;
   letter-spacing: 1px !important;
   margin: 0em 0 1.875em 0 !important;
-  padding: 0 0 0.875em 0 !important;
+  padding: 1 0 0.875em 0 !important;
   text-transform: uppercase !important;
   width: 100% !important;
   -webkit-box-sizing: border-box !important;
@@ -1346,7 +1346,7 @@ input {
 }
 
 .borderCard-white{
-  border: 1px solid #21252970 !important;
+  border: 1px solid #21252918 !important;
   border-radius: 1rem !important;
   padding-bottom: 1rem;
   /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */

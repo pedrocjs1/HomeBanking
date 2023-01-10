@@ -9,8 +9,8 @@ const createCard = createApp({
             clientLoans: {},
             balanceTotalLoan: "",
             
-            selectType: "Debit",
-            selectColor:"Silver",
+            selectType: "DEBIT",
+            selectColor:"SILVER",
 
 
             username: "",
