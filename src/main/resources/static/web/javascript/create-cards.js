@@ -90,7 +90,11 @@ const createCard = createApp({
                 if (result.isConfirmed) {
                     axios.post(
                                 "/api/clients/current/cards",
-                                `colorCard=${this.selectColor}&cardType=${this.selectType}`
+                                `colorCard=${this.selectColor}&cardType=${this.selectType}`,  {
+                                    headers: {
+                                        'content-type': 'application/x-www-form-urlencoded'
+                                    }
+                                }
                             )
                             .then((response) => window.location.href=("./cards.html"))
         

@@ -14,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -54,7 +51,8 @@ public class CardController {
                         randomNumber(100, 999),
                         LocalDate.now(),
                         LocalDate.now().plusYears(5),
-                        clientCurrent);
+                        clientCurrent,
+                        true);
                 cardService.saveCard(card);
                 return new ResponseEntity<>("Created succes", HttpStatus.CREATED);
             }
@@ -69,7 +67,8 @@ public class CardController {
                         randomNumber(100, 999),
                         LocalDate.now(),
                         LocalDate.now().plusYears(5),
-                        clientCurrent);
+                        clientCurrent,
+                        true);
                 cardService.saveCard(card);
                 return new ResponseEntity<>("Created succes", HttpStatus.CREATED);
             }
@@ -77,6 +76,18 @@ public class CardController {
             return new ResponseEntity<>("Limit cards reached", HttpStatus.FORBIDDEN);
         }
 
+    }
+
+    @PatchMapping("/clients/current/cards")
+    public ResponseEntity<Object> disableCard(Authentication authentication, @RequestParam long id) {
+        Card card = cardService.findById(id);
+        Client client = clientService.getClientCurrent(authentication);
+        if (!client.getCards().contains(card)) {
+            return new ResponseEntity<>("This is not your card", HttpStatus.FORBIDDEN);
+        }
+        card.setDisable(true);
+        cardService.saveCard(card);
+        return new ResponseEntity<>("Card disabled", HttpStatus.FORBIDDEN);
     }
 
 }

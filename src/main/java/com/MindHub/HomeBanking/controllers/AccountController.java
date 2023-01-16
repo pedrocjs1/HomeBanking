@@ -33,11 +33,11 @@ public class AccountController {
     @Autowired
     private ClientService clientService;
 
-    @RequestMapping("/accounts")
+    @GetMapping("/accounts")
     public List<AccountDTO> getAccounts(){
         return accountService.getAllAccountDTO();
     };
-    @RequestMapping("/accounts/{id}")
+    @GetMapping("/accounts/{id}")
     public AccountDTO getAccount(@PathVariable Long id){
         return accountService.getAccountById(id);
     };

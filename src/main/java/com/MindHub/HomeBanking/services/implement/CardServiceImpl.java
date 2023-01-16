@@ -20,13 +20,15 @@ public class CardServiceImpl implements CardService {
 
     @Autowired
     private ClientService clientService;
-
     @Override
     public Set<Card> getAllCardsAuthenticated(Authentication authentication) {
         Client client = clientService.getClientCurrent(authentication);
         return cardRepository.findAll().stream().filter(card -> card.getClient() == client).collect(Collectors.toSet());
     }
-
+    @Override
+    public Card findById(long id) {
+        return cardRepository.findById(id).orElse(null);
+    }
     @Override
     public void saveCard(Card card) {
         cardRepository.save(card);

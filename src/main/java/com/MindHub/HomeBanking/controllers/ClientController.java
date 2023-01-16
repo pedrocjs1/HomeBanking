@@ -27,11 +27,11 @@ public class ClientController {
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping("/clients")
+    @GetMapping("/clients")
     public List<ClientDTO> getClients(){
         return clientService.getAllClientDTO();
     };
-    @RequestMapping("/clients/{id}")
+    @GetMapping("/clients/{id}")
     public ClientDTO getClient(@PathVariable Long id){
         return clientService.getClientById(id);
     };
@@ -85,13 +85,13 @@ public class ClientController {
             return new ResponseEntity<>("Email incorrect",HttpStatus.FORBIDDEN);
 
         }
-        if (clientEmial.getPassword().equals(passwordEncoder.encode(newPassword)) ) {
+        if (passwordEncoder.matches(newPassword, clientEmial.getPassword())) {
             return new ResponseEntity<>("You must enter a different password than the previous one",HttpStatus.FORBIDDEN);
         }
         if (newPassword.length() < 5) {
             return new ResponseEntity<>("Password must contain at least 5 characters", HttpStatus.FORBIDDEN);
         }
-        if (clientAuth.getPassword().equals(password)){
+        if (!passwordEncoder.matches(password, clientEmial.getPassword())){
             return new ResponseEntity<>("Current password incorrect", HttpStatus.FORBIDDEN);
         }
         if (password.isEmpty() || email.isEmpty() || newPassword.isEmpty()) {

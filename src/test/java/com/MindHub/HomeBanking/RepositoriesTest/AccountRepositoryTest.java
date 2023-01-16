@@ -1,2 +1,4 @@
-package com.MindHub.HomeBanking.RepositoriesTest;public class AccountRepositoryTest {
+package com.MindHub.HomeBanking.RepositoriesTest;
+
+public class AccountRepositoryTest {
 }

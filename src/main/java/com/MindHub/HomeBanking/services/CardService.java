@@ -8,6 +8,6 @@ import java.util.Set;
 public interface CardService {
 
     Set<Card> getAllCardsAuthenticated(Authentication authentication);
-
+    Card findById(long id);
     void saveCard(Card card);
 }

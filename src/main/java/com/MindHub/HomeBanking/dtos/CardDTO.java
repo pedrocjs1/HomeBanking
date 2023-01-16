@@ -24,7 +24,7 @@ public class CardDTO {
 
     private LocalDate thruDate;
 
-
+    private Boolean disable;
 
     public CardDTO(Card card) {
         this.id = card.getId();
@@ -35,8 +35,12 @@ public class CardDTO {
         this.cvv = card.getCvv();
         this.fromDate = card.getFromDate();
         this.thruDate = card.getThruDate();
+        this.disable = card.getDisable();
     }
 
+    public Boolean getDisable() {
+        return disable;
+    }
     public Long getId() {
         return id;
     }

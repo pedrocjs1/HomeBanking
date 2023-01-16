@@ -10,7 +10,6 @@ import java.time.LocalDate;
 
 @Entity
 public class Card {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
@@ -22,6 +21,7 @@ public class Card {
     private int cvv;
     private LocalDate fromDate;
     private LocalDate thruDate;
+    private Boolean disable;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
     private Client client;
@@ -34,7 +34,8 @@ public class Card {
                 int cvv,
                 LocalDate fromDate,
                 LocalDate thruDate,
-                Client client) {
+                Client client,
+                Boolean disable) {
         this.cardHolder = cardHolder;
         this.type = type;
         this.color = color;
@@ -43,6 +44,11 @@ public class Card {
         this.fromDate = fromDate;
         this.thruDate = thruDate;
         this.client = client;
+        this.disable = disable;
+    }
+
+    public Boolean getDisable() {
+        return disable;
     }
     public Long getId() {
         return id;
@@ -96,6 +102,7 @@ public class Card {
     public void setClient(Client client) {
         this.client = client;
     }
-
-
+    public void setDisable(Boolean disable) {
+        this.disable = disable;
+    }
 }
