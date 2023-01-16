@@ -73,4 +73,34 @@ public class ClientController {
         return new ClientDTO(clientService.getClientCurrent(authentication));
     }
 
+    @PatchMapping("/clients/current/password")
+    public ResponseEntity<?> changePassword(Authentication authentication,
+                                            @RequestParam String newPassword,
+                                            @RequestParam String password,
+                                            @RequestParam String email) {
+        Client clientAuth = clientService.getClientCurrent(authentication);
+        Client clientEmial = clientService.getClientByEmail(clientAuth.getEmail());
+
+        if (!(clientEmial.getEmail().equals(email))) {
+            return new ResponseEntity<>("Email incorrect",HttpStatus.FORBIDDEN);
+
+        }
+        if (clientEmial.getPassword().equals(passwordEncoder.encode(newPassword)) ) {
+            return new ResponseEntity<>("You must enter a different password than the previous one",HttpStatus.FORBIDDEN);
+        }
+        if (newPassword.length() < 5) {
+            return new ResponseEntity<>("Password must contain at least 5 characters", HttpStatus.FORBIDDEN);
+        }
+        if (clientAuth.getPassword().equals(password)){
+            return new ResponseEntity<>("Current password incorrect", HttpStatus.FORBIDDEN);
+        }
+        if (password.isEmpty() || email.isEmpty() || newPassword.isEmpty()) {
+            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+        }
+        clientAuth.setPassword(passwordEncoder.encode(newPassword));
+        clientService.saveClient(clientAuth);
+        return new ResponseEntity<>("Password changed successfully", HttpStatus.OK);
+    }
+
+
 }
