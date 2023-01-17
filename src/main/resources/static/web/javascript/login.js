@@ -46,13 +46,9 @@ const login = createApp({
         signup() {
             axios.post('/api/clients', `firstName=${this.firstNameSign}&lastName=${this.lastNameSign}&email=${this.emailSign}&password=${this.passwordSign}`)
                 .then(response => {
-                    if (this.email.includes("@.com")) {
                         this.email = this.emailSign
                         this.password = this.passwordSign
                         this.login()
-                    } else {
-                        this.errorRegister = "Invalid email"    
-                    }
                 })
                 .catch(error => {
                     this.errorRegister = error.response.data
