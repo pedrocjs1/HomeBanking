@@ -57,7 +57,7 @@ const createCard = createApp({
                 this.username = data.data.firstName + ' ' + data.data.lastName
                 // this.clientsAccount = this.accountClient.sort((a,b) => a.id - b.id)
                 // this.balanceTotal = this.clientsAccount.map(account => account.balance).reduce((iter, acc) => iter + acc).toFixed(2)
-                console.log(this.username)
+                console.log(this.cards)
                 
                 
             })

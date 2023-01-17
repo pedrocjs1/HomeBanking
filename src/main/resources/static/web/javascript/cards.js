@@ -4,6 +4,7 @@ const card = createApp({
     data(){
         return {
             cards:[],
+            cardsData: [],
             clientsAccount: {},
             loans: [],
             clientLoans: {},
@@ -49,11 +50,12 @@ const card = createApp({
             axios
             .get("http://localhost:8080/api/clients/current")
             .then((data) =>{
-                this.cards = data.data.cards.sort((a,b) => a.id - b.id)
+                this.cardsData = data.data.cards.sort((a,b) => a.id - b.id)
                 this.username = data.data.firstName + ' ' + data.data.lastName
+                this.cards = this.cardsData.filter(card => card.disable === false)
                 // this.clientsAccount = this.accountClient.sort((a,b) => a.id - b.id)
                 // this.balanceTotal = this.clientsAccount.map(account => account.balance).reduce((iter, acc) => iter + acc).toFixed(2)
-                console.log(this.username)
+                console.log(this.cards)
                 
                 
             })
@@ -92,6 +94,40 @@ const card = createApp({
                 window.location.href = './index.html'
             })
         },
+        disabledCard(card) {
+            Swal.fire({
+                title: '¿Do you want to disable this card??',
+                showDenyButton: true,
+                text: `Card ${card.type} and color ${card.color}`,
+                confirmButtonText: 'Accept',
+                denyButtonText: `Cancel`,
+            }).then((result) => {
+                
+                if (result.isConfirmed) {
+                    axios.patch(
+                                "/api/clients/current/cards",
+                                `id=${card.id}`
+                            )
+                            Swal.fire('Card properly disabled')
+                                .then(result => {
+                                    window.location.reload()
+                                })
+        
+                            .catch((error) => Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: `${error.response.data}`,
+                            }));
+                }else {
+                    Swal.fire('Disabled card canceled')
+                                .then(result => {
+                                    window.location.reload()
+                                })
+                }
+        
+                
+            })
+        }
         
     
         
@@ -111,6 +147,7 @@ const card = createApp({
           this.shadowCard = "shadowWhite" 
           this.bgGrey = "bg-light borderRadius"
           this.backgroundLogo = ""
+          this.shadowCard = "shadowCard-black"
           localStorage.setItem("mode", true)
 
         } else if (this.checkedAccount === "false" || this.checkedAccount === false) {
@@ -123,6 +160,7 @@ const card = createApp({
           this.shadowCard = "shadow  bg-body rounded" 
           this.bgGrey = "backgroundBodyCard borderRadius"
           this.backgroundLogo = ""
+          this.shadowCard = "shadowCard-light"
           localStorage.setItem("mode", false)
         }
     }

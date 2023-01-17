@@ -81,14 +81,7 @@
                     <span :class="currentText">Transfers</span>
                   </a>
                 </li>
-                <li>
-                  <a href="#0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-currency-bitcoin ' + currentText" viewBox="0 0 16 16">
-                      <path d="M5.5 13v1.25c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25V13h.5v1.25c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25V13h.084c1.992 0 3.416-1.033 3.416-2.82 0-1.502-1.007-2.323-2.186-2.44v-.088c.97-.242 1.683-.974 1.683-2.19C11.997 3.93 10.847 3 9.092 3H9V1.75a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25V3h-.573V1.75a.25.25 0 0 0-.25-.25H5.75a.25.25 0 0 0-.25.25V3l-1.998.011a.25.25 0 0 0-.25.25v.989c0 .137.11.25.248.25l.755-.005a.75.75 0 0 1 .745.75v5.505a.75.75 0 0 1-.75.75l-.748.011a.25.25 0 0 0-.25.25v1c0 .138.112.25.25.25L5.5 13zm1.427-8.513h1.719c.906 0 1.438.498 1.438 1.312 0 .871-.575 1.362-1.877 1.362h-1.28V4.487zm0 4.051h1.84c1.137 0 1.756.58 1.756 1.524 0 .953-.626 1.45-2.158 1.45H6.927V8.539z"/>
-                    </svg>
-                    <span :class="currentText">Crypto Currency</span>
-                  </a>
-                </li>
+                
                 
                 <li class="menu-heading">
                   <h3 :class="currentText">Settings</h3>
@@ -161,214 +154,243 @@
                 </div>
               </div>
             </section>
-            <section  class="grid d-flex flex-sm-column flex-md-column justify-content-center align-items-center account-media">
-                <h2 :class="currentText">Cards</h2>
-                <h3 v-if="cards.length === 0" :class="'text-black display-7 fw-bolder  ' + currentText">Has not requested cards</h3>
-                <div v-if="cards.length < 6"  >
-                  <a class="d-flex gap-2" href="./create-cards.html">
-                    <h4 :class="currentText">Order Card</h4>
-                    <button >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-plus-circle ' + currentText" viewBox="0 0 16 16">
-                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                      </svg>
-                    </button>
-                  </a>
+            <section  class="grid d-flex flex-sm-column flex-md-row justify-content-around align-items-center account-media gap-5">
+                <div class="grid d-flex flex-sm-column flex-md-column justify-content-center align-items-center account-media">
+                  <h2 :class="currentText">Cards</h2>
+                  <h3 v-if="cards.length === 0" :class="'text-black fs-4 text fw-bolder  ' + currentText">Has not requested cards</h3>
+                  <div v-if="cards.length < 6"  >
+                    <a class="d-flex gap-2" href="./create-cards.html">
+                      <h4 :class="currentText">Order Card</h4>
+                      <button >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-plus-circle ' + currentText" viewBox="0 0 16 16">
+                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                        </svg>
+                      </button>
+                    </a>
+                  </div>
+                  <input id="viewCheck" type="checkbox" class="d-none" value="true" @click="viewPasswordFunction">
+                  
+                    <label v-if="cards.length !== 0" for="viewCheck">
+                      <div v-if="viewPassword == 'd-none'" class="d-flex gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-eye ' + currentText" viewBox="0 0 16 16">
+                          <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                          <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                        </svg>
+                        <span :class="'span-view ' + currentText">Show Card Data</span> 
+                      </div>
+                      <div v-if="noViewPassword == 'd-none'" class="d-flex gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-eye-slash ' + currentText" viewBox="0 0 16 16">
+                          <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+                          <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+                          <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+                        </svg>
+                        <span :class="'span-view ' + currentText">Hide Card Data</span> 
+                      </div>
+  
+                    </label>
+                  
+                  
+                 
+                  <template  v-for="card in cards">
+  
+                    <div v-if="card.color == 'TITANIUM' && card.disable === false" class="">
+                      <div class="card">
+                        <div class="flip">
+                          <div class="front">
+                            <div class="strip-bottom"></div>
+                            <div class="strip-top"></div>
+                            <svg class="logo-card" width="40" height="40" viewbox="0 0 17.5 16.2">
+                              <path d="M3.2 0l5.4 5.6L14.3 0l3.2 3v9L13 16.2V7.8l-4.4 4.1L4.5 8v8.2L0 12V3l3.2-3z" fill="white"></path>
+                            </svg>
+                            <div class="investor">{{card.type}} TITANIUM</div>
+                            <div class="chip">
+                              <div class="chip-line"></div>
+                              <div class="chip-line"></div>
+                              <div class="chip-line"></div>
+                              <div class="chip-line"></div>
+                              <div class="chip-main"></div>
+                            </div>
+                            <svg class="wave" viewBox="0 3.71 26.959 38.787" width="13.959" height="20.787" fill="white">
+                              <path d="M19.709 3.719c.266.043.5.187.656.406 4.125 5.207 6.594 11.781 6.594 18.938 0 7.156-2.469 13.73-6.594 18.937-.195.336-.57.531-.957.492a.9946.9946 0 0 1-.851-.66c-.129-.367-.035-.777.246-1.051 3.855-4.867 6.156-11.023 6.156-17.718 0-6.696-2.301-12.852-6.156-17.719-.262-.317-.301-.762-.102-1.121.204-.36.602-.559 1.008-.504z"></path>
+                              <path d="M13.74 7.563c.231.039.442.164.594.343 3.508 4.059 5.625 9.371 5.625 15.157 0 5.785-2.113 11.097-5.625 15.156-.363.422-1 .472-1.422.109-.422-.363-.472-1-.109-1.422 3.211-3.711 5.156-8.551 5.156-13.843 0-5.293-1.949-10.133-5.156-13.844-.27-.309-.324-.75-.141-1.114.188-.367.578-.582.985-.542h.093z"></path>
+                              <path d="M7.584 11.438c.227.031.438.144.594.312 2.953 2.863 4.781 6.875 4.781 11.313 0 4.433-1.828 8.449-4.781 11.312-.398.387-1.035.383-1.422-.016-.387-.398-.383-1.035.016-1.421 2.582-2.504 4.187-5.993 4.187-9.875 0-3.883-1.605-7.372-4.187-9.875-.321-.282-.426-.739-.266-1.133.164-.395.559-.641.984-.617h.094zM1.178 15.531c.121.02.238.063.344.125 2.633 1.414 4.437 4.215 4.437 7.407 0 3.195-1.797 5.996-4.437 7.406-.492.258-1.102.07-1.36-.422-.257-.492-.07-1.102.422-1.359 2.012-1.075 3.375-3.176 3.375-5.625 0-2.446-1.371-4.551-3.375-5.625-.441-.204-.676-.692-.551-1.165.122-.468.567-.785 1.051-.742h.094z"></path>
+                            </svg>
+                            <div class="card-number"> 
+                              <div :class="'section ' + viewPassword">{{card.number.slice(0,4)}}</div>
+                              <div :class="'section ' + noViewPassword">****</div>
+                              <div :class="'section ' + viewPassword">{{card.number.slice(4,8)}}</div>
+                              <div :class="'section ' + noViewPassword">****</div>
+                              <div :class="'section ' + viewPassword">{{card.number.slice(8,12)}}</div>
+                              <div :class="'section ' + noViewPassword">****</div>
+                              <div class="section">{{card.number.slice(12,16)}}</div>
+                            </div>
+                            <div class="end"><span class="end-text">exp:{{formatedDateCard(card.fromDate)}} end:</span><span class="end-date"> {{formatedDateCard(card.thruDate)}}</span></div>
+                            <div class="card-holder">mr {{card.cardHolder}}</div>
+                            <div class="master">
+                              <div class="circle master-red"></div>
+                              <div class="circle master-yellow"></div>
+                            </div>
+                          </div>
+                          <div class="back">
+                            <div class="strip-black"></div>
+                            <div class="ccv">
+                              <label>ccv</label>
+                              <div :class="'ccv-size ' + viewPassword">{{card.cvv}}</div>
+                              <div :class="'ccv-size ' + noViewPassword">***</div>
+                            </div>
+                            <div class="terms">
+                              <p>This card is property of MINDHUB Bank, Argentine. Misuse is criminal offence. If found, please return to MINDHUB Bank or to the nearest bank with MasterCard logo.</p>
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+  
+                  <template  v-for="card in cards">
+                    <div v-if="card.color == 'GOLD' && card.disable === false" class="">
+                      <div class="card">
+                        <div class="flip">
+                          <div class="frontGold">
+                            <div class="strip-bottom-Gold"></div>
+                            <div class="strip-top-Gold"></div>
+                            <svg class="logo-card" width="40" height="40" viewbox="0 0 17.5 16.2">
+                              <path d="M3.2 0l5.4 5.6L14.3 0l3.2 3v9L13 16.2V7.8l-4.4 4.1L4.5 8v8.2L0 12V3l3.2-3z" fill="white"></path>
+                            </svg>
+                            <div class="investor">{{card.type}} GOLD</div>
+                            <div class="chip">
+                              <div class="chip-line"></div>
+                              <div class="chip-line"></div>
+                              <div class="chip-line"></div>
+                              <div class="chip-line"></div>
+                              <div class="chip-main"></div>
+                            </div>
+                            <svg class="wave" viewBox="0 3.71 26.959 38.787" width="13.959" height="20.787" fill="white">
+                              <path d="M19.709 3.719c.266.043.5.187.656.406 4.125 5.207 6.594 11.781 6.594 18.938 0 7.156-2.469 13.73-6.594 18.937-.195.336-.57.531-.957.492a.9946.9946 0 0 1-.851-.66c-.129-.367-.035-.777.246-1.051 3.855-4.867 6.156-11.023 6.156-17.718 0-6.696-2.301-12.852-6.156-17.719-.262-.317-.301-.762-.102-1.121.204-.36.602-.559 1.008-.504z"></path>
+                              <path d="M13.74 7.563c.231.039.442.164.594.343 3.508 4.059 5.625 9.371 5.625 15.157 0 5.785-2.113 11.097-5.625 15.156-.363.422-1 .472-1.422.109-.422-.363-.472-1-.109-1.422 3.211-3.711 5.156-8.551 5.156-13.843 0-5.293-1.949-10.133-5.156-13.844-.27-.309-.324-.75-.141-1.114.188-.367.578-.582.985-.542h.093z"></path>
+                              <path d="M7.584 11.438c.227.031.438.144.594.312 2.953 2.863 4.781 6.875 4.781 11.313 0 4.433-1.828 8.449-4.781 11.312-.398.387-1.035.383-1.422-.016-.387-.398-.383-1.035.016-1.421 2.582-2.504 4.187-5.993 4.187-9.875 0-3.883-1.605-7.372-4.187-9.875-.321-.282-.426-.739-.266-1.133.164-.395.559-.641.984-.617h.094zM1.178 15.531c.121.02.238.063.344.125 2.633 1.414 4.437 4.215 4.437 7.407 0 3.195-1.797 5.996-4.437 7.406-.492.258-1.102.07-1.36-.422-.257-.492-.07-1.102.422-1.359 2.012-1.075 3.375-3.176 3.375-5.625 0-2.446-1.371-4.551-3.375-5.625-.441-.204-.676-.692-.551-1.165.122-.468.567-.785 1.051-.742h.094z"></path>
+                            </svg>
+                            <div class="card-number"> 
+                              <div :class="'section ' + viewPassword">{{card.number.slice(0,4)}}</div>
+                              <div :class="'section ' + noViewPassword">****</div>
+                              <div :class="'section ' + viewPassword">{{card.number.slice(4,8)}}</div>
+                              <div :class="'section ' + noViewPassword">****</div>
+                              <div :class="'section ' + viewPassword">{{card.number.slice(8,12)}}</div>
+                              <div :class="'section ' + noViewPassword">****</div>
+                              <div class="section">{{card.number.slice(12,16)}}</div>
+                            </div>
+                            <div class="end"><span class="end-text">exp:{{formatedDateCard(card.fromDate)}} end:</span><span class="end-date"> {{formatedDateCard(card.thruDate)}}</span></div>
+                            <div class="card-holder">mr {{card.cardHolder}}</div>
+                            <div class="master">
+                              <div class="circle master-red"></div>
+                              <div class="circle master-yellow"></div>
+                            </div>
+                          </div>
+                          <div class="backGold">
+                            <div class="strip-black"></div>
+                            <div class="ccv">
+                              <label>ccv</label>
+                              <div :class="'ccv-size ' + viewPassword">{{card.cvv}}</div>
+                              <div :class="'ccv-size ' + noViewPassword">***</div>
+                            </div>
+                            <div class="terms">
+                              <p>This card is property of MINDHUB Bank, Argentine. Misuse is criminal offence. If found, please return to MINDHUB Bank or to the nearest bank with MasterCard logo.</p>
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+  
+  
+                  <template v-for="card in cards">
+                    <div v-if="card.color == 'SILVER' && card.disable === false" class="">
+                      <div class="card">
+                        <div class="flip">
+                          <div class="frontSilver">
+                            <div class="strip-bottom-Silver"></div>
+                            <div class="strip-top-Silver"></div>
+                            <svg class="logo-card" width="40" height="40" viewbox="0 0 17.5 16.2">
+                              <path d="M3.2 0l5.4 5.6L14.3 0l3.2 3v9L13 16.2V7.8l-4.4 4.1L4.5 8v8.2L0 12V3l3.2-3z" fill="white"></path>
+                            </svg>
+                            <div class="investor">{{card.type}} SILVER</div>
+                            <div class="chip">
+                              <div class="chip-line"></div>
+                              <div class="chip-line"></div>
+                              <div class="chip-line"></div>
+                              <div class="chip-line"></div>
+                              <div class="chip-main"></div>
+                            </div>
+                            <svg class="wave" viewBox="0 3.71 26.959 38.787" width="13.959" height="20.787" fill="white">
+                              <path d="M19.709 3.719c.266.043.5.187.656.406 4.125 5.207 6.594 11.781 6.594 18.938 0 7.156-2.469 13.73-6.594 18.937-.195.336-.57.531-.957.492a.9946.9946 0 0 1-.851-.66c-.129-.367-.035-.777.246-1.051 3.855-4.867 6.156-11.023 6.156-17.718 0-6.696-2.301-12.852-6.156-17.719-.262-.317-.301-.762-.102-1.121.204-.36.602-.559 1.008-.504z"></path>
+                              <path d="M13.74 7.563c.231.039.442.164.594.343 3.508 4.059 5.625 9.371 5.625 15.157 0 5.785-2.113 11.097-5.625 15.156-.363.422-1 .472-1.422.109-.422-.363-.472-1-.109-1.422 3.211-3.711 5.156-8.551 5.156-13.843 0-5.293-1.949-10.133-5.156-13.844-.27-.309-.324-.75-.141-1.114.188-.367.578-.582.985-.542h.093z"></path>
+                              <path d="M7.584 11.438c.227.031.438.144.594.312 2.953 2.863 4.781 6.875 4.781 11.313 0 4.433-1.828 8.449-4.781 11.312-.398.387-1.035.383-1.422-.016-.387-.398-.383-1.035.016-1.421 2.582-2.504 4.187-5.993 4.187-9.875 0-3.883-1.605-7.372-4.187-9.875-.321-.282-.426-.739-.266-1.133.164-.395.559-.641.984-.617h.094zM1.178 15.531c.121.02.238.063.344.125 2.633 1.414 4.437 4.215 4.437 7.407 0 3.195-1.797 5.996-4.437 7.406-.492.258-1.102.07-1.36-.422-.257-.492-.07-1.102.422-1.359 2.012-1.075 3.375-3.176 3.375-5.625 0-2.446-1.371-4.551-3.375-5.625-.441-.204-.676-.692-.551-1.165.122-.468.567-.785 1.051-.742h.094z"></path>
+                            </svg>
+                            <div class="card-number"> 
+                              <div :class="'section ' + viewPassword">{{card.number.slice(0,4)}}</div>
+                              <div :class="'section ' + noViewPassword">****</div>
+                              <div :class="'section ' + viewPassword">{{card.number.slice(4,8)}}</div>
+                              <div :class="'section ' + noViewPassword">****</div>
+                              <div :class="'section ' + viewPassword">{{card.number.slice(8,12)}}</div>
+                              <div :class="'section ' + noViewPassword">****</div>
+                              <div class="section">{{card.number.slice(12,16)}}</div>
+                            </div>
+                            <div class="end"><span class="end-text">exp:{{formatedDateCard(card.fromDate)}} end:</span><span class="end-date"> {{formatedDateCard(card.thruDate)}}</span></div>
+                            <div class="card-holder">mr {{card.cardHolder}}</div>
+                            <div class="master">
+                              <div class="circle master-red"></div>
+                              <div class="circle master-yellow"></div>
+                            </div>
+                          </div>
+                          <div class="backSilver">
+                            <div class="strip-black"></div>
+                            <div class="ccv">
+                              <label>ccv</label>
+                              <div :class="'ccv-size ' + viewPassword">{{card.cvv}}</div>
+                              <div :class="'ccv-size ' + noViewPassword">***</div>
+                            </div>
+                            <div class="terms">
+                              <p>This card is property of MINDHUB Bank, Argentine. Misuse is criminal offence. If found, please return to MINDHUB Bank or to the nearest bank with MasterCard logo.</p>
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+
                 </div>
-                <input id="viewCheck" type="checkbox" class="d-none" value="true" @click="viewPasswordFunction">
-                
-                  <label v-if="cards.length !== 0" for="viewCheck">
-                    <div v-if="viewPassword == 'd-none'" class="d-flex gap-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-eye ' + currentText" viewBox="0 0 16 16">
-                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
-                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-                      </svg>
-                      <span :class="'span-view ' + currentText">Show Card Data</span> 
-                    </div>
-                    <div v-if="noViewPassword == 'd-none'" class="d-flex gap-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-eye-slash ' + currentText" viewBox="0 0 16 16">
-                        <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
-                        <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
-                        <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
-                      </svg>
-                      <span :class="'span-view ' + currentText">Hide Card Data</span> 
-                    </div>
 
-                  </label>
-                
-                
-               
-                <template  v-for="card in cards">
-
-                  <div v-if="card.color == 'TITANIUM'" class="">
-                    <div class="card">
-                      <div class="flip">
-                        <div class="front">
-                          <div class="strip-bottom"></div>
-                          <div class="strip-top"></div>
-                          <svg class="logo-card" width="40" height="40" viewbox="0 0 17.5 16.2">
-                            <path d="M3.2 0l5.4 5.6L14.3 0l3.2 3v9L13 16.2V7.8l-4.4 4.1L4.5 8v8.2L0 12V3l3.2-3z" fill="white"></path>
-                          </svg>
-                          <div class="investor">{{card.type}} TITANIUM</div>
-                          <div class="chip">
-                            <div class="chip-line"></div>
-                            <div class="chip-line"></div>
-                            <div class="chip-line"></div>
-                            <div class="chip-line"></div>
-                            <div class="chip-main"></div>
-                          </div>
-                          <svg class="wave" viewBox="0 3.71 26.959 38.787" width="13.959" height="20.787" fill="white">
-                            <path d="M19.709 3.719c.266.043.5.187.656.406 4.125 5.207 6.594 11.781 6.594 18.938 0 7.156-2.469 13.73-6.594 18.937-.195.336-.57.531-.957.492a.9946.9946 0 0 1-.851-.66c-.129-.367-.035-.777.246-1.051 3.855-4.867 6.156-11.023 6.156-17.718 0-6.696-2.301-12.852-6.156-17.719-.262-.317-.301-.762-.102-1.121.204-.36.602-.559 1.008-.504z"></path>
-                            <path d="M13.74 7.563c.231.039.442.164.594.343 3.508 4.059 5.625 9.371 5.625 15.157 0 5.785-2.113 11.097-5.625 15.156-.363.422-1 .472-1.422.109-.422-.363-.472-1-.109-1.422 3.211-3.711 5.156-8.551 5.156-13.843 0-5.293-1.949-10.133-5.156-13.844-.27-.309-.324-.75-.141-1.114.188-.367.578-.582.985-.542h.093z"></path>
-                            <path d="M7.584 11.438c.227.031.438.144.594.312 2.953 2.863 4.781 6.875 4.781 11.313 0 4.433-1.828 8.449-4.781 11.312-.398.387-1.035.383-1.422-.016-.387-.398-.383-1.035.016-1.421 2.582-2.504 4.187-5.993 4.187-9.875 0-3.883-1.605-7.372-4.187-9.875-.321-.282-.426-.739-.266-1.133.164-.395.559-.641.984-.617h.094zM1.178 15.531c.121.02.238.063.344.125 2.633 1.414 4.437 4.215 4.437 7.407 0 3.195-1.797 5.996-4.437 7.406-.492.258-1.102.07-1.36-.422-.257-.492-.07-1.102.422-1.359 2.012-1.075 3.375-3.176 3.375-5.625 0-2.446-1.371-4.551-3.375-5.625-.441-.204-.676-.692-.551-1.165.122-.468.567-.785 1.051-.742h.094z"></path>
-                          </svg>
-                          <div class="card-number"> 
-                            <div :class="'section ' + viewPassword">{{card.number.slice(0,4)}}</div>
-                            <div :class="'section ' + noViewPassword">****</div>
-                            <div :class="'section ' + viewPassword">{{card.number.slice(4,8)}}</div>
-                            <div :class="'section ' + noViewPassword">****</div>
-                            <div :class="'section ' + viewPassword">{{card.number.slice(8,12)}}</div>
-                            <div :class="'section ' + noViewPassword">****</div>
-                            <div class="section">{{card.number.slice(12,16)}}</div>
-                          </div>
-                          <div class="end"><span class="end-text">exp:{{formatedDateCard(card.fromDate)}} end:</span><span class="end-date"> {{formatedDateCard(card.thruDate)}}</span></div>
-                          <div class="card-holder">mr {{card.cardHolder}}</div>
-                          <div class="master">
-                            <div class="circle master-red"></div>
-                            <div class="circle master-yellow"></div>
-                          </div>
-                        </div>
-                        <div class="back">
-                          <div class="strip-black"></div>
-                          <div class="ccv">
-                            <label>ccv</label>
-                            <div :class="'ccv-size ' + viewPassword">{{card.cvv}}</div>
-                            <div :class="'ccv-size ' + noViewPassword">***</div>
-                          </div>
-                          <div class="terms">
-                            <p>This card is property of MINDHUB Bank, Argentine. Misuse is criminal offence. If found, please return to MINDHUB Bank or to the nearest bank with MasterCard logo.</p>
-                            
-                          </div>
-                        </div>
+                <div  :class="'g-4 align-items-between contentMin p-4 ' + shadowCard">
+                  <h2 :class="currentText + ' w-100 text-center fs-4 text pb-2'">Disabled Card</h2>
+                  
+                  <div class="w-100 d-flex align-items-center ">
+                    <div class=" w-100 ">
+                      
+                      <div class="card-body d-flex flex-column w-100 gap-2 m-0 p-0">
+                        <h3 v-if="cards.length === 0 " :class="'text-black fs-6 text fw-bolder  ' + currentText">Has not requested cards</h3>
+                        <template v-for="card in cards">
+                          <template v-if="card.disable === false">
+                            <div :class="'input-group mb-3 justify-content-between ' + shadowCard">
+                              <p @click="disabledCard(card)" :class="'m-0 d-flex align-items-center ps-1 border-p ' + currentText">{{card.type}} {{card.color}}</p>
+                              <button @click="disabledCard(card)" class="btn btn-outline-danger m-0 border-none" type="button" id="button-addon2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-x-fill" viewBox="0 0 16 16">
+                                  <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zM6.854 5.146a.5.5 0 1 0-.708.708L7.293 7 6.146 8.146a.5.5 0 1 0 .708.708L8 7.707l1.146 1.147a.5.5 0 1 0 .708-.708L8.707 7l1.147-1.146a.5.5 0 0 0-.708-.708L8 6.293 6.854 5.146z"/>
+                                </svg>
+                              </button>
+                            </div>
+                          </template>
+                        </template>
+                                    
                       </div>
+                      
                     </div>
                   </div>
-                </template>
-
-                <template v-for="card in cards">
-                  <div v-if="card.color == 'GOLD'" class="">
-                    <div class="card">
-                      <div class="flip">
-                        <div class="frontGold">
-                          <div class="strip-bottom-Gold"></div>
-                          <div class="strip-top-Gold"></div>
-                          <svg class="logo-card" width="40" height="40" viewbox="0 0 17.5 16.2">
-                            <path d="M3.2 0l5.4 5.6L14.3 0l3.2 3v9L13 16.2V7.8l-4.4 4.1L4.5 8v8.2L0 12V3l3.2-3z" fill="white"></path>
-                          </svg>
-                          <div class="investor">{{card.type}} GOLD</div>
-                          <div class="chip">
-                            <div class="chip-line"></div>
-                            <div class="chip-line"></div>
-                            <div class="chip-line"></div>
-                            <div class="chip-line"></div>
-                            <div class="chip-main"></div>
-                          </div>
-                          <svg class="wave" viewBox="0 3.71 26.959 38.787" width="13.959" height="20.787" fill="white">
-                            <path d="M19.709 3.719c.266.043.5.187.656.406 4.125 5.207 6.594 11.781 6.594 18.938 0 7.156-2.469 13.73-6.594 18.937-.195.336-.57.531-.957.492a.9946.9946 0 0 1-.851-.66c-.129-.367-.035-.777.246-1.051 3.855-4.867 6.156-11.023 6.156-17.718 0-6.696-2.301-12.852-6.156-17.719-.262-.317-.301-.762-.102-1.121.204-.36.602-.559 1.008-.504z"></path>
-                            <path d="M13.74 7.563c.231.039.442.164.594.343 3.508 4.059 5.625 9.371 5.625 15.157 0 5.785-2.113 11.097-5.625 15.156-.363.422-1 .472-1.422.109-.422-.363-.472-1-.109-1.422 3.211-3.711 5.156-8.551 5.156-13.843 0-5.293-1.949-10.133-5.156-13.844-.27-.309-.324-.75-.141-1.114.188-.367.578-.582.985-.542h.093z"></path>
-                            <path d="M7.584 11.438c.227.031.438.144.594.312 2.953 2.863 4.781 6.875 4.781 11.313 0 4.433-1.828 8.449-4.781 11.312-.398.387-1.035.383-1.422-.016-.387-.398-.383-1.035.016-1.421 2.582-2.504 4.187-5.993 4.187-9.875 0-3.883-1.605-7.372-4.187-9.875-.321-.282-.426-.739-.266-1.133.164-.395.559-.641.984-.617h.094zM1.178 15.531c.121.02.238.063.344.125 2.633 1.414 4.437 4.215 4.437 7.407 0 3.195-1.797 5.996-4.437 7.406-.492.258-1.102.07-1.36-.422-.257-.492-.07-1.102.422-1.359 2.012-1.075 3.375-3.176 3.375-5.625 0-2.446-1.371-4.551-3.375-5.625-.441-.204-.676-.692-.551-1.165.122-.468.567-.785 1.051-.742h.094z"></path>
-                          </svg>
-                          <div class="card-number"> 
-                            <div :class="'section ' + viewPassword">{{card.number.slice(0,4)}}</div>
-                            <div :class="'section ' + noViewPassword">****</div>
-                            <div :class="'section ' + viewPassword">{{card.number.slice(4,8)}}</div>
-                            <div :class="'section ' + noViewPassword">****</div>
-                            <div :class="'section ' + viewPassword">{{card.number.slice(8,12)}}</div>
-                            <div :class="'section ' + noViewPassword">****</div>
-                            <div class="section">{{card.number.slice(12,16)}}</div>
-                          </div>
-                          <div class="end"><span class="end-text">exp:{{formatedDateCard(card.fromDate)}} end:</span><span class="end-date"> {{formatedDateCard(card.thruDate)}}</span></div>
-                          <div class="card-holder">mr {{card.cardHolder}}</div>
-                          <div class="master">
-                            <div class="circle master-red"></div>
-                            <div class="circle master-yellow"></div>
-                          </div>
-                        </div>
-                        <div class="backGold">
-                          <div class="strip-black"></div>
-                          <div class="ccv">
-                            <label>ccv</label>
-                            <div :class="'ccv-size ' + viewPassword">{{card.cvv}}</div>
-                            <div :class="'ccv-size ' + noViewPassword">***</div>
-                          </div>
-                          <div class="terms">
-                            <p>This card is property of MINDHUB Bank, Argentine. Misuse is criminal offence. If found, please return to MINDHUB Bank or to the nearest bank with MasterCard logo.</p>
-                            
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </template>
-
-
-                <template v-for="card in cards">
-                  <div v-if="card.color == 'SILVER'" class="">
-                    <div class="card">
-                      <div class="flip">
-                        <div class="frontSilver">
-                          <div class="strip-bottom-Silver"></div>
-                          <div class="strip-top-Silver"></div>
-                          <svg class="logo-card" width="40" height="40" viewbox="0 0 17.5 16.2">
-                            <path d="M3.2 0l5.4 5.6L14.3 0l3.2 3v9L13 16.2V7.8l-4.4 4.1L4.5 8v8.2L0 12V3l3.2-3z" fill="white"></path>
-                          </svg>
-                          <div class="investor">{{card.type}} SILVER</div>
-                          <div class="chip">
-                            <div class="chip-line"></div>
-                            <div class="chip-line"></div>
-                            <div class="chip-line"></div>
-                            <div class="chip-line"></div>
-                            <div class="chip-main"></div>
-                          </div>
-                          <svg class="wave" viewBox="0 3.71 26.959 38.787" width="13.959" height="20.787" fill="white">
-                            <path d="M19.709 3.719c.266.043.5.187.656.406 4.125 5.207 6.594 11.781 6.594 18.938 0 7.156-2.469 13.73-6.594 18.937-.195.336-.57.531-.957.492a.9946.9946 0 0 1-.851-.66c-.129-.367-.035-.777.246-1.051 3.855-4.867 6.156-11.023 6.156-17.718 0-6.696-2.301-12.852-6.156-17.719-.262-.317-.301-.762-.102-1.121.204-.36.602-.559 1.008-.504z"></path>
-                            <path d="M13.74 7.563c.231.039.442.164.594.343 3.508 4.059 5.625 9.371 5.625 15.157 0 5.785-2.113 11.097-5.625 15.156-.363.422-1 .472-1.422.109-.422-.363-.472-1-.109-1.422 3.211-3.711 5.156-8.551 5.156-13.843 0-5.293-1.949-10.133-5.156-13.844-.27-.309-.324-.75-.141-1.114.188-.367.578-.582.985-.542h.093z"></path>
-                            <path d="M7.584 11.438c.227.031.438.144.594.312 2.953 2.863 4.781 6.875 4.781 11.313 0 4.433-1.828 8.449-4.781 11.312-.398.387-1.035.383-1.422-.016-.387-.398-.383-1.035.016-1.421 2.582-2.504 4.187-5.993 4.187-9.875 0-3.883-1.605-7.372-4.187-9.875-.321-.282-.426-.739-.266-1.133.164-.395.559-.641.984-.617h.094zM1.178 15.531c.121.02.238.063.344.125 2.633 1.414 4.437 4.215 4.437 7.407 0 3.195-1.797 5.996-4.437 7.406-.492.258-1.102.07-1.36-.422-.257-.492-.07-1.102.422-1.359 2.012-1.075 3.375-3.176 3.375-5.625 0-2.446-1.371-4.551-3.375-5.625-.441-.204-.676-.692-.551-1.165.122-.468.567-.785 1.051-.742h.094z"></path>
-                          </svg>
-                          <div class="card-number"> 
-                            <div :class="'section ' + viewPassword">{{card.number.slice(0,4)}}</div>
-                            <div :class="'section ' + noViewPassword">****</div>
-                            <div :class="'section ' + viewPassword">{{card.number.slice(4,8)}}</div>
-                            <div :class="'section ' + noViewPassword">****</div>
-                            <div :class="'section ' + viewPassword">{{card.number.slice(8,12)}}</div>
-                            <div :class="'section ' + noViewPassword">****</div>
-                            <div class="section">{{card.number.slice(12,16)}}</div>
-                          </div>
-                          <div class="end"><span class="end-text">exp:{{formatedDateCard(card.fromDate)}} end:</span><span class="end-date"> {{formatedDateCard(card.thruDate)}}</span></div>
-                          <div class="card-holder">mr {{card.cardHolder}}</div>
-                          <div class="master">
-                            <div class="circle master-red"></div>
-                            <div class="circle master-yellow"></div>
-                          </div>
-                        </div>
-                        <div class="backSilver">
-                          <div class="strip-black"></div>
-                          <div class="ccv">
-                            <label>ccv</label>
-                            <div :class="'ccv-size ' + viewPassword">{{card.cvv}}</div>
-                            <div :class="'ccv-size ' + noViewPassword">***</div>
-                          </div>
-                          <div class="terms">
-                            <p>This card is property of MINDHUB Bank, Argentine. Misuse is criminal offence. If found, please return to MINDHUB Bank or to the nearest bank with MasterCard logo.</p>
-                            
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </template>
-
-
+                  
+                </div>
               
 
             </section>

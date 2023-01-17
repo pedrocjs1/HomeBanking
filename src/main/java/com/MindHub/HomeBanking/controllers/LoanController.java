@@ -90,11 +90,13 @@ public class LoanController {
         ClientLoan clientLoan = new ClientLoan(amount * (loan.getPercentIncrease() * 0.01 + 1), payment,  client, loan);
         clientLoanService.saveClientLoan(clientLoan);
 
-        Transaction transaction = new Transaction(TransactionType.CREDIT, amount, loan.getName() + " loan approved", LocalDateTime.now(), targetAccount);
-        transactionService.saveTransaction(transaction);
+
 
         targetAccount.setBalance(targetAccount.getBalance() + amount);
         accountService.saveAccount(targetAccount);
+
+        Transaction transaction = new Transaction(TransactionType.CREDIT, amount, loan.getName() + " loan approved", LocalDateTime.now(), targetAccount, targetAccount.getBalance());
+        transactionService.saveTransaction(transaction);
 
         return new ResponseEntity<>("Loan approved", HttpStatus.CREATED);
     }

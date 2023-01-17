@@ -1232,6 +1232,44 @@ body {
     text-align: justify;
 }
 
+.borderDisabled {
+  border: 1px solid #000;
+}
+
+.border-none {
+ border: none !important;
+}
+
+.border-none:hover {
+  border-radius: 0rem !important;
+}
+
+
+
+.shadowCard-light {
+  border: 1px solid #fff !important;
+  border-radius: 1rem !important;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  
+}
+
+.shadowCard-black {
+  border: 1px solid #21252918 !important;
+  border-radius: 1rem !important;
+  box-shadow: rgba(179, 176, 176, 0.2) 0px 7px 29px 0px;
+
+}
+
+.contentMin {
+    height: auto !important; /* establecer una altura mínima */
+    width: 15rem !important;
+     /* para mostrar barras de desplazamiento si el contenido es más grande */  
+}
+
+.border-p:hover {
+  cursor: pointer !important;
+  color: rgba(255, 0, 0, 0.308) !important;
+}
 
 @font-face {
   font-family: 'cc font';

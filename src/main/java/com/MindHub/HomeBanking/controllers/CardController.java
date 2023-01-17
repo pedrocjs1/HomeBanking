@@ -38,10 +38,12 @@ public class CardController {
         Client clientCurrent = clientService.getClientCurrent(authentication);
         Set<Card> cardsClient = cardService.getAllCardsAuthenticated(authentication);
         Set<Card> cardsDebit = cardsClient.stream().filter(card -> card.getType() == CardType.DEBIT).collect(Collectors.toSet());
+        Set<Card> cardsDebitDisable = cardsDebit.stream().filter(card -> card.getDisable() == false).collect(Collectors.toSet());
         Set<Card> cardsCredit = cardsClient.stream().filter(card -> card.getType() == CardType.CREDIT).collect(Collectors.toSet());
+        Set<Card> cardsCreditDisable = cardsCredit.stream().filter(card -> card.getDisable() == false).collect(Collectors.toSet());
 
-        if (cardsDebit.size() < 3 && cardType.equals(CardType.DEBIT)) {
-            if (cardsDebit.stream().filter(card -> card.getColor().equals(colorCard)).count() == 1) {
+        if (cardsDebitDisable.size() < 3  && cardType.equals(CardType.DEBIT)) {
+            if (cardsDebitDisable.stream().filter(card -> card.getColor().equals(colorCard)).count() == 1) {
                 return new ResponseEntity<>("You exceeded the color of cards", HttpStatus.FORBIDDEN);
             } else {
                 Card card = new Card(clientCurrent.getFullname(),
@@ -52,12 +54,12 @@ public class CardController {
                         LocalDate.now(),
                         LocalDate.now().plusYears(5),
                         clientCurrent,
-                        true);
+                        false);
                 cardService.saveCard(card);
                 return new ResponseEntity<>("Created succes", HttpStatus.CREATED);
             }
-        } else if (cardsCredit.size() < 3 && cardType.equals(CardType.CREDIT)) {
-            if (cardsCredit.stream().filter(card -> card.getColor().equals(colorCard)).count() == 1) {
+        } else if (cardsCreditDisable.size() < 3 && cardType.equals(CardType.CREDIT)) {
+            if (cardsCreditDisable.stream().filter(card -> card.getColor().equals(colorCard)).count() == 1) {
                 return new ResponseEntity<>("You exceeded the color of cards", HttpStatus.FORBIDDEN);
             } else {
                 Card card = new Card(clientCurrent.getFullname(),
@@ -68,7 +70,7 @@ public class CardController {
                         LocalDate.now(),
                         LocalDate.now().plusYears(5),
                         clientCurrent,
-                        true);
+                        false);
                 cardService.saveCard(card);
                 return new ResponseEntity<>("Created succes", HttpStatus.CREATED);
             }

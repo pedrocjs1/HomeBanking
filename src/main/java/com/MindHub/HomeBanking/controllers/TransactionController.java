@@ -77,14 +77,16 @@ public class TransactionController {
                 amount,
                 "Transfer sent to " + targetAccountNumber + " - " + description,
                 LocalDateTime.now(),
-                originAccount);
+                originAccount,
+                originAccount.getBalance());
 
         targetAccount.setBalance(targetAccount.getBalance() + amount);
         Transaction transactionCredit = new Transaction(TransactionType.CREDIT,
                 amount,
                 "Transfer received from " + originAccountNumber + " - " + description,
                 LocalDateTime.now(),
-                targetAccount);
+                targetAccount,
+                targetAccount.getBalance());
 
         transactionService.saveTransaction(transactionDebit);
         transactionService.saveTransaction(transactionCredit);
