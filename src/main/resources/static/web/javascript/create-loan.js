@@ -1,6 +1,6 @@
 const {createApp} = Vue
 
-const loan = createApp({
+const createLoan = createApp({
     data(){
         return {
             clientLoansTaken: [],
@@ -14,12 +14,7 @@ const loan = createApp({
             selectLoan: "",
             selectOwner:"asdasd",
 
-            loanQuota: [],
-            quotaSelect: undefined,
-            accountTarget:"",
-            accountTargetOther: "",
-
-            description: "",
+            
 
             accountOwn: [],
 
@@ -51,9 +46,10 @@ const loan = createApp({
             noViewPassword: "",
 
 
-            amount: 0,
-            
-            
+            name: "",
+            payments: [],
+            maxAmount: 0,
+            percentIncrease: 0,
             
             
         }
@@ -114,36 +110,9 @@ const loan = createApp({
         addCommas(number) {
             return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         },
-        createCard() {
-            axios
-                    .post(
-                        "/api/clients/current/cards",
-                        `colorCard=${this.selectColor}&cardType=${this.selectType}`
-                    )
-                    .then((response) => window.location.href=("./cards.html"))
-
-                    .catch((error) => Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: `${error.response.data}`,
-                    }));
-        },
-        updateAmount(event) {
-            this.amount = event.target.value;
-        }, 
-        loanApply() {
-
-            let loanApplication = {
-                id: this.loanQuota.id,
-                amount: this.amount,
-                payment: this.quotaSelect,
-                targetAccount: this.accountTarget
-
-
-            }
-
+        createLoan() {
             Swal.fire({
-                title: 'Do you apply loan?',
+                title: '¿Do you Create loan?',
                 showDenyButton: true,
                 // showCancelButton: true,
                 confirmButtonText: 'Accept',
@@ -151,48 +120,24 @@ const loan = createApp({
             }).then((result) => {
 
                 if (result.isConfirmed) {
-                    if (this.amount > 0 ) {
-
-                        axios.post('/api/loans', loanApplication)
-                            .then(response => {
-                                Swal.fire('Loan approved', '', 'success')
-                                    .then(result => {
-                                        window.location.reload()
-                                    })
-                            }).catch(error => {
-
-                                this.error = error.response.data
-                                Swal.fire('Loan request Failed', this.error, 'error')
-                                    .then(result => {
-                                        window.location.reload()
+                        axios.post('/api/loans/create', `name=${this.name}&maxAmount=${this.maxAmount}&payments=${this.payments}&percentIncrease=${this.percentIncrease}`)
+                        .then(response => {
+                            Swal.fire('Create Loan Success', '', 'success')
+                                .then(result => {
+                                    window.location.href=("./loan-application.html")
                                 })
-                            })
-                    } else {
-                        Swal.fire('Transaction Failed', 'Complete all fields')
-                                    .then(result => {
-                                        window.location.reload()
-                                    })
-
-                    }
-                    
-                    
-                    
+                        }).catch((error) => Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: `${error.response.data}`,
+                        }))
                 } else if (result.isDenied) {
-                    Swal.fire('Cancel transaction', '', 'error')
+                    Swal.fire('Cancel Create Loan', '', 'error')
                 }
             })
     
         },
-        hasLoan(type) {
-
-              // Verificar si el cliente tiene un préstamo del tipo especificado
-              const loansTaked = this.clientLoansTaken.find(loan => loan.name === type)
-              if (loansTaked) {
-                return true
-              } else {
-                return false
-              }
-        },
+        
        
         
         
@@ -230,31 +175,9 @@ const loan = createApp({
           localStorage.setItem("mode", false)
         }
     },
-    maxAmount() {
-        const originAccount = this.loans.find(loan => loan.name === this.selectLoan);
-        if (originAccount) {
-          return originAccount.maxAmount;
-        } else {
-          return 0;
-        }
-    },
-    originAccountAmount() {
-        return `${this.amount}`;
-    },
-    loanQuotaMethod(){
-        const loanQuotaa = this.loans.find(loan => loan.name === this.selectLoan)
-        if (loanQuotaa === undefined) {
-            this.loanQuota = 'Valor por defecto'
-          } else {
-            this.loanQuota = loanQuotaa
-            this.quotaSelect = this.loanQuota.payments[0]
-
-          }
-        
-    },
-    imageUrl() {
-        return `./images/${this.loanQuota.name}.jpeg`
-    },
+    
+   
+    
     
 
     
@@ -264,4 +187,4 @@ const loan = createApp({
 })
 
 
-loan.mount('#loan')
+createLoan.mount('#createLoan')

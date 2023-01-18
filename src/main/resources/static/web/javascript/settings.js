@@ -86,7 +86,7 @@ const settings = createApp({
                                 `newPassword=${this.newPassword}&password=${this.currentPassword}&email=${this.emailVerification}`
                             )
                             .then(response => {
-                                Swal.fire('Transaction Success', '', 'success')
+                                Swal.fire('Change password Success', '', 'success')
                                     .then(result => {
                                         window.location.href=("./accounts.html")
                                     })

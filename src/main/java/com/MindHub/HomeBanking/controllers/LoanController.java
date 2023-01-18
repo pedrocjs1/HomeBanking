@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -65,7 +66,7 @@ public class LoanController {
         if (!allLoans.contains(loan)) {
             return new ResponseEntity<>("Loan not found", HttpStatus.FORBIDDEN);
         }
-
+        //IF APPLY LOAN IS ALREADY TAKED
         if (loansTaked.contains(loan)) {
             return new ResponseEntity<>("Loan already taked", HttpStatus.FORBIDDEN);
         }
@@ -78,11 +79,11 @@ public class LoanController {
         if (!loan.getPayments().contains(payment)) {
             return new ResponseEntity<>("Invalid payment", HttpStatus.FORBIDDEN);
         }
-      // IF TARGET ACCOUNT NOT EXIST IN DATABASE
+        // IF TARGET ACCOUNT NOT EXIST IN DATABASE
         if (!client.getAccounts().contains(targetAccount)) {
             return new ResponseEntity<>("Invalid target account", HttpStatus.FORBIDDEN);
         }
-       // IF THE CLIENT AUTHENTICATED NOT OWNER OF THE TARGET ACCOUNT
+        // IF THE CLIENT AUTHENTICATED NOT OWNER OF THE TARGET ACCOUNT
         if (!client.getAccounts().contains(targetAccount)) {
             return new ResponseEntity<>("You are not the account owner", HttpStatus.FORBIDDEN);
         }
@@ -101,4 +102,26 @@ public class LoanController {
         return new ResponseEntity<>("Loan approved", HttpStatus.CREATED);
     }
 
+    @Transactional
+    @PostMapping("/loans/create")
+    public ResponseEntity<Object> createLoan(@RequestParam String name,
+                                             @RequestParam int maxAmount,
+                                             @RequestParam List<Integer> payments,
+                                             @RequestParam int percentIncrease) {
+        if(name.isEmpty()) {
+            return new ResponseEntity<>("Invalid name loan", HttpStatus.FORBIDDEN);
+        }
+        if(maxAmount <= 0) {
+            return new ResponseEntity<>("Invalid max amount", HttpStatus.FORBIDDEN);
+        }
+        if(payments.stream().anyMatch(payment -> payment <= 0)) {
+            return new ResponseEntity<>("One or more payments its invalid", HttpStatus.FORBIDDEN);
+        }
+        if(percentIncrease <= 0) {
+            return new ResponseEntity<>("Invalid percent increase", HttpStatus.FORBIDDEN);
+        }
+        Loan loan = new Loan(name, maxAmount, payments, percentIncrease);
+        loanService.saveLoan(loan);
+        return new ResponseEntity<>("Create Loan success", HttpStatus.CREATED);
+    }
 }

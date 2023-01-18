@@ -4,6 +4,7 @@ const account = createApp({
     data(){
         return {
             accountClient:[],
+            clientsAccountActive: [],
             clientsAccount: {},
             loans: [],
             clientLoans: {},
@@ -48,12 +49,13 @@ const account = createApp({
                 this.accountClient = data.data.accountDTO
                 this.username = data.data.firstName + ' ' + data.data.lastName
                 this.clientsAccount = this.accountClient.sort((a,b) => a.id - b.id)
+                this.clientsAccountActive = this.clientsAccount.filter(account => account.active === true)
                 this.balanceTotal = this.clientsAccount.map(account => account.balance).reduce((iter, acc) => iter + acc).toFixed(2)
                 console.log(this.accountClient)
                 this.loans = data.data.loans
                 this.clientLoans = this.loans.sort((a,b) => a.payment - b.payment)
                 this.balanceTotalLoan = this.clientLoans.map(account => account.amount).reduce((iter, acc) => iter + acc).toFixed(2)
-                console.log(this.clientLoans)
+                console.log(this.clientsAccount)
                 
 
             })
@@ -91,21 +93,41 @@ const account = createApp({
                 window.location.href = './index.html'                
             })
         },
-        addAccount(){
-            axios.post("/api/clients/current/accounts")
-                .then(response => {
-                    Swal.fire('Create Success', '', 'success')
-                    .then(result => {
-                        window.location.reload()
-                    }) 
-                }).catch(error => {
-                    Swal.fire('Creation Failed', error.response.data, 'error')
-                        .then(result => {
-                            window.location.reload()
-                        })
-                })
-        }
-        
+        addAccount() {
+                let inputOptions = {
+                    'SAVINGS': 'Savings',
+                    'CHECKING': 'Checking',
+                }
+                Swal.fire({
+                        title: 'Select account type',
+                        input: 'radio',
+                        inputOptions: inputOptions,
+                        inputValidator: (value) => {
+                            if (!value) {
+                                return 'You need to choose something!'
+                            }
+                        }
+                    })
+                    .then((result) => {
+                        if (result.isConfirmed) {
+                            axios.post("/api/clients/current/accounts", `accountType=${result.value}`)
+                                .then(response => {
+                                    Swal.fire('Create Success', '', 'success')
+                                        .then(result => {
+                                            window.location.reload()
+                                        })
+                                }).catch(error => {
+                                    Swal.fire('Creation Failed', error.response.data, 'error')
+                                        .then(result => {
+                                            window.location.reload()
+                                        })
+                                })
+    
+                        } else if (result.isDenied) {
+                            Swal.fire('Cancel creation account', '', 'error')
+                        }
+                    })
+            },
        
         
         

@@ -30,11 +30,13 @@ public class WebAuthorization {
                 .antMatchers("/rest/**").denyAll()
                 .antMatchers("/web/index.html","/web/register.html", "/web/javascript/**","/web/styles/**","/web/images/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
-                .antMatchers("/rest/**", "/h2-console/**", "/manager.html").hasAuthority("ADMIN")
-                .antMatchers("/web/accounts.html", "/web/account.html", "/web/cards.html", "/404.html","/web/create-cards.html").hasAuthority("CLIENT")
+                .antMatchers("/rest/**", "/h2-console/**", "/manager.html", "/web/settings.html", "/web/create-loan.html").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST,"/api/loans/create").hasAuthority("ADMIN")
+                .antMatchers("/web/accounts.html", "/web/account.html", "/web/cards.html", "/404.html","/web/create-cards.html","/web/settings.html").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.POST,"/api/clients/current/**").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.PATCH,"/api/clients/current/password").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.PATCH,"/api/clients/current/cards").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.PATCH,"/api/clients/current/accounts/disabled").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.POST, "/api/transactions").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.POST, "/api/loans").hasAuthority("CLIENT");
 

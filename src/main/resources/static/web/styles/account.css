@@ -619,6 +619,9 @@ html {
   }
 }
 
+.cursorPointerText{
+  cursor: pointer;
+}
 
 /* FOOTER
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

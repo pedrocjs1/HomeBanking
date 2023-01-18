@@ -43,4 +43,9 @@ public class AccountServiceImpl implements AccountService {
     public void saveAccount(Account account) {
         accountRepository.save(account);
     }
+
+    @Override
+    public Account getAccountByIdOrElse(Long id) {
+        return accountRepository.findById(id).orElse(null);
+    }
 }

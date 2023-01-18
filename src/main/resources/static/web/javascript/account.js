@@ -24,7 +24,8 @@ const account = createApp({
             header: "",
             headerDesktop: "",
             id: new URLSearchParams(location.search).get("id"),
-            accountId:[]
+            idAccount: 0
+            
 
             
             
@@ -38,33 +39,23 @@ const account = createApp({
     methods: {
         loadData(){
             axios
-            .get("http://localhost:8080/api/accounts")
+            .get("http://localhost:8080/api/clients/current")
             .then((data) =>{
-                this.accountInfo = data.data
+                this.accountInfo = data.data.accountDTO
 
-                this.account = [... data.data].find(element => element.id == this.id)
+                this.account = [... data.data.accountDTO].find(element => element.id == this.id)
                 this.accountTransaction = this.account.transactions.sort((a,b) => b.id - a.id)
                 this.accountName = this.account.number
                 this.accountBalance = this.account.balance
+                this.idAccount = this.account.id
+                this.username = data.data.firstName + ' ' + data.data.lastName
                 
-                console.log(this.account);
+                console.log(this.accountInfo);
                    
             })
             .catch((error) => console.log(error))
 
-            axios
-            .get("http://localhost:8080/api/clients/1")
-            .then((data) =>{
-                // this.accountClient = data.data.accountDTO
-                this.username = data.data.firstName
-                
-
-                
-
-                
-                
-            })
-            .catch((error) => console.log(error))
+            
         },
         collapseHeaderMovile(){
             if (this.header == "mob-menu-opened"){
@@ -91,7 +82,43 @@ const account = createApp({
         addCommas(number) {
             return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         },
-        
+        disableAccount() {
+            Swal.fire({
+                    title: '¿Disable Account?',
+                    showDenyButton: true,
+                    // showCancelButton: true,
+                    confirmButtonText: 'Accept',
+                    denyButtonText: `Cancel`,
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                                input: 'password',
+                                inputLabel: 'Enter your password for confirm',
+                                inputValue: '',
+
+                                showCancelButton: true,
+                                confirmButtonText: 'Confirm',
+                            })
+                            .then(result => {
+                                if (result.isConfirmed) {
+
+                                    axios.patch('/api/clients/current/accounts/disabled', `idAccount=${this.idAccount}&password=${result.value}`)
+                                        .then(response => {
+                                            Swal.fire('Account deactivated', '', 'success')
+                                                .then(result => {
+                                                    window.location.href=("./accounts.html")
+                                                })
+                                        }).catch(error => {
+                                            this.error = error.response.data
+                                            Swal.fire('Failed deactived account', this.error, 'error')
+                                            
+                                        })
+                                }
+                            })
+                    }
+                })
+        },
        
         
         

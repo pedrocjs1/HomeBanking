@@ -161,7 +161,7 @@
             </section>
             <section  class="grid d-flex flex-sm-column flex-md-column align-items-center  account-media">
               <h2 :class="currentText">ACCOUNTS</h2>
-              <div v-if="clientsAccount.length < 3 "  :class="'d-flex gap-2 ' + currentText">
+              <div v-if="clientsAccountActive.length < 3 "  :class="'d-flex gap-2 ' + currentText">
                 <button class="d-flex gap-2" @click="addAccount">
                   <h4 class="currentText">Create Account</h4>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-plus-circle mt-2 ' + currentText" viewBox="0 0 16 16">
@@ -173,10 +173,14 @@
               <h2 :class="currentText">Total Balance: ${{addCommas(balanceTotal)}}</h2>
               <div class="d-flex flex-column justify-content-center flex-wrap gap-3 align-items-md-center flex-lg-row">
                 <template v-for="client in clientsAccount" >
+                  <template v-if="client.active === true" >
                     <div :class="'d-flex flex-column scale-up-center ' + shadowCard" style="width: 18rem; ">
                       <div :class="bgGrey  +' card-body'">
                         <a class="a-container-card" :href="'./account.html?id='+ client.id">
-                          <strong>{{client.number}}</strong>
+                          <div class="d-flex justify-content-between">
+                            <strong>{{client.number}}</strong>
+                            <strong>{{client.accountType}}</strong>
+                          </div>
                           <h5 class="card-title size-h5">Balance:</h5>
                           <strong class="card-text">
                             ${{addCommas(client.balance.toFixed(2))}}
@@ -193,6 +197,7 @@
                         </a>
                       </div>
                     </div>
+                  </template>
                 </template>
               </div>
               <div class="d-flex flex-column justify-content-center align-items-center w-100 gap-3  ">
