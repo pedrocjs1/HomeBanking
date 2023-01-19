@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -131,12 +132,26 @@ public class TransactionController {
         Set<Transaction> transactions = transactionService.getTransactionByDate(pdfDTO.getDateFrom(), pdfDTO.getDateTo(),transactionsAuth);
 
 
-        PDFMethod.createPDF(transactions);
+        PDFMethod.createPDF(transactions, clientAuthentication);
 
         return new ResponseEntity<>("PDF created", HttpStatus.CREATED);
 
     }
 
+//    @GetMapping("/pdf/generate/{id}")
+//    public void generatePDF(HttpServletResponse response, Authentication authentication, @PathVariable long id, @RequestParam String fromDate, @RequestParam String toDate ) throws IOException {
+//
+//        Client currentClient = clientService.getClientCurrent(authentication);
+//        Account account= accountService.getAccountByIdOrElse(id);
+//
+//        response.setContentType("application/pdf");
+//
+//        String headerKey = "Content-Disposition";
+//        String headerValue = "attachment; filename=balance_"+currentClient.getFirstName()+"_"+currentClient.getLastName()+".pdf";
+//        response.setHeader(headerKey, headerValue);
+//
+//
+//    }
 
     @PostMapping("/clients/current/transactions/payments")
     public ResponseEntity<Object> newPayments(Authentication authentication, @RequestBody PaymentsDTO paymentsDTO){
@@ -185,5 +200,7 @@ public class TransactionController {
 
         return new ResponseEntity<>("Payment exited",HttpStatus.CREATED);
     }
+
+
 
 }
