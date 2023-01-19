@@ -83,6 +83,9 @@ public class AccountController {
         if (!account.getActive()) {
             return new ResponseEntity<>("Account already deactivated", HttpStatus.FORBIDDEN);
         }
+        if (account.getCards().size() > 0) {
+            return new ResponseEntity<>("Your account has an associated card, you cannot delete this account.", HttpStatus.FORBIDDEN);
+        }
         if(!client.getAccounts().contains(account)) {
             return new ResponseEntity<>("You are not the account owner", HttpStatus.FORBIDDEN);
         }

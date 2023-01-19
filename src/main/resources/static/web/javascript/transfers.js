@@ -69,7 +69,7 @@ const transaction = createApp({
                 // this.clientsAccount = this.accountClient.sort((a,b) => a.id - b.id)
                 // this.balanceTotal = this.clientsAccount.map(account => account.balance).reduce((iter, acc) => iter + acc).toFixed(2)
                 
-                this.accountOwn = data.data.accountDTO.sort((a,b) => a.id - b.id)
+                this.accountOwn = data.data.accountDTO.filter(account => account.active === true).sort((a,b) => a.id - b.id)
                 console.log(this.accountOwn)
                 this.accountOrigin = [... data.data.accountDTO.map(number => number.number)][0]
                 this.accountTarget = data.data.accountDTO.length > 1 ? data.data.accountDTO[1].number : "No other account"

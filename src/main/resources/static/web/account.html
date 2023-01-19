@@ -209,41 +209,41 @@
                 </tbody>
               </table>
               <h6 style="color: rgba(138, 13, 13, 0.767) ;" @click="disableAccount()" class="cursorPointerText">Delete account</h6>
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  Get PDF
-                </button>
+              <button  style="background-color: #00b9eb !important;"type="button" class="btn " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Get PDF
+              </button>
 
                 
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                  aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Download your transactions report</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <h3>Select between dates</h3>
-                        <div class="mb-3">
-                          <input type="datetime-local" class="form-control date"  v-model="dateFrom">
-                          <input type="datetime-local" class="form-control date" v-model="dateTo">
-                          
-                          </select>
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-dark details" data-bs-dismiss="modal">Close</button>
-                        <div v-if="dateFrom == 0 || dateTo == 0 || accountNumber == '' ">
-                          <button @click="downloadPDF" type="button" class="btn btn-primary" disabled>Download</button>
-                        </div>
-                        <div v-else>
-                          <button @click="downloadPDF" type="button" class="btn btn-primary">Download</button>
-                        </div>
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Download your transactions report</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <h3>Select between dates</h3>
+                            <div class="mb-3">
+                              <input type="datetime-local" class="form-control date"  v-model="dateFrom">
+                              <input type="datetime-local" class="form-control date" v-model="dateTo">
+                              
+                              
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-dark details" data-bs-dismiss="modal">Close</button>
+                            <div v-if="dateFrom == 0 || dateTo == 0 || accountNumber == '' ">
+                              <button style="background-color: #00b9eb !important;" @click="downloadPDF" type="button" class="btn " disabled>Download</button>
+                            </div>
+                            <div v-else>
+                              <button style="background-color: #00b9eb !important;" @click="downloadPDF" type="button" class="btn ">Download</button>
+                            </div>
+                          </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
+              
             </section>
             <footer :class="'footer-page d-flex align-items-center justify-content-center gap-3 ' + currentBackGround ">
               <img v-if="currentBackGround === 'backGroundGrey'" style="width: 10rem;" :class="'ms-4 borderRadius  d-flex ' + backgroundLogo" src="./images/logoWhite.png" alt="Logo MindHub Bank">
@@ -255,7 +255,7 @@
             </footer>
           </section>
         
-      </div>
+      
     </div>
   </body>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
