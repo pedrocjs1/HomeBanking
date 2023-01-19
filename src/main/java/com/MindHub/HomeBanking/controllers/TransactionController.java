@@ -10,11 +10,13 @@ import com.MindHub.HomeBanking.services.ClientService;
 import com.MindHub.HomeBanking.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -135,39 +137,53 @@ public class TransactionController {
 
     }
 
-//    @PostMapping("/clients/current/transactions/payments")
-//    public ResponseEntity<Object> newPayments(Authentication authentication, @RequestBody PaymentsDTO paymentsDTO){
-//        Client client = clientService.getClientByEmail(authentication.getName());
-//        Card card = cardService.findById(paymentsDTO.getId());
-//        String accountOrigin = card.getAccount();
-//        Account accountOriginA = accountService.getAccountByNumber(paymentsDTO.getNumber());
-//        Card cardNumber = cardService.findByNumber(paymentsDTO.getNumber());
-//
-//        if (client == null){
-//            return new ResponseEntity<>("client does not exist", HttpStatus.FORBIDDEN);
-//        }
-//        if (card == null){
-//            return new ResponseEntity<>("card does not exist", HttpStatus.FORBIDDEN);
-//        }
-//
-//        if(cardNumber == null){
-//            return new ResponseEntity<>("card number does not exist", HttpStatus.FORBIDDEN);
-//        }
-//
-//        if (paymentsDTO.getAmount() <= 0 ){
-//            return new ResponseEntity<>("invalid amount", HttpStatus.FORBIDDEN);
-//        }
-//
-//        if(accountOrigin == null){
-//            return new ResponseEntity<>("account does not exist", HttpStatus.FORBIDDEN);
-//        }
-//        if (paymentsDTO.getAmount() > accountOriginA.getBalance()){
-//            return new ResponseEntity<>("Amount is invalid", HttpStatus.FORBIDDEN);
-//        }
-//
-//        transactionService.saveTransaction(new Transaction(TransactionType.DEBIT,- paymentsDTO.getAmount(), paymentsDTO.getDescription(),LocalDateTime.now(), accountOriginA, accountOriginA.getBalance()));
-//        accountOriginA.setBalance(accountOriginA.getBalance() - paymentsDTO.getAmount());
-//        return new ResponseEntity<>("Payment exited",HttpStatus.CREATED);
-//    }
+
+    @PostMapping("/clients/current/transactions/payments")
+    public ResponseEntity<Object> newPayments(Authentication authentication, @RequestBody PaymentsDTO paymentsDTO){
+        Card card = cardService.findByNumber(paymentsDTO.getNumber());
+        Account account = accountService.getAccountByNumber(card.getAccount());
+        Account account1 = accountService.getAccountByNumber(paymentsDTO.getDestiny());
+
+        if (paymentsDTO.getNumber().isEmpty() || paymentsDTO.getAmount() == 0 || paymentsDTO.getCvv() == 0 || paymentsDTO.getDestiny().isEmpty()) {
+            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+        }
+
+        if (paymentsDTO.getDestiny() == null) {
+            return new ResponseEntity<>("Destiny account does not exist", HttpStatus.FORBIDDEN);
+        }
+
+        if (paymentsDTO.getAmount() > account.getBalance()) {
+            return new ResponseEntity<>("Requested amount exceeds the maximum account amount", HttpStatus.FORBIDDEN);
+        }
+
+        if (!account.getActive()) {
+            return new ResponseEntity<>("Deleted account", HttpStatus.FORBIDDEN);
+        }
+
+        if (!account1.getActive()) {
+            return new ResponseEntity<>("Deleted account", HttpStatus.FORBIDDEN);
+        }
+
+        if (card.getDisable()) {
+            return new ResponseEntity<>("Deleted card", HttpStatus.FORBIDDEN);
+        }
+
+        if (LocalDate.now().isAfter(card.getThruDate())) {
+            return new ResponseEntity<>("Expired card", HttpStatus.FORBIDDEN);
+        }
+
+        if (paymentsDTO.getCvv() != card.getCvv()) {
+            return new ResponseEntity<>("Cvv does not belong to the card", HttpStatus.FORBIDDEN);
+        }
+
+        transactionService.saveTransaction(new Transaction(TransactionType.DEBIT, -paymentsDTO.getAmount(), paymentsDTO.getDescription(), LocalDateTime.now(), account, account.getBalance()));
+        transactionService.saveTransaction(new Transaction(TransactionType.CREDIT, paymentsDTO.getAmount(), paymentsDTO.getDescription(), LocalDateTime.now(), account1, account1.getBalance()));
+        account.setBalance(account.getBalance() - paymentsDTO.getAmount());
+        account1.setBalance(account1.getBalance() + paymentsDTO.getAmount());
+        accountService.saveAccount(account);
+        accountService.saveAccount(account1);
+
+        return new ResponseEntity<>("Payment exited",HttpStatus.CREATED);
+    }
 
 }

@@ -62,7 +62,7 @@ public class CardController {
                         clientCurrent,
                         false,
                         associatedAccount,
-                        account.toString());
+                        account);
                 cardService.saveCard(card);
                 return new ResponseEntity<>("Created succes", HttpStatus.CREATED);
             }
@@ -80,7 +80,7 @@ public class CardController {
                         clientCurrent,
                         false,
                         associatedAccount,
-                        account.toString());
+                        account);
                 cardService.saveCard(card);
                 return new ResponseEntity<>("Created succes", HttpStatus.CREATED);
             }

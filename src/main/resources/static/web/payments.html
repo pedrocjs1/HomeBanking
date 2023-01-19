@@ -163,40 +163,36 @@
               </div>
             </section>
             <section  class="grid d-flex flex-sm-column flex-md-column justify-content-center align-items-center account-media">
-                <h2 :class="currentText">Transfers</h2>
+                <h2 :class="currentText">Payment</h2>
                 
                 <div class="w-100 d-flex flex-lg-row justify-content-around mediaQuerySection">
 
                   <form  :class="'d-flex flex-column gap-2 p-3 ' + shadowCardLoan" action="">
-                      <h5 :class="currentText">Transfer to your own or a third party's account</h5>
-                      <select required  v-model="selectType" :class="'form-select form-select-sm ' + currentText" aria-label=".form-select-sm example">
-                          <option :class="optionBackground" value="ownAccount">Own account</option>
-                          <option :class="optionBackground" value="thirdAccount">Third-party account</option>
-                      </select>
+                      
                       <div >
-                        <h5 :class="currentText">Select your origin account</h5>
+                        <h5 :class="currentText">Select your account</h5>
                         <select required  v-model="targetsNumber" :class="'form-select form-select-sm ' + currentText" aria-label=".form-select-sm example">
                           <option :class="optionBackground"  v-for="tarjetNumber in targetsNumberArray" :value="tarjetNumber" >
                             {{tarjetNumber}}
                          </option>
                         </select>
-                        <div v-if="targetsNumberArray.length > 1" class="mt-2 mb-2 w-100 d-flex justify-content-center">
-                          <button @click.prevent="swapValues">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" :class="'bi bi-arrow-down-up ' + currentText" viewBox="0 0 16 16">
-                              <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
-                            </svg>
-                          </button>
-                        </div>
-                        <h5 :class="currentText">Select your target account</h5>
-                        <!-- <select required  v-model="accountTarget" :class="'form-select form-select-sm ' + currentText" aria-label=".form-select-sm example">
-                          <option :class="optionBackground"  v-for="account in accountOwn" :value="account.number" :disabled="account.number === accountOrigin">
-                            {{account.number}}
-                          </option>
-                        </select> -->
+                        <h5 :class="currentText">Select associated card</h5>
+                        <select required  v-model="targetAssociated" :class="'form-select form-select-sm ' + currentText" aria-label=".form-select-sm example">
+                          <option selected v-if="CardsAsociate.length === 0" value="Not" disabled>you do not have any associated cards</option>
+                          <option :class="optionBackground"  v-for="tarjet in CardsAsociate" :value="tarjet.number" >
+                            {{tarjet.number}} {{tarjet.type}} {{tarjet.color}}
+                         </option>
+                         {{targetAsociate}}
+                         {{cardSelected}}
+                        </select>
+                        <h5 :class="currentText">Target account</h5>
+                        <input placeholder="Target account" type="text" v-model="accountTargetOther">
+                        
+                        
                         <div class="d-flex gap-2 mt-2 mb-2">
                           <label for="customRange2" :class="'form-label ' + currentText">Select amount:</label>
                           <input
-                            type="text"
+                            type="number"
                             id="customRange2"
                             v-model="amount"
                           /> 
@@ -208,7 +204,7 @@
                         </div>
                       </div>
                       
-                      <a @click="" :class="backgroundTitle +' btn mt-2 d-flex justify-content-center'">
+                      <a @click="payments" :class="backgroundTitle +' btn mt-2 d-flex justify-content-center'">
                           <span :class="currentText + ' d-flex '">
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>

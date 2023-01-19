@@ -15,11 +15,14 @@ const payments = createApp({
             targetsNumber: "",
             accountTarget:"",
             accountTargetOther: "",
+            targetAssociated: "",
+            targetAssociatedArray: [],
 
             description: "",
 
             targetsNumberArray: [],
-
+            targetsArray: [],
+            CardsAsociate: [],
             username: "",
             
 
@@ -46,9 +49,9 @@ const payments = createApp({
 
             viewPassword: "d-none",
             noViewPassword: "",
-
-
+            cvv: 0,
             amount: 0,
+            
             
             
             
@@ -69,11 +72,14 @@ const payments = createApp({
                 // this.clientsAccount = this.accountClient.sort((a,b) => a.id - b.id)
                 // this.balanceTotal = this.clientsAccount.map(account => account.balance).reduce((iter, acc) => iter + acc).toFixed(2)
                 
-                this.targetsNumberArray = data.data.accountDTO.map(account => account.number).sort((a,b) => a - b)
-                console.log(this.targetsNumberArray)
+                this.targetsNumberArray = data.data.accountDTO.filter(account => account.active === true).map(account => account.number).sort((a,b) => a - b)
+                this.targetsNumber = this.targetsNumberArray[0]
+                this.targetsArray = data.data.accountDTO.filter(account => account.active === true)
+                 
+                console.log(this.targetsArray)
                 this.accountOrigin = [... data.data.accountDTO.map(number => number.number)][0]
-                this.accountTarget = data.data.accountDTO.length > 1 ? data.data.accountDTO[1].number : "No other account"
-                console.log(this.accountOrigin)
+                
+                console.log(this.cards)
                 
             })
             .catch((error) => console.log(error))
@@ -101,10 +107,10 @@ const payments = createApp({
             this.accountOrigin = this.accountTarget;
             this.accountTarget = temp;
         }, 
-        transaction() {
+        payments() {
 
             Swal.fire({
-                title: 'Do you make transaction?',
+                title: '¿Do you make pay?',
                 showDenyButton: true,
                 // showCancelButton: true,
                 confirmButtonText: 'Accept',
@@ -112,24 +118,16 @@ const payments = createApp({
             }).then((result) => {
 
                 if (result.isConfirmed) {
-                    if (this.amount > 0 && this.description != "" && this.selectType === "ownAccount") {
+                    if (this.amount > 0 && this.description != "" && this.targetAssociated != "") {
 
-                        axios.post('/api/transactions', `description=${this.description}&amount=${this.amount}&originAccountNumber=${this.accountOrigin}&targetAccountNumber=${this.accountTarget}`)
-                            .then(response => {
-                                Swal.fire('Transaction Success', '', 'success')
-                                    .then(result => {
-                                        window.location.reload()
-                                    })
-                            }).catch(error => {
-
-                                this.error = error.response.data
-                                Swal.fire('Transaction Failed', this.error, 'error')
-                                    .then(result => {
-                                        window.location.reload()
-                                })
-                            })
-                    } else if (this.amount > 0 && this.description != "" && this.selectType === "thirdAccount"){
-                        axios.post('/api/transactions', `description=${this.description}&amount=${this.amount}&originAccountNumber=${this.accountOrigin}&targetAccountNumber=${this.accountTargetOther}`)
+                        axios.post('/api/clients/current/transactions/payments', {number:this.targetAssociated,
+                                                                                amount:this.amount,
+                                                                                cvv:this.cvv,
+                                                                                description:this.description,
+                                                                                destiny:this.accountTargetOther
+                                                                                },
+                                                                                { headers: { 'content-type': 'application/json' } }
+                                                                                )
                             .then(response => {
                                 Swal.fire('Transaction Success', '', 'success')
                                     .then(result => {
@@ -194,7 +192,31 @@ const payments = createApp({
           localStorage.setItem("mode", false)
         }
     },
-    
+    targetAsociate(){
+        const targetAssociatedFind = this.targetsArray.find(target => target.number === this.targetsNumber)
+        if (targetAssociatedFind === undefined) {
+            this.targetAssociated = 'Valor por defecto'
+           
+          } else {
+            this.CardsAsociate = targetAssociatedFind.cards
+            
+            
+          }
+        
+    },
+    cardSelected() {
+        const targetAssociatedFindCvv = this.cards.filter(target => target.account === this.targetsNumber).map(card => card.cvv)
+        if (targetAssociatedFindCvv === undefined) {
+            this.targetAssociated = 'Valor por defecto'
+           
+          } else {
+            this.cvv = targetAssociatedFindCvv[0]
+            
+            
+            
+          }
+        
+    },
     
     
 

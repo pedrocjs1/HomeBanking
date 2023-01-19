@@ -2,6 +2,7 @@ package com.MindHub.HomeBanking.models;
 
 
 import com.MindHub.HomeBanking.enums.AccountType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -91,6 +92,10 @@ public class Account {
         this.cards = cards;
     }
 
+    @JsonIgnore
+    public Client getClient() {
+        return owner;
+    }
     @Override
     public String toString() {
         return "Account{" +

@@ -16,18 +16,23 @@ public class PaymentsDTO {
     private LocalDate thruDate;
 
     private String description;
+    private String destiny;
 
     public PaymentsDTO() {
     }
 
-    public PaymentsDTO(long id, String cardHolder, String number, Double amount, Integer cvv, LocalDate thruDate, String description) {
-        this.id = id;
+    public PaymentsDTO(String number, Double amount, Integer cvv, String description, String destiny) {
         this.cardHolder = cardHolder;
         this.number = number;
         this.amount = amount;
         this.cvv = cvv;
         this.thruDate = thruDate;
         this.description = description;
+        this.destiny = destiny;
+    }
+
+    public String getDestiny() {
+        return destiny;
     }
 
     public long getId() {

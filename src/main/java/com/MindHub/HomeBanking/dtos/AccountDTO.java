@@ -16,7 +16,7 @@ public class AccountDTO {
     private String number;
     private String associatedAccount;
     private LocalDateTime creationDate;
-
+    private Set<CardDTO> cards;
     private double balance;
     private Set<TransactionDTO> transactions;
     public AccountDTO(Account account){
@@ -27,7 +27,16 @@ public class AccountDTO {
         this.accountType = account.getAccountType();
         this.transactions = account.getTransactions().stream().map(transaction -> new TransactionDTO(transaction)).collect(Collectors.toSet());
         this.active = account.getActive();
+        this.cards = account.getCards().stream().map(CardDTO::new).collect(Collectors.toSet());
+    }
 
+
+    public String getAssociatedAccount() {
+        return associatedAccount;
+    }
+
+    public Set<CardDTO> getCards() {
+        return cards;
     }
 
     public Boolean getActive() {
