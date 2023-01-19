@@ -1,0 +1,199 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 134217728 bytes for Failed to commit area from 0x0000000080800000 to 0x0000000088800000 of length 134217728.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (./src/hotspot/os/windows/os_windows.cpp:3386), pid=16028, tid=14904
+#
+# JRE version:  (11.0.16.1+1) (build )
+# Java VM: OpenJDK 64-Bit Server VM (11.0.16.1+1, mixed mode, sharing, tiered, compressed oops, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Xverify:none -XX:TieredStopAtLevel=1 -Dfile.encoding=windows-1252 -Duser.country=AR -Duser.language=es -Duser.variant com.MindHub.HomeBanking.HomeBankingApplication
+
+Host: AMD FX(tm)-6300 Six-Core Processor             , 6 cores, 7G,  Windows 10 , 64 bit Build 19041 (10.0.19041.2364)
+Time: Wed Jan 18 22:15:41 2023 Hora estándar de Argentina elapsed time: 0.021645 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000001258b729000):  JavaThread "Unknown thread" [_thread_in_vm, id=14904, stack(0x0000001289b00000,0x0000001289c00000)]
+
+Stack: [0x0000001289b00000,0x0000001289c00000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x61f18a]
+V  [jvm.dll+0x7abb09]
+V  [jvm.dll+0x7ad1f8]
+V  [jvm.dll+0x7ad8d3]
+V  [jvm.dll+0x24fc38]
+V  [jvm.dll+0x61c49a]
+V  [jvm.dll+0x610c45]
+V  [jvm.dll+0x307b5c]
+V  [jvm.dll+0x3079e2]
+V  [jvm.dll+0x30c6f6]
+V  [jvm.dll+0x352b4f]
+V  [jvm.dll+0x352580]
+V  [jvm.dll+0x2e4b58]
+V  [jvm.dll+0x2e5cb6]
+V  [jvm.dll+0x785957]
+V  [jvm.dll+0x7870df]
+V  [jvm.dll+0x35f899]
+V  [jvm.dll+0x7688c0]
+V  [jvm.dll+0x3cd3bf]
+V  [jvm.dll+0x3cf751]
+C  [jli.dll+0x5207]
+C  [ucrtbase.dll+0x21bb2]
+C  [KERNEL32.DLL+0x17614]
+C  [ntdll.dll+0x526a1]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00000125895428b0, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x000001258b73a800 GCTaskThread "GC Thread#0" [stack: 0x0000001289c00000,0x0000001289d00000] [id=6928]
+  0x000001258b76a800 ConcurrentGCThread "G1 Main Marker" [stack: 0x0000001289d00000,0x0000001289e00000] [id=18908]
+  0x000001258b76e000 ConcurrentGCThread "G1 Conc#0" [stack: 0x0000001289e00000,0x0000001289f00000] [id=9928]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ff924a84327]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x000001258b723c60] Heap_lock - owner thread: 0x000001258b729000
+
+Heap address: 0x0000000080800000, size: 2040 MB, Compressed Oops mode: Non-zero based: 0x0000000080800000
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (1 events):
+Event: 0.009 Loaded shared library C:\Program Files\Eclipse Adoptium\jdk-11.0.16.101-hotspot\bin\zip.dll
+
+
+Dynamic libraries:
+0x00007ff6f84a0000 - 0x00007ff6f84ad000 	C:\Program Files\Eclipse Adoptium\jdk-11.0.16.101-hotspot\bin\java.exe
+0x00007ff96b410000 - 0x00007ff96b608000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007ff969830000 - 0x00007ff9698ef000 	C:\Windows\System32\KERNEL32.DLL
+0x00007ff969090000 - 0x00007ff969362000 	C:\Windows\System32\KERNELBASE.dll
+0x00007ff968cc0000 - 0x00007ff968dc0000 	C:\Windows\System32\ucrtbase.dll
+0x00007ff9557d0000 - 0x00007ff9557e7000 	C:\Program Files\Eclipse Adoptium\jdk-11.0.16.101-hotspot\bin\jli.dll
+0x00007ff954c60000 - 0x00007ff954c75000 	C:\Program Files\Eclipse Adoptium\jdk-11.0.16.101-hotspot\bin\VCRUNTIME140.dll
+0x00007ff96a000000 - 0x00007ff96a1a1000 	C:\Windows\System32\USER32.dll
+0x00007ff954190000 - 0x00007ff95442a000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.1110_none_60b5254171f9507e\COMCTL32.dll
+0x00007ff968df0000 - 0x00007ff968e12000 	C:\Windows\System32\win32u.dll
+0x00007ff969f50000 - 0x00007ff969fee000 	C:\Windows\System32\msvcrt.dll
+0x00007ff969e40000 - 0x00007ff969e6b000 	C:\Windows\System32\GDI32.dll
+0x00007ff968b00000 - 0x00007ff968c0f000 	C:\Windows\System32\gdi32full.dll
+0x00007ff968e20000 - 0x00007ff968ebd000 	C:\Windows\System32\msvcp_win.dll
+0x00007ff969680000 - 0x00007ff9696b2000 	C:\Windows\System32\IMM32.DLL
+0x00007ff93daf0000 - 0x00007ff93db8b000 	C:\Program Files\Eclipse Adoptium\jdk-11.0.16.101-hotspot\bin\msvcp140.dll
+0x00007ff924790000 - 0x00007ff925312000 	C:\Program Files\Eclipse Adoptium\jdk-11.0.16.101-hotspot\bin\server\jvm.dll
+0x00007ff9696c0000 - 0x00007ff96976e000 	C:\Windows\System32\ADVAPI32.dll
+0x00007ff969580000 - 0x00007ff96961c000 	C:\Windows\System32\sechost.dll
+0x00007ff969450000 - 0x00007ff969575000 	C:\Windows\System32\RPCRT4.dll
+0x00007ff969770000 - 0x00007ff969778000 	C:\Windows\System32\PSAPI.DLL
+0x00007ff951bd0000 - 0x00007ff951bd9000 	C:\Windows\SYSTEM32\WSOCK32.dll
+0x00007ff95a1c0000 - 0x00007ff95a1e7000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007ff96ab70000 - 0x00007ff96abdb000 	C:\Windows\System32\WS2_32.dll
+0x00007ff962ac0000 - 0x00007ff962aca000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007ff9669a0000 - 0x00007ff9669b2000 	C:\Windows\SYSTEM32\kernel.appcore.dll
+0x00007ff95c3e0000 - 0x00007ff95c3f0000 	C:\Program Files\Eclipse Adoptium\jdk-11.0.16.101-hotspot\bin\verify.dll
+0x00007ff959330000 - 0x00007ff959514000 	C:\Windows\SYSTEM32\DBGHELP.DLL
+0x00007ff952140000 - 0x00007ff952175000 	C:\Windows\SYSTEM32\dbgcore.DLL
+0x00007ff9693c0000 - 0x00007ff969442000 	C:\Windows\System32\bcryptPrimitives.dll
+0x00007ff94a6f0000 - 0x00007ff94a718000 	C:\Program Files\Eclipse Adoptium\jdk-11.0.16.101-hotspot\bin\java.dll
+0x00007ff95b340000 - 0x00007ff95b34a000 	C:\Program Files\Eclipse Adoptium\jdk-11.0.16.101-hotspot\bin\jimage.dll
+0x00007ff953560000 - 0x00007ff953578000 	C:\Program Files\Eclipse Adoptium\jdk-11.0.16.101-hotspot\bin\zip.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Program Files\Eclipse Adoptium\jdk-11.0.16.101-hotspot\bin;C:\Windows\SYSTEM32;C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.1110_none_60b5254171f9507e;C:\Program Files\Eclipse Adoptium\jdk-11.0.16.101-hotspot\bin\server
+
+VM Arguments:
+jvm_args: -Xverify:none -XX:TieredStopAtLevel=1 -Dfile.encoding=windows-1252 -Duser.country=AR -Duser.language=es -Duser.variant 
+java_command: com.MindHub.HomeBanking.HomeBankingApplication
+java_class_path (initial): D:\WorkSpace\WorkSpace-MindHub\Modulo-Java\HomeBanking-task-3\src\main\resources;D:\WorkSpace\WorkSpace-MindHub\Modulo-Java\HomeBanking-task-3\build\classes\java\main;C:\Users\Pedro\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-devtools\2.7.5\e8510bace48b6a516515aa140cdfd758ad5a47c\spring-boot-devtools-2.7.5.jar;C:\Users\Pedro\.gradle\caches\modules-2\files-2.1\org.postgresql\postgresql\42.3.7\1b4a36e733974ac465aa9dc972236a32ce75bb25\postgresql-42.3.7.jar;C:\Users\Pedro\.gradle\caches\modules-2\files-2.1\org.springframework.data\spring-data-rest-webmvc\3.7.5\ea6e7837b2623257f823558821b48618b0dfa169\spring-data-rest-webmvc-3.7.5.jar;C:\Users\Pedro\.gradle\caches\modules-2\files-2.1\org.springframework.data\spring-data-rest-core\3.7.5\1b1b4bea07f44ca7a2eeecf7d5bb3b39191b009a\spring-data-rest-core-3.7.5.jar;C:\Users\Pedro\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.datatype\jackson-datatype-jdk8\2.13.4\557dbba5d8dfc7b7f944c58fe084109afcb5670b\jackson-datatype-jdk8-2.13.4.jar;C:\Users\Pedro\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.datatype\jackson-datatype-jsr310\2.13.4\e6d820112871f33cd94a1dcc54eef58874753b5\jackson-datatype-jsr310-2.13.4.jar;C:\Users\Pedro\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.module\jackson-module-parameter-names\2.13.4\858ccf6624b5fac6044813e845063edb6a62cf37\jackson-module-parameter-names-2.13.4.jar;C:\Users\Pedro\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-databind\2.13.4.2\325c06bdfeb628cfb80ebaaf1a26cc1eb558a585\jackson-databind-2.13.4.2.jar;C:\Users\Pedro\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.13.4\cf934c681294b97ef6d80082faeefbe1edadf56\jackson-core-2.13.4.jar;C:\Users\Pedro\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-annotations\2.13.4\858c6cc78e1f08a885b1613e1d817c829df70a6e\jackson-annotations-2.13.4.jar;C:\Users\Pedro\.gradle\caches\modules-2\files-2
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     bool BytecodeVerificationLocal                = false                                     {product} {command line}
+     bool BytecodeVerificationRemote               = false                                     {product} {command line}
+     intx CICompilerCount                          = 3                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 2                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 6                                         {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 134217728                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 2139095040                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 6973028                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 244685212                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 0                                      {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+     intx TieredStopAtLevel                        = 1                                         {product} {command line}
+     bool UseCompressedClassPointers               = true                                 {lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                                 {lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+PATH=C:\Program Files\Eclipse Adoptium\jdk-11.0.16.101-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-8.0.345.1-hotspot\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Users\Pedro\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\Pedro\AppData\Local\Programs\Python\Python310\;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Pedro\AppData\Local\Microsoft\WindowsApps;C:\Users\Pedro\AppData\Roaming\npm;C:\Users\Pedro\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Pedro\AppData\Local\GitHubDesktop\bin;C:\Program Files\heroku\bin
+USERNAME=Pedro
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=AMD64 Family 21 Model 2 Stepping 0, AuthenticAMD
+TMP=C:\Users\Pedro\AppData\Local\Temp
+TEMP=C:\Users\Pedro\AppData\Local\Temp
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10 , 64 bit Build 19041 (10.0.19041.2364)
+OS uptime: 4 days 2:33 hours
+Hyper-V role detected
+
+CPU:total 6 (initial active 6) (6 cores per cpu, 1 threads per core) family 21 model 2 stepping 0 microcode 0x0, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, aes, clmul, mmxext, 3dnowpref, lzcnt, sse4a, tsc, tscinvbit, tscinv, bmi1, fma
+
+Memory: 4k page, system-wide physical 8158M (745M free)
+TotalPageFile size 12158M (AvailPageFile size 110M)
+current process WorkingSet (physical memory assigned to process): 10M, peak: 10M
+current process commit charge ("private bytes"): 53M, peak: 181M
+
+vm_info: OpenJDK 64-Bit Server VM (11.0.16.1+1) for windows-amd64 JRE (11.0.16.1+1), built on Aug 16 2022 02:58:04 by "" with MS VC++ 15.9 (VS2017)
+
+END.

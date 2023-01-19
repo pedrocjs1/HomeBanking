@@ -24,7 +24,11 @@ const account = createApp({
             header: "",
             headerDesktop: "",
             id: new URLSearchParams(location.search).get("id"),
-            idAccount: 0
+            idAccount: 0,
+
+            dateFrom: "",
+            dateTo: "",
+            accountNumber: "",
             
 
             
@@ -49,6 +53,7 @@ const account = createApp({
                 this.accountBalance = this.account.balance
                 this.idAccount = this.account.id
                 this.username = data.data.firstName + ' ' + data.data.lastName
+                this.accountNumber = this.account.number
                 
                 console.log(this.accountInfo);
                    
@@ -118,6 +123,24 @@ const account = createApp({
                             })
                     }
                 })
+        },
+        downloadPDF() {
+            axios.post('/api/transactions/pdf',{
+            "dateFrom":this.dateFrom,
+            "dateTo":this.dateTo,
+            "accountNumber":this.accountNumber,                
+        })
+        .then(response => {
+                Swal.fire('Pdf Downloaded', '', 'success')
+                                                .then(result => {
+                                                    window.location.reload()
+                                                })
+        })
+        .catch(error => {
+                this.error = error.response.data
+                Swal.fire('Failed download PDF', this.error, 'error')
+                
+        })
         },
        
         

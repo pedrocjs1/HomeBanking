@@ -1,5 +1,6 @@
 package com.MindHub.HomeBanking.dtos;
 
+import com.MindHub.HomeBanking.models.Account;
 import com.MindHub.HomeBanking.models.Card;
 import com.MindHub.HomeBanking.enums.CardType;
 import com.MindHub.HomeBanking.enums.ColorCard;
@@ -25,7 +26,7 @@ public class CardDTO {
     private LocalDate thruDate;
 
     private Boolean disable;
-
+    private Account associatedAccount;
     public CardDTO(Card card) {
         this.id = card.getId();
         this.cardHolder = card.getCardHolder();
@@ -36,6 +37,11 @@ public class CardDTO {
         this.fromDate = card.getFromDate();
         this.thruDate = card.getThruDate();
         this.disable = card.getDisable();
+        this.associatedAccount = card.getAssociatedAccount();
+    }
+
+    public Account getAssociatedAccount() {
+        return associatedAccount;
     }
 
     public Boolean getDisable() {

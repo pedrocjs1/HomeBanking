@@ -8,10 +8,10 @@ const createCard = createApp({
             loans: [],
             clientLoans: {},
             balanceTotalLoan: "",
-            
+            accountsNumber: [],
             selectType: "DEBIT",
             selectColor:"SILVER",
-
+            selectAccount: "",
 
             username: "",
             
@@ -58,7 +58,9 @@ const createCard = createApp({
                 // this.clientsAccount = this.accountClient.sort((a,b) => a.id - b.id)
                 // this.balanceTotal = this.clientsAccount.map(account => account.balance).reduce((iter, acc) => iter + acc).toFixed(2)
                 console.log(this.cards)
-                
+                this.accountsNumber = data.data.accountDTO.filter(account => account.active === true).map(account => account.number).sort((a,b) => a - b)
+                console.log(this.accountsNumber)
+                this.selectAccount = this.accountsNumber[0]
                 
             })
             .catch((error) => console.log(error))
@@ -90,7 +92,7 @@ const createCard = createApp({
                 if (result.isConfirmed) {
                     axios.post(
                                 "/api/clients/current/cards",
-                                `colorCard=${this.selectColor}&cardType=${this.selectType}`,  {
+                                `colorCard=${this.selectColor}&cardType=${this.selectType}&account=${this.selectAccount}`,  {
                                     headers: {
                                         'content-type': 'application/x-www-form-urlencoded'
                                     }

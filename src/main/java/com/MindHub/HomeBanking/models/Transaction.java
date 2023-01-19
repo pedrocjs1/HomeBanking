@@ -27,6 +27,7 @@ public class Transaction {
         this.account = account;
         this.balance = account.getBalance();
     }
+
     public Long getId() {
         return id;
     }

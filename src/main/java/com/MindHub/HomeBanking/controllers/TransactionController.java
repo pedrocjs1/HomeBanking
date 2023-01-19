@@ -1,10 +1,11 @@
 package com.MindHub.HomeBanking.controllers;
 
+import com.MindHub.HomeBanking.dtos.PaymentsDTO;
+import com.MindHub.HomeBanking.dtos.pdfDTO;
 import com.MindHub.HomeBanking.enums.TransactionType;
-import com.MindHub.HomeBanking.models.Account;
-import com.MindHub.HomeBanking.models.Client;
-import com.MindHub.HomeBanking.models.Transaction;
+import com.MindHub.HomeBanking.models.*;
 import com.MindHub.HomeBanking.services.AccountService;
+import com.MindHub.HomeBanking.services.CardService;
 import com.MindHub.HomeBanking.services.ClientService;
 import com.MindHub.HomeBanking.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -28,6 +30,11 @@ public class TransactionController {
 
     @Autowired
     private TransactionService transactionService;
+
+    @Autowired
+    private CardService cardService;
+
+
 
     @Transactional
     @PostMapping("/transactions")
@@ -97,5 +104,70 @@ public class TransactionController {
         return new ResponseEntity<>("Transaction success", HttpStatus.CREATED);
 
     }
+
+
+    @PostMapping("/transactions/pdf")
+    public ResponseEntity<Object> getPdfTransactions(@RequestBody pdfDTO pdfDTO,
+                                                     Authentication authentication) throws Exception {
+
+        Client clientAuthentication = clientService.getClientCurrent(authentication);
+        Account account = accountService.getAccountByNumber(pdfDTO.getAccountNumber());
+        Set<Transaction> transactionsAuth = account.getTransactions();
+
+        if (clientAuthentication == null)
+            return new ResponseEntity<>("error", HttpStatus.FORBIDDEN);
+
+        if (account == null)
+            return new ResponseEntity<>("Account doesn't exist", HttpStatus.FORBIDDEN);
+
+        if ( pdfDTO.getDateFrom() == null || pdfDTO.getDateTo() == null)
+            return new ResponseEntity<>("Invalid dates", HttpStatus.FORBIDDEN);
+
+        if (pdfDTO.getDateFrom().isAfter(pdfDTO.getDateTo()))//isAfter es un metodo que se usa para comparar fechas.
+            return new ResponseEntity<>("Invalid dates", HttpStatus.FORBIDDEN);
+
+        Set<Transaction> transactions = transactionService.getTransactionByDate(pdfDTO.getDateFrom(), pdfDTO.getDateTo(),transactionsAuth);
+
+
+        PDFMethod.createPDF(transactions);
+
+        return new ResponseEntity<>("PDF created", HttpStatus.CREATED);
+
+    }
+
+//    @PostMapping("/clients/current/transactions/payments")
+//    public ResponseEntity<Object> newPayments(Authentication authentication, @RequestBody PaymentsDTO paymentsDTO){
+//        Client client = clientService.getClientByEmail(authentication.getName());
+//        Card card = cardService.findById(paymentsDTO.getId());
+//        String accountOrigin = card.getAccount();
+//        Account accountOriginA = accountService.getAccountByNumber(paymentsDTO.getNumber());
+//        Card cardNumber = cardService.findByNumber(paymentsDTO.getNumber());
+//
+//        if (client == null){
+//            return new ResponseEntity<>("client does not exist", HttpStatus.FORBIDDEN);
+//        }
+//        if (card == null){
+//            return new ResponseEntity<>("card does not exist", HttpStatus.FORBIDDEN);
+//        }
+//
+//        if(cardNumber == null){
+//            return new ResponseEntity<>("card number does not exist", HttpStatus.FORBIDDEN);
+//        }
+//
+//        if (paymentsDTO.getAmount() <= 0 ){
+//            return new ResponseEntity<>("invalid amount", HttpStatus.FORBIDDEN);
+//        }
+//
+//        if(accountOrigin == null){
+//            return new ResponseEntity<>("account does not exist", HttpStatus.FORBIDDEN);
+//        }
+//        if (paymentsDTO.getAmount() > accountOriginA.getBalance()){
+//            return new ResponseEntity<>("Amount is invalid", HttpStatus.FORBIDDEN);
+//        }
+//
+//        transactionService.saveTransaction(new Transaction(TransactionType.DEBIT,- paymentsDTO.getAmount(), paymentsDTO.getDescription(),LocalDateTime.now(), accountOriginA, accountOriginA.getBalance()));
+//        accountOriginA.setBalance(accountOriginA.getBalance() - paymentsDTO.getAmount());
+//        return new ResponseEntity<>("Payment exited",HttpStatus.CREATED);
+//    }
 
 }

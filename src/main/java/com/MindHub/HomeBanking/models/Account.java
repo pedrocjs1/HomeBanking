@@ -24,6 +24,9 @@ public class Account {
     private Client owner;
     @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
     private Set<Transaction> transactions = new HashSet<>(); // es el que guarda la memoria para ese set
+
+    @OneToMany(mappedBy = "associatedAccount", fetch = FetchType.EAGER)
+    private Set<Card> cards = new HashSet<>();
     private String number;
     LocalDateTime creationDate = LocalDateTime.now();
     private double balance;
@@ -35,6 +38,10 @@ public class Account {
         this.owner = client;
         this.accountType = accountType;
         this.active = active;
+    }
+
+    public Set<Card> getCards() {
+        return cards;
     }
 
     public Boolean getActive() {
@@ -78,5 +85,20 @@ public class Account {
     }
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public void setCards(Set<Card> cards) {
+        this.cards = cards;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", number='" + number + '\'' +
+                ", creationDate=" + creationDate +
+                ", balance=" + balance +
+                ", client=" + owner +
+                '}';
     }
 }

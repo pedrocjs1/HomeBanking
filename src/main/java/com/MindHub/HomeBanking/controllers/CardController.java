@@ -3,11 +3,13 @@ package com.MindHub.HomeBanking.controllers;
 
 import com.MindHub.HomeBanking.enums.CardType;
 import com.MindHub.HomeBanking.enums.ColorCard;
+import com.MindHub.HomeBanking.models.Account;
 import com.MindHub.HomeBanking.models.Card;
 import com.MindHub.HomeBanking.models.Client;
 import com.MindHub.HomeBanking.repositories.AccountRepository;
 import com.MindHub.HomeBanking.repositories.CardRepository;
 import com.MindHub.HomeBanking.repositories.ClientRepository;
+import com.MindHub.HomeBanking.services.AccountService;
 import com.MindHub.HomeBanking.services.CardService;
 import com.MindHub.HomeBanking.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,15 +34,19 @@ public class CardController {
     @Autowired
     private CardService cardService;
 
+    @Autowired
+    private AccountService accountService;
+
 
     @PostMapping("/clients/current/cards")
-    public ResponseEntity<Object> createCard(Authentication authentication, @RequestParam ColorCard colorCard, @RequestParam CardType cardType) {
+    public ResponseEntity<Object> createCard(Authentication authentication, @RequestParam ColorCard colorCard, @RequestParam CardType cardType, @RequestParam String account) {
         Client clientCurrent = clientService.getClientCurrent(authentication);
         Set<Card> cardsClient = cardService.getAllCardsAuthenticated(authentication);
         Set<Card> cardsDebit = cardsClient.stream().filter(card -> card.getType() == CardType.DEBIT).collect(Collectors.toSet());
         Set<Card> cardsDebitDisable = cardsDebit.stream().filter(card -> card.getDisable() == false).collect(Collectors.toSet());
         Set<Card> cardsCredit = cardsClient.stream().filter(card -> card.getType() == CardType.CREDIT).collect(Collectors.toSet());
         Set<Card> cardsCreditDisable = cardsCredit.stream().filter(card -> card.getDisable() == false).collect(Collectors.toSet());
+        Account associatedAccount = accountService.getAccountByNumber(account);
 
         if (cardsDebitDisable.size() < 3  && cardType.equals(CardType.DEBIT)) {
             if (cardsDebitDisable.stream().filter(card -> card.getColor().equals(colorCard)).count() == 1) {
@@ -54,7 +60,9 @@ public class CardController {
                         LocalDate.now(),
                         LocalDate.now().plusYears(5),
                         clientCurrent,
-                        false);
+                        false,
+                        associatedAccount,
+                        account.toString());
                 cardService.saveCard(card);
                 return new ResponseEntity<>("Created succes", HttpStatus.CREATED);
             }
@@ -70,7 +78,9 @@ public class CardController {
                         LocalDate.now(),
                         LocalDate.now().plusYears(5),
                         clientCurrent,
-                        false);
+                        false,
+                        associatedAccount,
+                        account.toString());
                 cardService.saveCard(card);
                 return new ResponseEntity<>("Created succes", HttpStatus.CREATED);
             }

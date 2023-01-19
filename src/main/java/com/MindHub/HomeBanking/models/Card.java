@@ -15,6 +15,7 @@ public class Card {
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;
     private String cardHolder;
+    private String account;
     private CardType type;
     private ColorCard color;
     private String number;
@@ -25,6 +26,10 @@ public class Card {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
     private Client client;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="card_id")
+    private Account associatedAccount;
+
     public Card() {
     }
     public Card(String cardHolder,
@@ -35,7 +40,9 @@ public class Card {
                 LocalDate fromDate,
                 LocalDate thruDate,
                 Client client,
-                Boolean disable) {
+                Boolean disable,
+                Account associatedAccount,
+                String account) {
         this.cardHolder = cardHolder;
         this.type = type;
         this.color = color;
@@ -45,6 +52,25 @@ public class Card {
         this.thruDate = thruDate;
         this.client = client;
         this.disable = disable;
+        this.associatedAccount = associatedAccount;
+        this.account = account;
+    }
+
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public Account getAssociatedAccount() {
+        return associatedAccount;
+    }
+
+    public void setAssociatedAccount(Account associatedAccount) {
+        this.associatedAccount = associatedAccount;
     }
 
     public Boolean getDisable() {
@@ -105,4 +131,5 @@ public class Card {
     public void setDisable(Boolean disable) {
         this.disable = disable;
     }
+
 }

@@ -14,7 +14,7 @@ public class AccountDTO {
     private Boolean active;
     private AccountType accountType;
     private String number;
-
+    private String associatedAccount;
     private LocalDateTime creationDate;
 
     private double balance;
@@ -27,6 +27,7 @@ public class AccountDTO {
         this.accountType = account.getAccountType();
         this.transactions = account.getTransactions().stream().map(transaction -> new TransactionDTO(transaction)).collect(Collectors.toSet());
         this.active = account.getActive();
+
     }
 
     public Boolean getActive() {
