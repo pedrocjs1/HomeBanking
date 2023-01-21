@@ -125,24 +125,35 @@ const account = createApp({
                 })
         },
         downloadPDF() {
-            axios.post('/api/transactions/pdf',{
-            "dateFrom":this.dateFrom,
-            "dateTo":this.dateTo,
-            "accountNumber":this.accountNumber,                
-        })
-        .then(response => {
-                Swal.fire('Pdf Downloaded', '', 'success')
-                                                .then(result => {
-                                                    window.location.reload()
-                                                })
-        })
-        .catch(error => {
-                this.error = error.response.data
-                Swal.fire('Failed download PDF', this.error, 'error')
-                
-        })
-        },
-       
+            axios({
+              method: 'post',
+              url: '/api/transactions/pdf',
+              data: {
+                dateFrom: this.dateFrom,
+                dateTo: this.dateTo,
+                accountNumber: this.accountNumber
+              },
+              responseType: 'blob' // indica que la respuesta es un archivo
+            })
+            .then(response => {
+              const url = window.URL.createObjectURL(new Blob([response.data]));
+              
+              const link = document.createElement('a');
+              
+              link.href = url;
+              link.setAttribute('download', 'TransactionInfo.pdf');
+              document.body.appendChild(link);
+              link.click();
+              Swal.fire('Pdf Downloaded', '', 'success')
+                  .then(result => {
+                      window.location.reload()
+                  })
+            })
+            .catch(error => {
+              this.error = error.response.data
+              Swal.fire('Failed download PDF', this.error, 'error')
+            });
+          },
         
         
             

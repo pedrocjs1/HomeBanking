@@ -7,9 +7,8 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.net.URL;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -19,7 +18,7 @@ public class PDFMethod {
     public PDFMethod() {
     }
 
-    public static void createPDF (Set<Transaction> transactionArray,  Client client) throws Exception {
+    public static void createPDF (Set<Transaction> transactionArray,  Client client, HttpServletResponse response) throws Exception {
         Font titleFont = new Font(Font.FontFamily.COURIER,20);
         Font subFont = new Font(Font.FontFamily.HELVETICA,11);
         Font bold = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
@@ -29,11 +28,14 @@ public class PDFMethod {
         {
             Document doc = new Document(PageSize.A4);
             String route = System.getProperty("user.home");
-            URL url = PDFMethod.class.getClassLoader().getResource("Downloads/TransactionInfo.pdf");
+            URL url = PDFMethod.class.getClassLoader().getResource("downloads/TransactionInfo.pdf");
             File file = new File(url.getFile());
-            PdfWriter.getInstance(doc, new FileOutputStream(file));
+            PdfWriter.getInstance(doc, response.getOutputStream());
+            response.setContentType("application/pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=TransactionInfo.pdf");
+            OutputStream os = response.getOutputStream();
             doc.open();
-            ClassLoader classLoader = PDFMethod.class.getClassLoader();
+
 
 
             Image img = Image.getInstance("src/main/resources/static/web/images/logoWhite.png");
@@ -60,6 +62,8 @@ public class PDFMethod {
                 table.addCell(String.valueOf(transaction.getDate()));
                 table.addCell(String.valueOf(transaction.getType()));
             });
+
+
             doc.add(img);
             doc.add(title);
             doc.add(subTitle);

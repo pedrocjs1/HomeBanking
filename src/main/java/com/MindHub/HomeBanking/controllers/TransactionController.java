@@ -110,7 +110,7 @@ public class TransactionController {
 
 
     @PostMapping("/transactions/pdf")
-    public ResponseEntity<Object> getPdfTransactions(@RequestBody pdfDTO pdfDTO,
+    public ResponseEntity<Object> getPdfTransactions(HttpServletResponse response,@RequestBody pdfDTO pdfDTO,
                                                      Authentication authentication) throws Exception {
 
         Client clientAuthentication = clientService.getClientCurrent(authentication);
@@ -132,7 +132,8 @@ public class TransactionController {
         Set<Transaction> transactions = transactionService.getTransactionByDate(pdfDTO.getDateFrom(), pdfDTO.getDateTo(),transactionsAuth);
 
 
-        PDFMethod.createPDF(transactions, clientAuthentication);
+
+        PDFMethod.createPDF(transactions, clientAuthentication, response);
 
         return new ResponseEntity<>("PDF created", HttpStatus.CREATED);
 
