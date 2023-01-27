@@ -44,7 +44,7 @@ const account = createApp({
     methods: {
         loadData(){
             axios
-            .get("http://localhost:8080/api/clients/current")
+            .get("/api/clients/current")
             .then((data) =>{
                 this.accountClient = data.data.accountDTO
                 this.username = data.data.firstName + ' ' + data.data.lastName

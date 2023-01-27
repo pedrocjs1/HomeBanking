@@ -20,9 +20,6 @@ public class ClientDTO {
 
     private String firstName, lastName, email;
 
-
-
-
     public ClientDTO(Client client){
         this.id = client.getId();
         this.firstName = client.getFirstName();

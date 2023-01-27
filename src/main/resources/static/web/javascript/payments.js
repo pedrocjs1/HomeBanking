@@ -65,7 +65,7 @@ const payments = createApp({
     methods: {
         loadData(){
             axios
-            .get("http://localhost:8080/api/clients/current")
+            .get("/api/clients/current")
             .then((data) =>{
                 this.cards = data.data.cards.sort((a,b) => a.id - b.id)
                 this.username = data.data.firstName + ' ' + data.data.lastName
