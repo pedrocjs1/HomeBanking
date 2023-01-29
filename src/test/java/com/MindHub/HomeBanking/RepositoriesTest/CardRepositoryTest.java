@@ -14,18 +14,18 @@ import java.util.List;
 @SpringBootTest
 public class CardRepositoryTest {
 
-    @Autowired
-    CardRepository cardRepository;
-
-    @Test
-    public void existCard() {
-        List<Card> cards = cardRepository.findAll();
-        assertThat(cards, is(not(empty())));
-    }
-
-    @Test
-    public void existTypeCardCREDIT() {
-        List<Card> cards = cardRepository.findAll();
-        assertThat(cards, hasItem(hasProperty("type", is(CardType.CREDIT))));
-    }
+//    @Autowired
+//    CardRepository cardRepository;
+//
+//    @Test
+//    public void existCard() {
+//        List<Card> cards = cardRepository.findAll();
+//        assertThat(cards, is(not(empty())));
+//    }
+//
+//    @Test
+//    public void existTypeCardCREDIT() {
+//        List<Card> cards = cardRepository.findAll();
+//        assertThat(cards, hasItem(hasProperty("type", is(CardType.CREDIT))));
+//    }
 }

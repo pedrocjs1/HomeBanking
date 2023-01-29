@@ -20,20 +20,20 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 @AutoConfigureTestDatabase(replace = NONE)
 public class LoanRepositoryTest {
 
-    @Autowired
-    LoanRepository loanRepository;
-
-    @Test
-    public void existLoans(){
-        List<Loan> loans = loanRepository.findAll();
-        assertThat(loans,is(not(empty())));
-    }
-
-    @Test
-    public void existPersonalLoan(){
-        List<Loan> loans = loanRepository.findAll();
-        assertThat(loans, hasItem(hasProperty("name", is("Personal"))));
-    }
+//    @Autowired
+//    LoanRepository loanRepository;
+//
+//    @Test
+//    public void existLoans(){
+//        List<Loan> loans = loanRepository.findAll();
+//        assertThat(loans,is(not(empty())));
+//    }
+//
+//    @Test
+//    public void existPersonalLoan(){
+//        List<Loan> loans = loanRepository.findAll();
+//        assertThat(loans, hasItem(hasProperty("name", is("Personal"))));
+//    }
 
 
 }

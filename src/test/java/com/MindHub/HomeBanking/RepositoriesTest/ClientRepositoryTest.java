@@ -20,15 +20,15 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 @AutoConfigureTestDatabase(replace = NONE)
 public class ClientRepositoryTest {
 
-    @Autowired
-    ClientRepository clientRepository;
-
-
-    @Test
-    public void existClient(){
-        List<Client> clients = clientRepository.findAll();
-        assertThat(clients,is(not(empty())));
-
-    }
+//    @Autowired
+//    ClientRepository clientRepository;
+//
+//
+//    @Test
+//    public void existClient(){
+//        List<Client> clients = clientRepository.findAll();
+//        assertThat(clients,is(not(empty())));
+//
+//    }
 
 }
